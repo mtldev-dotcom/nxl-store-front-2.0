@@ -1,0 +1,326 @@
+{
+  "general": {
+    "title": "Next X Level",
+    "description": "Élevez votre style avec des vêtements modernes et performants conçus au Canada. Nos pièces associent matériaux de luxe, confort et polyvalence—parfaites pour toutes les occasions, du chalet au cocktail, sur le green de golf ou le court de tennis, au travail ou en boîte de nuit huppée.",
+    "featuredProducts": "Produits en Vedette",
+    "learnMore": "En Savoir Plus",
+    "addToCart": "Ajouter au Panier",
+    "viewDetails": "Voir les Détails",
+    "checkout": "Paiement",
+    "cart": "Panier",
+    "account": "Compte",
+    "search": "Rechercher",
+    "language": "Langue",
+    "country": "Pays"
+  },
+  "hero": {
+    "title": "Next X Level",
+    "subtitle": "Vêtements de Mode Canadiens Haut de Gamme",
+    "description": "Élevez votre style avec des vêtements modernes et performants conçus au Canada. Nos pièces sont fabriquées à partir des mêmes matériaux que les plus grandes marques de luxe—Hugo Boss, Under Armour, Louis Vuitton—et proposées à un prix accessible. Que vous soyez au chalet autour d’un feu, à un cocktail 5 à 7, sur le golf ou le tennis, au travail ou en boîte de nuit haut de gamme, Next X Level a ce qu’il vous faut.",
+    "shopCollection": "Voir la Collection",
+    "ourStory": "Notre Histoire",
+    "tagline": "Portez votre look—et votre style de vie—au Niveau Supérieur."
+  },
+  "brandStory": {
+    "title": "Notre Histoire",
+    "subtitle": "De la Passion au Premium",
+    "paragraph1": "Fondée au Canada par des passionnés de mode, Next X Level est née du désir de concevoir des vêtements capables de s’adapter à chaque aspect de la vie moderne. Nous voulions des pièces alliant matériaux de luxe, savoir-faire irréprochable et portabilité au quotidien—sans le prix de luxe.",
+    "paragraph2": "Nous avons constaté que la plupart des vêtements forçaient un compromis entre style et fonctionnalité. Notre objectif est devenu clair : créer des pièces premium qui combinent design sophistiqué et performances techniques, du chalet en montagne aux rues animées de la ville.",
+    "learnMore": "En Savoir Plus",
+    "tagline": "Élevez votre style"
+  },
+  "categories": {
+    "title": "Achetez par Catégorie",
+    "subtitle": "Explorez notre collection premium conçue pour le style et la polyvalence",
+    "polos": {
+      "name": "Polos",
+      "description": "Style classique revisité avec une fonctionnalité moderne—idéal pour toute occasion décontractée ou semi-formelle"
+    },
+    "hoodies": {
+      "name": "Sweats à Capuche",
+      "description": "Douillet et raffiné, parfait pour les soirées fraîches au chalet ou les journées actives"
+    },
+    "joggers": {
+      "name": "Joggings",
+      "description": "Coupe athlétique et sophistiquée pour une liberté de mouvement—de jour comme de nuit"
+    },
+    "caps": {
+      "name": "Casquettes",
+      "description": "Complétez votre look avec style et matériaux haut de gamme"
+    },
+    "shopNow": "Acheter Maintenant"
+  },
+  "benefits": {
+    "title": "L'Avantage Next X Level",
+    "subtitle": "Notre engagement envers la qualité, la polyvalence et le style nous distingue",
+    "quality": {
+      "title": "Qualité Premium",
+      "description": "Nos vêtements sont fabriqués à partir des matériaux les plus fins—les mêmes utilisés par les grandes marques de luxe—pour offrir durabilité et confort en toutes circonstances."
+    },
+    "performance": {
+      "title": "Design Polyvalent",
+      "description": "Conçus avec des tissus haut de gamme, une gestion de l’humidité et une extensibilité optimales pour un confort maximal, que vous soyez en détente ou en mouvement."
+    },
+    "materialInnovation": {
+      "title": "Innovation Textile",
+      "description": "Nous collaborons avec des filatures de premier plan pour intégrer des technologies de pointe, garantissant des vêtements respirants, extensibles et durables."
+    },
+    "shipping": {
+      "title": "Livraison Rapide",
+      "description": "Livraison gratuite partout au Canada et options d’expédition internationale accélérée disponibles."
+    }
+  },
+  "newsletter": {
+    "title": "Rejoignez le Niveau Supérieur",
+    "subtitle": "Restez informé des nouvelles collections, des offres exclusives et de l’inspiration lifestyle",
+    "placeholder": "Votre adresse e-mail",
+    "subscribe": "S’abonner",
+    "processing": "Traitement en cours...",
+    "disclaimer": "En vous abonnant, vous acceptez de recevoir des e-mails marketing de Next X Level. Vous pouvez vous désabonner à tout moment.",
+    "success": {
+      "title": "Merci de Vous Être Abonné",
+      "message": "Vous avez été ajouté à notre newsletter. Surveillez votre boîte de réception pour des mises à jour et des offres exclusives."
+    }
+  },
+  "navigation": {
+    "home": "Accueil",
+    "shop": "Boutique",
+    "categories": "Catégories",
+    "collections": "Collections",
+    "about": "À Propos",
+    "contact": "Contact",
+    "menu": "Menu",
+    "language": "Langue",
+    "languages": {
+      "english": "Anglais",
+      "french": "Français"
+    }
+  },
+  "product": {
+    "price": "Prix",
+    "quantity": "Quantité",
+    "addToCart": "Ajouter au Panier",
+    "description": "Description",
+    "details": "Détails",
+    "reviews": "Avis",
+    "relatedProducts": "Produits Associés",
+    "outOfStock": "Rupture de Stock",
+    "inStock": "En Stock"
+  },
+  "cart": {
+    "empty": "Votre panier est vide",
+    "continueShoping": "Continuer Vos Achats",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "tax": "Taxe",
+    "total": "Total",
+    "checkout": "Passer à la Caisse",
+    "remove": "Supprimer",
+    "viewCart": "Voir le Panier",
+    "quantity": "Quantité"
+  },
+  "footer": {
+    "customerService": "Service Client",
+    "help": "Aide",
+    "about": "À Propos de Nous",
+    "terms": "Termes et Conditions",
+    "privacy": "Politique de Confidentialité",
+    "shipping": "Expédition et Retours",
+    "copyright": "© 2025 Next X Level. Tous droits réservés.",
+    "navigation": "Navigation",
+    "aboutUs": "À Propos de Nous",
+    "ourStory": "Notre Histoire",
+    "ourValues": "Nos Valeurs",
+    "contactUs": "Contactez-nous",
+    "follow": "Suivez-nous",
+    "language": "Langue",
+    "country": "Pays",
+    "shippingTo": "Expédition vers",
+    "emailPlaceholder": "Votre e-mail",
+    "messagePlaceholder": "Votre message",
+    "send": "Envoyer",
+    "settings": "Paramètres",
+    "premiumDescription": "Vêtements canadiens premium conçus pour chaque moment—du feu de cheminée au nightlife urbain.",
+    "madein": "Fièrement fabriqué au Canada."
+  },
+  "checkout": {
+    "shippingAddress": "Adresse de Livraison",
+    "billingAddress": "Adresse de Facturation",
+    "paymentMethod": "Méthode de Paiement",
+    "placeOrder": "Passer la Commande",
+    "orderSummary": "Récapitulatif de la Commande",
+    "backToCart": "Retour au Panier",
+    "back": "Retour",
+    "title": "Paiement"
+  },
+  "error": {
+    "pageNotFound": "Page Non Trouvée",
+    "pageNotFoundDesc": "La page que vous essayez d’accéder n’existe pas.",
+    "goToFrontpage": "Aller à l’Accueil",
+    "somethingWentWrong": "Une erreur s’est produite",
+    "cartTransferFailed": "Une erreur s’est produite lors du transfert de votre panier",
+    "runTransferAgain": "Réessayer",
+    "transferring": "Transfert en cours..."
+  },
+  "shipping": {
+    "freeShipping": "Livraison Gratuite",
+    "unlockFreeShipping": "Débloquer la Livraison Gratuite",
+    "freeShippingUnlocked": "Livraison Gratuite Débloquée !",
+    "onlyAway": "Seulement {amount} de plus",
+    "viewCart": "Voir le Panier",
+    "viewProducts": "Voir les Produits"
+  },
+  "account": {
+    "dashboard": "Tableau de Bord",
+    "orders": "Commandes",
+    "addresses": "Adresses",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S’inscrire",
+    "forgotPassword": "Mot de Passe Oublié ?",
+    "accountDetails": "Détails du Compte",
+    "myAccount": "Mon Compte",
+    "customerService": "Service Client",
+    "gotQuestions": "Vous Avez des Questions ?",
+    "faqDescription": "Trouvez les questions fréquemment posées et leurs réponses sur notre page de service client.",
+    "name": "Nom",
+    "email": "Email",
+    "password": "Mot de Passe",
+    "phone": "Téléphone",
+    "billingAddress": "Adresse de Facturation",
+    "shippingAddress": "Adresse de Livraison",
+    "saveChanges": "Enregistrer les Modifications",
+    "orderHistory": "Historique des Commandes",
+    "noOrdersYet": "Vous n’avez pas encore passé de commande",
+    "browseProducts": "Parcourir les Produits",
+    "addressBook": "Carnet d’Adresses",
+    "noAddressesYet": "Vous n’avez pas encore ajouté d’adresse",
+    "addAddress": "Ajouter une Adresse",
+    "editAddress": "Modifier l’Adresse",
+    "deleteAddress": "Supprimer l’Adresse",
+    "defaultShippingAddress": "Adresse de Livraison par Défaut",
+    "defaultBillingAddress": "Adresse de Facturation par Défaut"
+  },
+  "about": {
+    "hero": {
+      "tagline": "Portez votre look—et votre style de vie—au Niveau Supérieur."
+    },
+    "story": {
+      "title": "Notre Histoire",
+      "paragraph1": "Née d’un amour pour le design et d’une passion pour la polyvalence, Next X Level a vu le jour avec une mission claire : créer des vêtements capables de s’adapter à chaque moment de la vie moderne. De la boîte de nuit huppée aux soirées au chalet, nos pièces sont conçues pour performer et impressionner.",
+      "paragraph2": "Nous avons rapidement réalisé que la plupart des vêtements exigeaient un compromis entre luxe et fonctionnalité. Notre objectif est devenu évident : sélectionner des matériaux haut de gamme, perfectionner chaque couture et offrir des designs intemporels à un prix accessible.",
+      "paragraph3": "Aujourd’hui, nous repoussons sans cesse les limites en créant des pièces qui allient technologie textile de pointe et savoir-faire irréprochable. Chaque article est conçu pour résister à l’épreuve du temps, que vous parcouriez les rues de la ville, que vous vous détendiez près du feu ou que vous pratiquiez vos activités du week-end."
+    },
+    "values": {
+      "title": "Nos Valeurs Fondamentales",
+      "quality": {
+        "title": "Qualité Sans Compromis",
+        "description": "Nous sélectionnons les meilleurs matériaux et collaborons avec des artisans qualifiés pour créer des vêtements qui durent tant en durabilité qu’en style."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Nous réimaginons l’essence même du vêtement de tous les jours, intégrant des textiles performants à un design soigné."
+      },
+      "craftsmanship": {
+        "title": "Savoir-Faire",
+        "description": "Nous harmonisons la tradition de la confection haut de gamme avec des techniques modernes pour fabriquer des pièces durables."
+      },
+      "authenticity": {
+        "title": "Authenticité",
+        "description": "Nous restons fidèles à nos racines canadiennes, mêlant héritage et innovation pour créer des produits authentiques adaptés à tous les styles de vie."
+      }
+    },
+    "team": {
+      "title": "Notre Équipe",
+      "member1": {
+        "name": "James Wilson",
+        "role": "Fondateur et PDG",
+        "bio": "Fort d’une expérience en design de mode et d’une passion pour l’esthétique raffinée, James a fondé Next X Level pour redéfinir le prêt-à-porter premium."
+      },
+      "member2": {
+        "name": "Olivia Chen",
+        "role": "Directrice du Design",
+        "bio": "Ancienne des plus grandes maisons de mode, Olivia apporte son expertise en tissus haute performance et esthétique élégante à nos collections."
+      },
+      "member3": {
+        "name": "Michael Tran",
+        "role": "Directeur de Production",
+        "bio": "Supervisant notre fabrication canadienne, Michael veille à ce que chaque pièce réponde à nos normes strictes de qualité et de durabilité."
+      }
+    },
+    "commitment": {
+      "title": "Notre Engagement",
+      "paragraph1": "Chez Next X Level, nous croyons que le véritable luxe rime avec responsabilité. Nos matériaux proviennent de fournisseurs respectueux de l’environnement, et nos installations de production canadiennes fonctionnent avec un impact minimal sur la planète.",
+      "paragraph2": "Nous utilisons des emballages éco-responsables, collaborons avec des filatures éthiques et innovons sans cesse pour réduire notre empreinte carbone—car un vêtement premium ne devrait jamais nuire à la planète.",
+      "paragraph3": "Notre engagement s’étend au-delà des produits, pour chaque interaction avec nos clients, nos communautés et l’environnement. Nous nous efforçons de bâtir une marque qui incarne la qualité, l’intégrité et un style inclusif.",
+      "quote": "Nous ne faisons pas que des vêtements. Nous créons des expériences pour chaque moment de votre vie."
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contact",
+      "subtitle": "Nous aimerions avoir de vos nouvelles"
+    },
+    "info": {
+      "title": "Prenez Contact",
+      "phone": {
+        "title": "Téléphone",
+        "number": "+1 (888) 555-STYLE",
+        "hours": "Du lundi au vendredi, de 9 h à 17 h HNE"
+      },
+      "email": {
+        "title": "Email",
+        "address": "info@nextxlevel.com",
+        "response": "Nous répondrons dans les 24 heures"
+      },
+      "address": {
+        "title": "Adresse",
+        "line1": "123 Fashion Avenue",
+        "line2": "Montréal, Québec H3B 1Z7",
+        "line3": "Canada"
+      },
+      "follow": "Suivez-nous"
+    },
+    "form": {
+      "title": "Envoyez-nous un Message",
+      "name": "Nom",
+      "email": "Email",
+      "subject": "Sujet",
+      "subjectPlaceholder": "Veuillez sélectionner un sujet",
+      "subjectOptions": {
+        "order": "Demande de Commande",
+        "product": "Informations Produit",
+        "wholesale": "Demande de Vente en Gros",
+        "other": "Autre"
+      },
+      "message": "Message",
+      "submit": "Envoyer"
+    },
+    "location": {
+      "title": "Visitez Notre Showroom",
+      "mapPlaceholder": "Une carte interactive serait intégrée ici",
+      "hours": "Notre showroom est ouvert du lundi au vendredi, de 10 h à 18 h, et le samedi de 11 h à 16 h.",
+      "appointment": "Veuillez appeler à l’avance pour planifier un rendez-vous d’achat personnalisé pour une meilleure expérience."
+    },
+    "faq": {
+      "title": "Questions Fréquemment Posées",
+      "shipping": {
+        "question": "Quels sont vos frais d’expédition ?",
+        "answer": "Nous offrons la livraison gratuite sur toutes les commandes canadiennes de plus de 150 $. Pour les commandes de moins de 150 $, des frais forfaitaires de 12 $ s’appliquent. Les tarifs d’expédition internationale varient selon la destination."
+      },
+      "tracking": {
+        "question": "Comment puis-je suivre ma commande ?",
+        "answer": "Une fois votre commande expédiée, vous recevrez un e-mail de confirmation avec les informations de suivi. Vous pouvez également vous connecter à votre compte pour vérifier l’état de votre commande à tout moment."
+      },
+      "returns": {
+        "question": "Quelle est votre politique de retour ?",
+        "answer": "Nous acceptons les retours dans les 30 jours suivant l’achat pour les articles non portés avec leurs étiquettes d’origine attachées. Les retours sont traités dans un délai de 5 à 7 jours ouvrables après réception."
+      },
+      "wholesale": {
+        "question": "Proposez-vous des opportunités de vente en gros ?",
+        "answer": "Oui, nous collaborons avec des boutiques et détaillants sélectionnés. Veuillez contacter notre service vente en gros à wholesale@nextxlevel.com pour plus d’informations."
+      }
+    }
+  }
+}

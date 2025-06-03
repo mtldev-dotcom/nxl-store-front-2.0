@@ -1,0 +1,326 @@
+{
+  "general": {
+    "title": "Next X Level",
+    "description": "Elevate your style with modern, high-performance apparel designed in Canada. Our clothing merges luxury materials, comfort, and versatility—perfect for any occasion from a chalet fireside to a cocktail soirée, the golf course to the tennis court, work to a high-end nightclub.",
+    "featuredProducts": "Featured Products",
+    "learnMore": "Learn More",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details",
+    "checkout": "Checkout",
+    "cart": "Cart",
+    "account": "Account",
+    "search": "Search",
+    "language": "Language",
+    "country": "Country"
+  },
+  "hero": {
+    "title": "Next X Level",
+    "subtitle": "Premium Canadian Fashion Apparel",
+    "description": "Elevate your style with modern, high-performance apparel designed in Canada. Our pieces are crafted from the same materials used by top luxury brands—Hugo Boss, Under Armour, Louis Vuitton—and offered at an accessible price point. Whether you’re at a chalet around the fire, a 5 à 7 cocktail, on the golf course, the tennis court, at work, or a high-end nightclub, Next X Level has you covered.",
+    "shopCollection": "Shop Collection",
+    "ourStory": "Our Story",
+    "tagline": "Take your look—and your lifestyle—to the Next Level."
+  },
+  "brandStory": {
+    "title": "Our Brand Story",
+    "subtitle": "From Passion to Premium",
+    "paragraph1": "Founded in Canada by fashion enthusiasts, Next X Level was born from a desire to design clothing that seamlessly transitions across every aspect of modern life. We wanted garments that combine luxury materials, impeccable craftsmanship, and everyday wearability—without the luxury price tag.",
+    "paragraph2": "We recognized that most apparel forced a choice between style and performance. Our mission became clear: create premium clothing that performs under pressure while looking exceptional in any setting—from the ski chalet to the city skyline.",
+    "learnMore": "Learn More",
+    "tagline": "Elevate your style"
+  },
+  "categories": {
+    "title": "Shop by Category",
+    "subtitle": "Explore our premium apparel collection designed for style and versatility",
+    "polos": {
+      "name": "Polos",
+      "description": "Classic style meets modern functionality—ideal for any casual or semi-formal occasion"
+    },
+    "hoodies": {
+      "name": "Hoodies",
+      "description": "Cozy and refined, perfect for cooler days by the fire or active moments on the go"
+    },
+    "joggers": {
+      "name": "Joggers",
+      "description": "Athletic yet sophisticated fit for unrestricted movement—day or night"
+    },
+    "caps": {
+      "name": "Caps",
+      "description": "Top off your look with signature style and premium materials"
+    },
+    "shopNow": "Shop Now"
+  },
+  "benefits": {
+    "title": "The Next X Level Advantage",
+    "subtitle": "Our commitment to quality, versatility, and style sets us apart",
+    "quality": {
+      "title": "Premium Quality",
+      "description": "Our apparel is crafted from the finest materials—think luxury blends used by top brands—for durability and comfort across all occasions."
+    },
+    "performance": {
+      "title": "Versatile Design",
+      "description": "Engineered with advanced fabrics, moisture-wicking technology, and stretch for maximum comfort whether you’re relaxing or on the move."
+    },
+    "materialInnovation": {
+      "title": "Material Innovation",
+      "description": "We partner with leading textile manufacturers to integrate cutting-edge fabric technologies, ensuring garments that breathe, move, and last."
+    },
+    "shipping": {
+      "title": "Fast Shipping",
+      "description": "Free delivery across Canada and expedited international shipping options available."
+    }
+  },
+  "newsletter": {
+    "title": "Join The Next Level",
+    "subtitle": "Stay updated on new collections, exclusive offers, and lifestyle inspiration",
+    "placeholder": "Your email address",
+    "subscribe": "Subscribe",
+    "processing": "Processing...",
+    "disclaimer": "By subscribing, you agree to receive marketing emails from Next X Level. You can unsubscribe at any time.",
+    "success": {
+      "title": "Thank You for Subscribing",
+      "message": "You've been added to our newsletter. Watch your inbox for exclusive updates and offers."
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "categories": "Categories",
+    "collections": "Collections",
+    "about": "About",
+    "contact": "Contact",
+    "menu": "Menu",
+    "language": "Language",
+    "languages": {
+      "english": "English",
+      "french": "Français"
+    }
+  },
+  "product": {
+    "price": "Price",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "description": "Description",
+    "details": "Details",
+    "reviews": "Reviews",
+    "relatedProducts": "Related Products",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock"
+  },
+  "cart": {
+    "empty": "Your cart is empty",
+    "continueShoping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove",
+    "viewCart": "View Cart",
+    "quantity": "Quantity"
+  },
+  "footer": {
+    "customerService": "Customer Service",
+    "help": "Help",
+    "about": "About Us",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy",
+    "shipping": "Shipping & Returns",
+    "copyright": "© 2025 Next X Level. All rights reserved.",
+    "navigation": "Navigation",
+    "aboutUs": "About Us",
+    "ourStory": "Our Story",
+    "ourValues": "Our Values",
+    "contactUs": "Contact Us",
+    "follow": "Follow Us",
+    "language": "Language",
+    "country": "Country",
+    "shippingTo": "Shipping to",
+    "emailPlaceholder": "Your email",
+    "messagePlaceholder": "Your message",
+    "send": "Send",
+    "settings": "Settings",
+    "premiumDescription": "Premium Canadian apparel designed for every moment—from the chalet fireside to the city nightlife.",
+    "madein": "Proudly made in Canada."
+  },
+  "checkout": {
+    "shippingAddress": "Shipping Address",
+    "billingAddress": "Billing Address",
+    "paymentMethod": "Payment Method",
+    "placeOrder": "Place Order",
+    "orderSummary": "Order Summary",
+    "backToCart": "Back to Cart",
+    "back": "Back",
+    "title": "Checkout"
+  },
+  "error": {
+    "pageNotFound": "Page not found",
+    "pageNotFoundDesc": "The page you tried to access does not exist.",
+    "goToFrontpage": "Go to Homepage",
+    "somethingWentWrong": "Something went wrong",
+    "cartTransferFailed": "Something went wrong when we tried to transfer your cart",
+    "runTransferAgain": "Try again",
+    "transferring": "Transferring..."
+  },
+  "shipping": {
+    "freeShipping": "Free Shipping",
+    "unlockFreeShipping": "Unlock Free Shipping",
+    "freeShippingUnlocked": "Free Shipping unlocked!",
+    "onlyAway": "Only {amount} away",
+    "viewCart": "View Cart",
+    "viewProducts": "View Products"
+  },
+  "account": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "profile": "Profile",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "forgotPassword": "Forgot Password?",
+    "accountDetails": "Account Details",
+    "myAccount": "My Account",
+    "customerService": "Customer Service",
+    "gotQuestions": "Got questions?",
+    "faqDescription": "Find FAQs and answers on our customer service page.",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "billingAddress": "Billing Address",
+    "shippingAddress": "Shipping Address",
+    "saveChanges": "Save Changes",
+    "orderHistory": "Order History",
+    "noOrdersYet": "You haven't made any orders yet",
+    "browseProducts": "Browse Products",
+    "addressBook": "Address Book",
+    "noAddressesYet": "You haven't added any addresses yet",
+    "addAddress": "Add Address",
+    "editAddress": "Edit Address",
+    "deleteAddress": "Delete Address",
+    "defaultShippingAddress": "Default Shipping Address",
+    "defaultBillingAddress": "Default Billing Address"
+  },
+  "about": {
+    "hero": {
+      "tagline": "Take your look—and your lifestyle—to the Next Level."
+    },
+    "story": {
+      "title": "Our Brand Story",
+      "paragraph1": "Born from a love of design and a passion for versatility, Next X Level emerged with a simple mission: create clothing that transitions seamlessly across every aspect of modern life. From high-end nightclubs to cozy chalet evenings, our garments are designed to perform and impress.",
+      "paragraph2": "We saw that most apparel left a gap between luxury quality and real-world functionality. Our goal became clear: source premium materials, refine every stitch, and deliver timeless designs at an accessible price point.",
+      "paragraph3": "Today, we continue to push boundaries—crafting pieces that blend cutting-edge fabric technology with impeccable craftsmanship. Each item is made to stand the test of time, whether you’re navigating city streets, relaxing fireside, or enjoying weekend sports."
+    },
+    "values": {
+      "title": "Our Values",
+      "excellence": {
+        "title": "Excellence",
+        "description": "We pursue excellence in every detail—from fabric selection to finishing touches—creating apparel that exceeds expectations."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We reimagine what everyday clothing can be, integrating high-performance textiles with refined aesthetics."
+      },
+      "craftsmanship": {
+        "title": "Craftsmanship",
+        "description": "We honor the tradition of quality tailoring while embracing modern techniques to build garments that last."
+      },
+      "authenticity": {
+        "title": "Authenticity",
+        "description": "We stay true to our Canadian roots, blending heritage and innovation to craft genuine products for real lifestyles."
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "member1": {
+        "name": "James Wilson",
+        "role": "Founder & CEO",
+        "bio": "With a background in fashion design and a passion for refined aesthetics, James founded Next X Level to redefine premium casual wear."
+      },
+      "member2": {
+        "name": "Olivia Chen",
+        "role": "Head of Design",
+        "bio": "A veteran of top fashion houses, Olivia brings her expertise in high-performance fabrics and elegant design to our collections."
+      },
+      "member3": {
+        "name": "Michael Tran",
+        "role": "Production Director",
+        "bio": "Overseeing Canadian manufacturing, Michael ensures that every piece meets our exacting standards for quality and sustainability."
+      }
+    },
+    "commitment": {
+      "title": "Our Commitment",
+      "paragraph1": "At Next X Level, we believe true luxury means responsibility. Our materials are sourced from sustainable suppliers, and our Canadian production facilities operate with minimal environmental impact.",
+      "paragraph2": "We use eco-friendly packaging, partner with ethical mills, and constantly innovate to reduce our carbon footprint—because premium apparel should never come at the planet’s expense.",
+      "paragraph3": "Our commitment extends beyond products to every interaction we have—with customers, communities, and the environment. We strive to build a brand that stands for quality, integrity, and inclusive style.",
+      "quote": "We don’t just make clothes. We craft experiences for every moment of your life."
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contact",
+      "subtitle": "We’d love to hear from you"
+    },
+    "info": {
+      "title": "Get In Touch",
+      "phone": {
+        "title": "Phone",
+        "number": "+1 (888) 555-STYLE",
+        "hours": "Monday to Friday, 9 AM – 5 PM EST"
+      },
+      "email": {
+        "title": "Email",
+        "address": "info@nextxlevel.com",
+        "response": "We’ll respond within 24 hours"
+      },
+      "address": {
+        "title": "Address",
+        "line1": "123 Fashion Avenue",
+        "line2": "Montreal, Quebec H3B 1Z7",
+        "line3": "Canada"
+      },
+      "follow": "Follow Us"
+    },
+    "form": {
+      "title": "Send Us A Message",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "subjectPlaceholder": "Please select a subject",
+      "subjectOptions": {
+        "order": "Order Inquiry",
+        "product": "Product Information",
+        "wholesale": "Wholesale Inquiry",
+        "other": "Other"
+      },
+      "message": "Message",
+      "submit": "Submit"
+    },
+    "location": {
+      "title": "Visit Our Showroom",
+      "mapPlaceholder": "Interactive Map Would Be Embedded Here",
+      "hours": "Our showroom is open Monday to Friday, 10 AM – 6 PM, and Saturdays from 11 AM – 4 PM.",
+      "appointment": "Please call ahead to schedule a personal shopping appointment for the best experience."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "shipping": {
+        "question": "What are your shipping rates?",
+        "answer": "We offer free shipping on all Canadian orders over $150. For orders under $150, a flat shipping rate of $12 applies. International shipping rates vary by destination."
+      },
+      "tracking": {
+        "question": "How can I track my order?",
+        "answer": "Once your order ships, you’ll receive a confirmation email with tracking details. You can also log into your account to view order status at any time."
+      },
+      "returns": {
+        "question": "What is your return policy?",
+        "answer": "We accept returns within 30 days of purchase for unworn items with original tags attached. Returns are processed within 5–7 business days of receipt."
+      },
+      "wholesale": {
+        "question": "Do you offer wholesale opportunities?",
+        "answer": "Yes, we partner with select boutiques and retailers. Please contact our wholesale department at wholesale@nextxlevel.com for more information."
+      }
+    }
+  }
+}
