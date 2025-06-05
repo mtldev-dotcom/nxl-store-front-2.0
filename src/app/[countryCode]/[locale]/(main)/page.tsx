@@ -125,7 +125,7 @@ export default async function Home(props: {
       <Hero dictionary={dictionary} />
 
       {/* Featured Products Section: highlighted collections */}
-      <div className="py-16 bg-nxl-black">
+<div className="py-16" style={{ backgroundColor: "var(--color-white)" }}>
         <div className="content-container">
           <h2 className="font-display text-3xl md:text-4xl text-nxl-gold uppercase tracking-wider text-center mb-10">
             {dictionary.general.featuredProducts}

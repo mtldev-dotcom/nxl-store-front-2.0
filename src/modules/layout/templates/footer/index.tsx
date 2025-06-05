@@ -24,7 +24,7 @@ export default async function Footer({ params }: FooterProps) {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
 
   return (
-    <footer className="border-t border-nxl-gold/30 w-full bg-nxl-black text-nxl-ivory">
+<footer className="w-full" style={{ backgroundColor: "var(--color-slate-gray)", color: "var(--color-charcoal)", borderTop: "1px solid var(--color-charcoal)" }}>
       <div className="content-container flex flex-col w-full">
         <div className="flex flex-col gap-y-12 py-20">
           {/* Header with logo */}
@@ -41,7 +41,7 @@ export default async function Footer({ params }: FooterProps) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             {/* 1. Navigation column */}
             <div className="flex flex-col gap-y-3">
-              <span className="font-serif text-base text-nxl-gold mb-2">{dictionary.footer.navigation}</span>
+<span className="section-header mb-2" style={{ color: "var(--color-sunshine)" }}>{dictionary.footer.navigation}</span>
               <ul className="grid grid-cols-1 gap-y-2 text-nxl-ivory font-body">
                 <li>
                   <LocalizedClientLink
@@ -61,14 +61,6 @@ export default async function Footer({ params }: FooterProps) {
                 </li>
                 <li>
                   <LocalizedClientLink
-                    href="/about"
-                    className="hover:text-nxl-gold transition-colors"
-                  >
-                    {dictionary.navigation.about}
-                  </LocalizedClientLink>
-                </li>
-                <li>
-                  <LocalizedClientLink
                     href="/contact"
                     className="hover:text-nxl-gold transition-colors"
                   >
@@ -81,7 +73,7 @@ export default async function Footer({ params }: FooterProps) {
             {/* 2. Description and social links */}
             <div className="flex flex-col gap-4">
               <span className="font-serif text-base text-nxl-gold mb-2">{dictionary.footer.aboutUs}</span>
-              <p className="font-body text-nxl-ivory/80">
+<p className="body-copy" style={{ color: "var(--color-charcoal)" }}>
                 {dictionary.footer.premiumDescription}
               </p>
               <div className="mt-4 flex space-x-4">

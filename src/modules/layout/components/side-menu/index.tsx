@@ -38,12 +38,6 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
       fallback: "Shop",
     },
     {
-      key: "about",
-      path: "/about",
-      translationKey: "navigation.about",
-      fallback: "About",
-    },
-    {
       key: "contact",
       path: "/contact",
       translationKey: "navigation.contact",
