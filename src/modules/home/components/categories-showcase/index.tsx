@@ -40,7 +40,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
   const categories = [
     {
       key: "polos",
-      image: "/product-samples/nxl-polo-blue-gray-logo.png",
+      image: "/polo.png",
       slug: "/store?category=polos",
       name: categoriesText.polos.name,
       description: categoriesText.polos.description,
@@ -48,7 +48,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
     },
     {
       key: "hoodies",
-      image: "/product-samples/nxl-hoodie-gray-green-logo.png",
+      image: "/hoodie.png",
       slug: "/store?category=hoodies",
       name: categoriesText.hoodies.name,
       description: categoriesText.hoodies.description,
@@ -56,7 +56,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
     },
     {
       key: "joggers",
-      image: "/product-samples/nxl-joggers-blk-yellow-logo.png",
+      image: "/jogger.png",
       slug: "/store?category=joggers",
       name: categoriesText.joggers.name,
       description: categoriesText.joggers.description,
@@ -64,7 +64,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
     },
     {
       key: "caps",
-      image: "/product-samples/nxl-cap-blk-green-logo.png",
+      image: "/cap.png",
       slug: "/store?category=caps",
       name: categoriesText.caps.name,
       description: categoriesText.caps.description,
@@ -187,14 +187,6 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
           <LocalizedClientLink href="/store">
             <button className="nxl-btn-secondary group">
               <span>View All Products</span>
-              <svg 
-                className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
             </button>
           </LocalizedClientLink>
         </div>

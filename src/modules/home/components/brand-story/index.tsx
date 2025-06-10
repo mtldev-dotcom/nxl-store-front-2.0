@@ -52,7 +52,7 @@ const BrandStory = ({ dictionary }: BrandStoryProps) => {
               {/* Main image */}
               <div className="relative w-full h-full z-10 overflow-hidden rounded-lg shadow-luxury">
                 <Image 
-                  src="/product-samples/nxl-hoodie-gray-green-logo.png"
+                  src="/hoodie-brandstory.png"
                   alt="Premium Next X Level hoodie showcasing luxury golf apparel design"
                   fill
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
