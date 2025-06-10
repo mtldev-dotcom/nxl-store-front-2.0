@@ -12,11 +12,13 @@ export const listProducts = async ({
   queryParams,
   countryCode,
   regionId,
+  locale,
 }: {
   pageParam?: number
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
   countryCode?: string
   regionId?: string
+  locale?: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
@@ -53,6 +55,9 @@ export const listProducts = async ({
     ...(await getCacheOptions("products")),
   }
 
+  // Build translation fields based on locale
+  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
       `/store/products`,
@@ -63,7 +68,7 @@ export const listProducts = async ({
           offset,
           region_id: region?.id,
           fields:
-            "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
+            `*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags${translationsField}`,
           ...queryParams,
         },
         headers,
@@ -94,11 +99,13 @@ export const listProductsWithSort = async ({
   queryParams,
   sortBy = "created_at",
   countryCode,
+  locale,
 }: {
   page?: number
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
   sortBy?: SortOptions
   countryCode: string
+  locale?: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
@@ -115,6 +122,7 @@ export const listProductsWithSort = async ({
       limit: 100,
     },
     countryCode,
+    locale,
   })
 
   const sortedProducts = sortProducts(products, sortBy)
@@ -132,5 +140,52 @@ export const listProductsWithSort = async ({
     },
     nextPage,
     queryParams,
+  }
+}
+
+/**
+ * Retrieve a single product by its handle with translations
+ */
+export const retrieveProduct = async (
+  handle: string,
+  countryCode: string,
+  locale?: string
+): Promise<HttpTypes.StoreProduct | null> => {
+  const region = await getRegion(countryCode)
+
+  if (!region) {
+    return null
+  }
+
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  const next = {
+    ...(await getCacheOptions("products")),
+  }
+
+  // Build translation fields based on locale
+  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale},+options.translations.${locale},+options.values.translations.${locale}` : ""
+
+  try {
+    const { product } = await sdk.client.fetch<{ product: HttpTypes.StoreProduct }>(
+      `/store/products/${handle}`,
+      {
+        method: "GET",
+        query: {
+          region_id: region.id,
+          fields: `*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags${translationsField}`,
+        },
+        headers,
+        next,
+        cache: "force-cache",
+      }
+    )
+
+    return product
+  } catch (error) {
+    console.error("Error retrieving product:", error)
+    return null
   }
 }

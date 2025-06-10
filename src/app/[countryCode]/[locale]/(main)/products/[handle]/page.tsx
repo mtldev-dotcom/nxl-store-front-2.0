@@ -16,7 +16,7 @@ import { Metadata } from "next"             // Type helper for meta generation
 import { notFound } from "next/navigation"  // Utility to trigger 404 page
 
 // Internal data-layer helpers -------------------------------------------------------------
-import { listProducts } from "@lib/data/products"      // Fetch products from Medusa backend
+import { listProducts, retrieveProduct } from "@lib/data/products"      // Fetch products from Medusa backend
 import { getRegion, listRegions } from "@lib/data/regions" // Fetch region info
 
 // Presentation layer ---------------------------------------------------------------------
@@ -29,7 +29,7 @@ import ProductTemplate from "@modules/products/templates" // React component tha
  * We reflect that here so TypeScript reminds us to await it.
  */
 type Props = {
-  params: Promise<{ countryCode: string; handle: string }>
+  params: Promise<{ countryCode: string; handle: string; locale: string }>
 }
 
 /* =============================================================================
@@ -108,10 +108,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   // --- Fetch product data ---------------------------------------------------------------
-  const product = await listProducts({
-    countryCode: params.countryCode,                    // Use correct pricing region
-    queryParams: { handle },                            // Filter by handle
-  }).then(({ response }) => response.products[0])       // API returns array
+  const product = await retrieveProduct(
+    params.handle,
+    params.countryCode,
+    params.locale
+  )
 
   if (!product) {
     notFound()                                          // Unknown product → 404
@@ -147,11 +148,12 @@ export default async function ProductPage(props: Props) {
     notFound()                          // Unknown region → show 404
   }
 
-  // 2. Fetch product priced for this region ---------------------------------------------
-  const pricedProduct = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle: params.handle },
-  }).then(({ response }) => response.products[0])
+  // 2. Fetch product priced for this region with translations --------------------------
+  const pricedProduct = await retrieveProduct(
+    params.handle,
+    params.countryCode,
+    params.locale
+  )
 
   if (!pricedProduct) {
     notFound()                          // Product not found → 404
@@ -163,6 +165,7 @@ export default async function ProductPage(props: Props) {
       product={pricedProduct}
       region={region}
       countryCode={params.countryCode}
+      locale={params.locale}
     />
   )
 }
