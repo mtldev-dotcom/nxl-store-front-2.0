@@ -5,16 +5,22 @@ import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
+import { getTranslatedProduct, StoreProductWithTranslations } from "@lib/util/translations"
 
 export default async function ProductPreview({
   product,
   isFeatured,
   region,
+  locale,
 }: {
   product: HttpTypes.StoreProduct
   isFeatured?: boolean
   region: HttpTypes.StoreRegion
+  locale?: string
 }) {
+  // Get translated product data (optional, falls back to original if no translations)
+  const translatedProduct = locale ? getTranslatedProduct(product as StoreProductWithTranslations, locale) : product
+  
   const { cheapestPrice } = getProductPrice({
     product,
   })
@@ -39,7 +45,7 @@ export default async function ProductPreview({
               className="font-serif text-nxl-gold font-medium group-hover:text-nxl-gold/80 transition-colors duration-300" 
               data-testid="product-title"
             >
-              {product.title}
+              {translatedProduct.title}
             </Text>
             <div className="flex items-center">
               {cheapestPrice && <PreviewPrice price={cheapestPrice} />}

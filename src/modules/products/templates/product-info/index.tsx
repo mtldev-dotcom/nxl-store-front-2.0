@@ -9,8 +9,8 @@ type ProductInfoProps = {
 }
 
 const ProductInfo = ({ product, locale }: ProductInfoProps) => {
-  // Get translated product data
-  const translatedProduct = locale ? getTranslatedProduct(product as StoreProductWithTranslations, locale) : product
+  // Get translated product data (optional, falls back to original if no translations)
+  const translatedProduct = locale && product ? getTranslatedProduct(product as StoreProductWithTranslations, locale) : product
   const translatedCollection = locale && product.collection ? getTranslatedCollection(product.collection, locale) : product.collection
   return (
     <div id="product-info">

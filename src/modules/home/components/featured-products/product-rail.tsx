@@ -30,23 +30,30 @@ import Image from "next/image"                       // Next.js optimized image 
 type ProductRailProps = {
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
+  countryCode: string
+  locale?: string
 }
 
 export default async function ProductRail({
   collection,
   region,
+  countryCode,
+  locale,
 }: ProductRailProps) {
-  // 1. Fetch a maximum of 4 products for this collection
+  // 1. Fetch products for this region with translations
   const response = await listProducts({
+    countryCode: countryCode,
+    locale: locale,
     queryParams: {
-      collection_id: [collection.id], // Filter by this collection’s ID
-      limit: 4,                        // Only need up to 4 products
+      limit: 100,                        // Fetch more products to filter by collection
     },
-    regionId: region.id,              // Provide region ID to satisfy backend requirement
   })
 
-  // 2. Extract products array safely; fallback to empty array
-  const products = response?.response?.products || []
+  // 2. Extract products array and filter by collection
+  const allProducts = response?.response?.products || []
+  const products = allProducts
+    .filter(product => product.collection_id === collection.id)
+    .slice(0, 4) // Only take first 4 products
 
   // 3. If no products found, render nothing (avoid empty section)
   if (products.length === 0) {

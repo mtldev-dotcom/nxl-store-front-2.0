@@ -8,19 +8,32 @@ import ProductPreview from "@modules/products/components/product-preview"
 export default async function ProductRail({
   collection,
   region,
+  locale,
+  countryCode,
 }: {
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
+  locale?: string
+  countryCode: string
 }) {
+  // Build translation fields based on locale
+  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+
   const {
-    response: { products: pricedProducts },
+    response: { products: allProducts },
   } = await listProducts({
-    regionId: region.id,
+    countryCode: countryCode,
+    locale: locale,
     queryParams: {
-      collection_id: collection.id,
-      fields: "*variants.calculated_price",
+      fields: `*variants.calculated_price,+metadata,+tags${translationsField}`,
+      limit: 100,
     },
   })
+
+  // Filter products by collection since collection_id queryParam has TypeScript issues
+  const pricedProducts = allProducts.filter(product => 
+    product.collection_id === collection.id
+  )
 
   if (!pricedProducts) {
     return null
@@ -47,7 +60,7 @@ export default async function ProductRail({
               <li key={product.id} className="group relative">
                 <div className="absolute -inset-3 bg-gradient-to-r from-nxl-green/5 via-nxl-gold/5 to-nxl-navy/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 <div className="relative">
-                  <ProductPreview product={product} region={region} isFeatured />
+                  <ProductPreview product={product} region={region} isFeatured locale={locale} />
                 </div>
               </li>
             ))}

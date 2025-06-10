@@ -108,11 +108,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   // --- Fetch product data ---------------------------------------------------------------
-  const product = await retrieveProduct(
-    params.handle,
-    params.countryCode,
-    params.locale
-  )
+  const allProducts = await listProducts({
+    countryCode: params.countryCode,                    // Use correct pricing region
+    queryParams: { limit: 100 },                       // Get more products to find by handle
+  }).then(({ response }) => response.products)         // API returns array
+
+  const product = allProducts.find(p => p.handle === handle)
 
   if (!product) {
     notFound()                                          // Unknown product → 404
@@ -149,11 +150,13 @@ export default async function ProductPage(props: Props) {
   }
 
   // 2. Fetch product priced for this region with translations --------------------------
-  const pricedProduct = await retrieveProduct(
-    params.handle,
-    params.countryCode,
-    params.locale
-  )
+  const pricedProducts = await listProducts({
+    countryCode: params.countryCode,
+    locale: params.locale,
+    queryParams: { limit: 100 }, // Get more products to find the right one by handle
+  }).then(({ response }) => response.products)
+
+  const pricedProduct = pricedProducts.find(p => p.handle === params.handle)
 
   if (!pricedProduct) {
     notFound()                          // Product not found → 404

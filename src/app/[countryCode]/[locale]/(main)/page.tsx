@@ -140,7 +140,7 @@ export default async function Home(props: {
             */
             }
             {collections && collections.length > 0 ? (
-              <FeaturedProducts collections={collections} region={region} />
+              <FeaturedProducts collections={collections} region={region} locale={locale} countryCode={countryCode} />
             ) : (
               <p className="text-center text-nxl-ivory">No featured products available at this time.</p>
             )}

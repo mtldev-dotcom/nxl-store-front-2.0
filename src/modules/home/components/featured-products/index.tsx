@@ -21,14 +21,26 @@ import ProductRail from "@modules/home/components/featured-products/product-rail
 export default async function FeaturedProducts({
   collections,
   region,
+  locale,
+  countryCode,
 }: {
   collections: HttpTypes.StoreCollection[]
   region: HttpTypes.StoreRegion
-}) { console.log("FeaturedProducts", collections, region)
+  locale?: string
+  countryCode: string
+}) {
   // Map each collection to a list item containing its product rail
-  return collections.map((collection) => (
-    <li key={collection.id}>
-      <ProductRail collection={collection} region={region} />
-    </li>
-  ))
+  return collections.map((collection) => {
+    const ProductRailComponent = ProductRail as any
+    return (
+      <li key={collection.id}>
+        <ProductRailComponent 
+          collection={collection} 
+          region={region} 
+          countryCode={countryCode}
+          locale={locale}
+        />
+      </li>
+    )
+  })
 }

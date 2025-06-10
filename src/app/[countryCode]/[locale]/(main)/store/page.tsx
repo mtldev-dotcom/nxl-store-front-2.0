@@ -52,6 +52,7 @@ type Params = {
   }>
   params: Promise<{
     countryCode: string
+    locale: string
   }>
 }
 
@@ -80,6 +81,7 @@ export default async function StorePage(props: Params) {
       sortBy={sortBy}
       page={page}
       countryCode={params.countryCode}
+      locale={params.locale}
     />
   )
 }
