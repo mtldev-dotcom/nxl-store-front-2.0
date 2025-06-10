@@ -108,13 +108,15 @@ export default async function PaginatedProducts({
   }
 
   const getSortLabel = (sortOption: SortOptions) => {
+    const locale_code = locale || "en"
+    
     switch(sortOption) {
       case "created_at":
-        return "Latest Arrivals"
+        return locale_code === "fr" ? "Dernières Arrivées" : "Latest Arrivals"
       case "price_asc":
-        return "Price: Low to High"
+        return locale_code === "fr" ? "Prix: Du Plus Bas au Plus Haut" : "Price: Low to High"
       case "price_desc":
-        return "Price: High to Low"
+        return locale_code === "fr" ? "Prix: Du Plus Haut au Plus Bas" : "Price: High to Low"
       default:
         return sortOption
     }
@@ -125,11 +127,14 @@ export default async function PaginatedProducts({
       {/* Results Summary */}
       <div className="flex items-center justify-between text-sm">
         <p className="text-white/90 drop-shadow-sm">
-          {`Showing ${((page - 1) * PRODUCT_LIMIT) + 1}-${Math.min(page * PRODUCT_LIMIT, count)} of ${count} products`}
+          {locale === "fr" 
+            ? `Affichage ${((page - 1) * PRODUCT_LIMIT) + 1}-${Math.min(page * PRODUCT_LIMIT, count)} sur ${count} produits`
+            : `Showing ${((page - 1) * PRODUCT_LIMIT) + 1}-${Math.min(page * PRODUCT_LIMIT, count)} of ${count} products`
+          }
         </p>
         {sortBy && (
           <p className="text-white/90 drop-shadow-sm">
-            Sorted by: <span className="text-nxl-gold">{getSortLabel(sortBy)}</span>
+            {locale === "fr" ? "Trié par" : "Sorted by"}: <span className="text-nxl-gold">{getSortLabel(sortBy)}</span>
           </p>
         )}
       </div>
