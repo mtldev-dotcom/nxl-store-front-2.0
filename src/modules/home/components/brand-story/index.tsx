@@ -122,17 +122,17 @@ const BrandStory = ({ dictionary }: BrandStoryProps) => {
             <div className="flex items-center gap-6 pt-6 border-t border-nxl-gold/20">
               <div className="text-center">
                 <div className="font-display text-2xl text-nxl-gold">2023</div>
-                <div className="text-sm text-nxl-ivory/60 font-body">Founded</div>
+                <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.brandStory?.founded || "Founded"}</div>
               </div>
               <div className="w-px h-8 bg-nxl-gold/20" />
               <div className="text-center">
                 <div className="font-display text-2xl text-nxl-gold">100%</div>
-                <div className="text-sm text-nxl-ivory/60 font-body">Canadian</div>
+                <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.brandStory?.canadian || "Canadian"}</div>
               </div>
               <div className="w-px h-8 bg-nxl-gold/20" />
               <div className="text-center">
                 <div className="font-display text-2xl text-nxl-gold">∞</div>
-                <div className="text-sm text-nxl-ivory/60 font-body">Style</div>
+                <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.brandStory?.style || "Style"}</div>
               </div>
             </div>
           </div>

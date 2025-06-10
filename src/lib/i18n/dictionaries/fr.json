@@ -3,6 +3,14 @@
     "title": "Next X Level",
     "description": "Élevez votre style avec des vêtements modernes et performants conçus au Canada. Nos pièces associent matériaux de luxe, confort et polyvalence—parfaites pour toutes les occasions, du chalet au cocktail, sur le green de golf ou le court de tennis, au travail ou en boîte de nuit huppée.",
     "featuredProducts": "Produits en Vedette",
+    "featuredProductsDescription": "Découvrez notre collection soigneusement sélectionnée de vêtements premium, conçus pour le style et la performance dans tous les environnements.",
+    "featuredCollection": "Collection Vedette",
+    "viewCollection": "Voir la Collection",
+    "comingSoon": "Bientôt Disponible",
+    "comingSoonDescription": "Notre collection de produits vedettes est en cours de curation. Revenez bientôt pour des vêtements premium polyvalents.",
+    "regionError": "Erreur de Configuration de Région",
+    "regionErrorDescription": "Impossible de charger les données de région pour ce code de pays",
+    "regionErrorAdvice": "Veuillez vérifier la configuration de votre backend Medusa et vous assurer que les régions sont correctement configurées.",
     "learnMore": "En Savoir Plus",
     "addToCart": "Ajouter au Panier",
     "viewDetails": "Voir les Détails",
@@ -24,11 +32,14 @@
   "brandStory": {
     "title": "Notre Histoire",
     "subtitle": "De la Passion au Premium",
-    "paragraph1": "Fondée au Canada par des passionnés de mode, Next X Level est née du désir de concevoir des vêtements capables de s’adapter à chaque aspect de la vie moderne. Nous voulions des pièces alliant matériaux de luxe, savoir-faire irréprochable et portabilité au quotidien—sans le prix de luxe.",
+    "paragraph1": "Fondée au Canada par des passionnés de mode, Next X Level est née du désir de concevoir des vêtements capables de s'adapter à chaque aspect de la vie moderne. Nous voulions des pièces alliant matériaux de luxe, savoir-faire irréprochable et portabilité au quotidien—sans le prix de luxe.",
     "paragraph2": "Nous avons constaté que la plupart des vêtements forçaient un compromis entre style et fonctionnalité. Notre objectif est devenu clair : créer des pièces premium qui combinent design sophistiqué et performances techniques, du chalet en montagne aux rues animées de la ville.",
     "learnMore": "En Savoir Plus",
     "shopNow": "Acheter Maintenant",
-    "tagline": "Élevez votre style"
+    "tagline": "Élevez votre style",
+    "founded": "Fondée",
+    "canadian": "Canadien",
+    "style": "Style"
   },
   "categories": {
     "title": "Achetez par Catégorie",
@@ -49,7 +60,8 @@
       "name": "Casquettes",
       "description": "Complétez votre look avec style et matériaux haut de gamme"
     },
-    "shopNow": "Acheter Maintenant"
+    "shopNow": "Acheter Maintenant",
+    "viewAllProducts": "Voir Tous les Produits"
   },
   "benefits": {
     "title": "L'Avantage Next X Level",
@@ -60,7 +72,7 @@
     },
     "performance": {
       "title": "Design Polyvalent",
-      "description": "Conçus avec des tissus haut de gamme, une gestion de l’humidité et une extensibilité optimales pour un confort maximal, que vous soyez en détente ou en mouvement."
+      "description": "Conçus avec des tissus haut de gamme, une gestion de l'humidité et une extensibilité optimales pour un confort maximal, que vous soyez en détente ou en mouvement."
     },
     "materialInnovation": {
       "title": "Innovation Textile",
@@ -68,16 +80,24 @@
     },
     "shipping": {
       "title": "Livraison Rapide",
-      "description": "Livraison gratuite partout au Canada et options d’expédition internationale accélérée disponibles."
-    }
+      "description": "Livraison gratuite partout au Canada et options d'expédition internationale accélérée disponibles."
+    },
+    "customerSupport": "Support Client",
+    "dayReturns": "Jours de Retour",
+    "ratingAverage": "Note Moyenne",
+    "satisfaction": "Satisfaction"
   },
   "newsletter": {
     "title": "Rejoignez le Niveau Supérieur",
-    "subtitle": "Restez informé des nouvelles collections, des offres exclusives et de l’inspiration lifestyle",
+    "subtitle": "Restez informé des nouvelles collections, des offres exclusives et de l'inspiration lifestyle",
     "placeholder": "Votre adresse e-mail",
-    "subscribe": "S’abonner",
+    "subscribe": "S'abonner",
     "processing": "Traitement en cours...",
     "disclaimer": "En vous abonnant, vous acceptez de recevoir des e-mails marketing de Next X Level. Vous pouvez vous désabonner à tout moment.",
+    "exclusiveOffers": "Offres Exclusives",
+    "newArrivals": "Nouveautés",
+    "styleTips": "Conseils de Style",
+    "joinSubscribers": "Rejoignez 5 000+ abonnés",
     "success": {
       "title": "Merci de Vous Être Abonné",
       "message": "Vous avez été ajouté à notre newsletter. Surveillez votre boîte de réception pour des mises à jour et des offres exclusives."
@@ -258,6 +278,55 @@
       "quote": "Nous ne faisons pas que des vêtements. Nous créons des expériences pour chaque moment de votre vie."
     }
   },
+  "store": {
+    "title": "Notre Boutique",
+    "subtitle": "Vêtements canadiens premium qui élèvent votre style quotidien",
+    "breadcrumb": {
+      "home": "Accueil",
+      "store": "Boutique"
+    },
+    "explore": "Explorer",
+    "allProducts": "Tous les Produits",
+    "description": "Découvrez notre collection complète de vêtements premium polyvalents",
+    "filters": {
+      "title": "Filtres",
+      "sortBy": "Trier par",
+      "categories": "Catégories",
+      "size": "Taille",
+      "color": "Couleur",
+      "priceRange": "Gamme de Prix",
+      "apply": "Appliquer",
+      "clearAll": "Effacer Tous les Filtres",
+      "showing": "Affichage {start}-{end} sur {total} produits",
+      "sortedBy": "Trié par",
+      "sortOptions": {
+        "created_at": "Dernières Arrivées",
+        "price_asc": "Prix: Du Plus Bas au Plus Haut",
+        "price_desc": "Prix: Du Plus Haut au Plus Bas"
+      }
+    },
+    "categories": {
+      "polos": "Polos",
+      "hoodies": "Sweats à Capuche", 
+      "joggers": "Joggings et Pantalons",
+      "caps": "Casquettes et Chapeaux",
+      "accessories": "Accessoires"
+    },
+    "emptyState": {
+      "title": "Aucun Produit Trouvé",
+      "description": "Essayez d'ajuster vos filtres ou critères de recherche.",
+      "clearFilters": "Effacer les Filtres"
+    },
+    "regionError": {
+      "title": "Région Non Disponible",
+      "description": "Nous ne desservons pas actuellement cette région."
+    },
+    "loadMore": "Charger Plus de Produits",
+    "viewToggle": {
+      "grid": "Vue grille",
+      "list": "Vue liste"
+    }
+  },
   "contact": {
     "hero": {
       "title": "Contact",
@@ -293,10 +362,33 @@
         "order": "Demande de Commande",
         "product": "Informations Produit",
         "wholesale": "Demande de Vente en Gros",
+        "partnership": "Opportunités de Partenariat",
+        "feedback": "Commentaires et Suggestions",
         "other": "Autre"
       },
       "message": "Message",
-      "submit": "Envoyer"
+      "submit": "Envoyer le Message",
+      "submitting": "Envoi en cours...",
+      "required": "Champs obligatoires",
+      "placeholders": {
+        "name": "Saisissez votre nom complet (ex: Jean Dupont)",
+        "email": "Saisissez votre adresse e-mail (ex: jean@exemple.com)",
+        "message": "Parlez-nous de vos préférences de style, questions de taille, opportunités de partenariat, ou comment nous pouvons améliorer votre garde-robe..."
+      },
+      "validation": {
+        "nameRequired": "Le nom est obligatoire",
+        "emailRequired": "L'e-mail est obligatoire",
+        "emailInvalid": "Veuillez saisir une adresse e-mail valide",
+        "subjectRequired": "Veuillez sélectionner un sujet",
+        "messageRequired": "Le message est obligatoire",
+        "messageMinLength": "Le message doit contenir au moins 10 caractères"
+      },
+      "success": {
+        "title": "Message Envoyé avec Succès",
+        "description": "Merci de nous avoir contactés. Nous vous répondrons dans les 24 heures.",
+        "sendAnother": "Envoyer un Autre Message"
+      },
+      "characterCount": "{count}/500 caractères"
     },
     "location": {
       "title": "Visitez Notre Showroom",

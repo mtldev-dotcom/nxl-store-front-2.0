@@ -171,19 +171,19 @@ const LifestyleBenefits = ({ dictionary }: LifestyleBenefitsProps) => {
         >
           <div className="text-center">
             <div className="font-display text-3xl text-nxl-gold mb-2">24/7</div>
-            <div className="text-sm text-nxl-ivory/60 font-body">Customer Support</div>
+            <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.benefits?.customerSupport || "Customer Support"}</div>
           </div>
           <div className="text-center">
             <div className="font-display text-3xl text-nxl-gold mb-2">30</div>
-            <div className="text-sm text-nxl-ivory/60 font-body">Day Returns</div>
+            <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.benefits?.dayReturns || "Day Returns"}</div>
           </div>
           <div className="text-center">
             <div className="font-display text-3xl text-nxl-gold mb-2">5★</div>
-            <div className="text-sm text-nxl-ivory/60 font-body">Rating Average</div>
+            <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.benefits?.ratingAverage || "Rating Average"}</div>
           </div>
           <div className="text-center">
             <div className="font-display text-3xl text-nxl-gold mb-2">100%</div>
-            <div className="text-sm text-nxl-ivory/60 font-body">Satisfaction</div>
+            <div className="text-sm text-nxl-ivory/60 font-body">{dictionary?.benefits?.satisfaction || "Satisfaction"}</div>
           </div>
         </div>
       </div>

@@ -103,19 +103,19 @@ const Newsletter = ({ dictionary }: NewsletterProps) => {
               <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Exclusive Offers</span>
+              <span>{newsletterText.exclusiveOffers || "Exclusive Offers"}</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>New Arrivals</span>
+              <span>{newsletterText.newArrivals || "New Arrivals"}</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Style Tips</span>
+              <span>{newsletterText.styleTips || "Style Tips"}</span>
             </div>
           </div>
         </header>
@@ -232,7 +232,7 @@ const Newsletter = ({ dictionary }: NewsletterProps) => {
                     <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                     </svg>
-                    <span>Join 5,000+ subscribers</span>
+                    <span>{newsletterText.joinSubscribers || "Join 5,000+ subscribers"}</span>
                   </div>
                 </div>
               </div>

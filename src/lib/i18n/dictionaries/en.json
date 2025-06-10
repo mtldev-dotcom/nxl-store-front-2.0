@@ -3,6 +3,14 @@
     "title": "Next X Level",
     "description": "Elevate your style with modern, high-performance apparel designed in Canada. Our clothing merges luxury materials, comfort, and versatility—perfect for any occasion from a chalet fireside to a cocktail soirée, the golf course to the tennis court, work to a high-end nightclub.",
     "featuredProducts": "Featured Products",
+    "featuredProductsDescription": "Discover our carefully curated collection of premium apparel, designed for style and performance in every setting.",
+    "featuredCollection": "Featured Collection",
+    "viewCollection": "View Collection",
+    "comingSoon": "Coming Soon",
+    "comingSoonDescription": "Our featured products collection is being curated. Check back soon for premium versatile apparel.",
+    "regionError": "Region Configuration Error",
+    "regionErrorDescription": "Unable to load region data for this country code",
+    "regionErrorAdvice": "Please check your Medusa backend setup and ensure regions are correctly configured.",
     "learnMore": "Learn More",
     "addToCart": "Add to Cart",
     "viewDetails": "View Details",
@@ -28,7 +36,10 @@
     "paragraph2": "We recognized that most apparel forced a choice between style and performance. Our mission became clear: create premium clothing that performs under pressure while looking exceptional in any setting—from the ski chalet to the city skyline.",
     "learnMore": "Learn More",
     "shopNow": "Shop Now",
-    "tagline": "Elevate your style"
+    "tagline": "Elevate your style",
+    "founded": "Founded",
+    "canadian": "Canadian",
+    "style": "Style"
   },
   "categories": {
     "title": "Shop by Category",
@@ -49,7 +60,8 @@
       "name": "Caps",
       "description": "Top off your look with signature style and premium materials"
     },
-    "shopNow": "Shop Now"
+    "shopNow": "Shop Now",
+    "viewAllProducts": "View All Products"
   },
   "benefits": {
     "title": "The Next X Level Advantage",
@@ -60,7 +72,7 @@
     },
     "performance": {
       "title": "Versatile Design",
-      "description": "Engineered with advanced fabrics, moisture-wicking technology, and stretch for maximum comfort whether you’re relaxing or on the move."
+      "description": "Engineered with advanced fabrics, moisture-wicking technology, and stretch for maximum comfort whether you're relaxing or on the move."
     },
     "materialInnovation": {
       "title": "Material Innovation",
@@ -69,7 +81,11 @@
     "shipping": {
       "title": "Fast Shipping",
       "description": "Free delivery across Canada and expedited international shipping options available."
-    }
+    },
+    "customerSupport": "Customer Support",
+    "dayReturns": "Day Returns",
+    "ratingAverage": "Rating Average",
+    "satisfaction": "Satisfaction"
   },
   "newsletter": {
     "title": "Join The Next Level",
@@ -78,6 +94,10 @@
     "subscribe": "Subscribe",
     "processing": "Processing...",
     "disclaimer": "By subscribing, you agree to receive marketing emails from Next X Level. You can unsubscribe at any time.",
+    "exclusiveOffers": "Exclusive Offers",
+    "newArrivals": "New Arrivals",
+    "styleTips": "Style Tips",
+    "joinSubscribers": "Join 5,000+ subscribers",
     "success": {
       "title": "Thank You for Subscribing",
       "message": "You've been added to our newsletter. Watch your inbox for exclusive updates and offers."
@@ -258,10 +278,59 @@
       "quote": "We don’t just make clothes. We craft experiences for every moment of your life."
     }
   },
+  "store": {
+    "title": "Our Store",
+    "subtitle": "Premium Canadian apparel that elevates your everyday style",
+    "breadcrumb": {
+      "home": "Home",
+      "store": "Store"
+    },
+    "explore": "Explore",
+    "allProducts": "All Products",
+    "description": "Discover our complete collection of versatile premium apparel",
+    "filters": {
+      "title": "Filters",
+      "sortBy": "Sort by",
+      "categories": "Categories",
+      "size": "Size",
+      "color": "Color",
+      "priceRange": "Price Range",
+      "apply": "Apply",
+      "clearAll": "Clear All Filters",
+      "showing": "Showing {start}-{end} of {total} products",
+      "sortedBy": "Sorted by",
+      "sortOptions": {
+        "created_at": "Latest Arrivals",
+        "price_asc": "Price: Low to High",
+        "price_desc": "Price: High to Low"
+      }
+    },
+    "categories": {
+      "polos": "Polo Shirts",
+      "hoodies": "Hoodies & Sweatshirts", 
+      "joggers": "Joggers & Pants",
+      "caps": "Caps & Hats",
+      "accessories": "Accessories"
+    },
+    "emptyState": {
+      "title": "No Products Found",
+      "description": "Try adjusting your filters or search criteria.",
+      "clearFilters": "Clear Filters"
+    },
+    "regionError": {
+      "title": "Region Not Available",
+      "description": "We're currently not serving this region."
+    },
+    "loadMore": "Load More Products",
+    "viewToggle": {
+      "grid": "Grid view",
+      "list": "List view"
+    }
+  },
   "contact": {
     "hero": {
       "title": "Contact",
-      "subtitle": "We’d love to hear from you"
+      "subtitle": "We'd love to hear from you"
     },
     "info": {
       "title": "Get In Touch",
@@ -273,7 +342,7 @@
       "email": {
         "title": "Email",
         "address": "info@nextxlevel.com",
-        "response": "We’ll respond within 24 hours"
+        "response": "We'll respond within 24 hours"
       },
       "address": {
         "title": "Address",
@@ -293,10 +362,33 @@
         "order": "Order Inquiry",
         "product": "Product Information",
         "wholesale": "Wholesale Inquiry",
+        "partnership": "Partnership Opportunities",
+        "feedback": "Feedback & Suggestions",
         "other": "Other"
       },
       "message": "Message",
-      "submit": "Submit"
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "required": "Required fields",
+      "placeholders": {
+        "name": "Enter your full name (e.g., John Smith)",
+        "email": "Enter your email address (e.g., john@example.com)",
+        "message": "Tell us about your style preferences, sizing questions, partnership opportunities, or how we can elevate your wardrobe..."
+      },
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "subjectRequired": "Please select a subject",
+        "messageRequired": "Message is required",
+        "messageMinLength": "Message must be at least 10 characters long"
+      },
+      "success": {
+        "title": "Message Sent Successfully",
+        "description": "Thank you for reaching out to us. We'll get back to you within 24 hours.",
+        "sendAnother": "Send Another Message"
+      },
+      "characterCount": "{count}/500 characters"
     },
     "location": {
       "title": "Visit Our Showroom",

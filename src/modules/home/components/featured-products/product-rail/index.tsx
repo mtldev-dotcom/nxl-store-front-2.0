@@ -10,11 +10,13 @@ export default async function ProductRail({
   region,
   locale,
   countryCode,
+  dictionary,
 }: {
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
   locale?: string
   countryCode: string
+  dictionary?: Record<string, any>
 }) {
   // Build translation fields based on locale
   const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
@@ -39,19 +41,23 @@ export default async function ProductRail({
     return null
   }
 
+  // Get translations with fallback defaults
+  const featuredCollectionText = dictionary?.general?.featuredCollection || "Featured Collection"
+  const viewCollectionText = dictionary?.general?.viewCollection || "View Collection"
+
   return (
     <div className="bg-nxl-black">
       <div className="content-container py-20 small:py-32">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 pb-6 border-b border-nxl-gold/30">
           <div>
-            <Text className="font-serif text-sm uppercase tracking-widest text-nxl-gold mb-2">Featured Collection</Text>
+            <Text className="font-serif text-sm uppercase tracking-widest text-nxl-gold mb-2">{featuredCollectionText}</Text>
             <Text className="font-serif text-3xl sm:text-4xl text-nxl-ivory">{collection.title}</Text>
           </div>
           <InteractiveLink 
             href={`/collections/${collection.handle}`}
             className="font-button text-nxl-gold hover:text-nxl-gold/80 uppercase tracking-wider mt-4 sm:mt-0"
           >
-            View all
+            {viewCollectionText}
           </InteractiveLink>
         </div>
         <ul className="grid grid-cols-1 small:grid-cols-2 medium:grid-cols-3 gap-x-10 gap-y-24 small:gap-y-36">

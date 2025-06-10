@@ -186,7 +186,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
         >
           <LocalizedClientLink href="/store">
             <button className="nxl-btn-secondary group">
-              <span>View All Products</span>
+              <span>{categoriesText.viewAllProducts}</span>
             </button>
           </LocalizedClientLink>
         </div>

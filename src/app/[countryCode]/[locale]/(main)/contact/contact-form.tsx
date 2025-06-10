@@ -1,218 +1,303 @@
 "use client"
 
-import { useState, FormEvent } from "react"
+import { useState, useEffect } from "react"
+import { getDictionary } from "@lib/i18n/get-dictionary"
+import { Locale } from "@lib/i18n/config"
 
-/**
- * ContactForm Component
- * -----------------------------------------------------------------------------
- * Client component that renders and handles a contact form.
- * Includes form validation and submission.
- */
-export default function ContactForm({ dictionary }: { dictionary: any }) {
-  // Form state
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+interface FormErrors {
+  name?: string
+  email?: string
+  subject?: string
+  message?: string
+}
+
+interface ContactFormProps {
+  locale?: Locale
+}
+
+const ContactForm = ({ locale = "en" }: ContactFormProps) => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     subject: "",
-    message: "",
+    message: ""
   })
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [dictionary, setDictionary] = useState<any>(null)
 
-  // Extract dictionary values with fallbacks
-  const formLabels = {
-    name: dictionary?.contact?.form?.name || "Full Name",
-    email: dictionary?.contact?.form?.email || "Email Address",
-    subject: dictionary?.contact?.form?.subject || "Subject",
-    message: dictionary?.contact?.form?.message || "Your Message",
-    submit: dictionary?.contact?.form?.submit || "Send Message",
-    sending: dictionary?.contact?.form?.sending || "Sending...",
-    successTitle: dictionary?.contact?.form?.successTitle || "Message Sent",
-    successMessage: dictionary?.contact?.form?.successMessage || "Thank you for contacting us. We'll respond to your inquiry as soon as possible.",
-    errorTitle: dictionary?.contact?.form?.errorTitle || "Error",
-    errorMessage: dictionary?.contact?.form?.errorMessage || "There was a problem sending your message. Please try again later.",
-    required: dictionary?.contact?.form?.required || "This field is required",
-    invalidEmail: dictionary?.contact?.form?.invalidEmail || "Please enter a valid email address",
-  }
+  useEffect(() => {
+    const loadTranslations = async () => {
+      const dict = await getDictionary(locale)
+      setDictionary(dict)
+    }
+    loadTranslations()
+  }, [locale])
 
-  // Form validation
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
-    
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {}
+
     if (!formData.name.trim()) {
-      newErrors.name = formLabels.required
+      newErrors.name = dictionary?.contact?.form?.validation?.nameRequired || "Name is required"
     }
-    
+
     if (!formData.email.trim()) {
-      newErrors.email = formLabels.required
+      newErrors.email = dictionary?.contact?.form?.validation?.emailRequired || "Email is required"
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = formLabels.invalidEmail
+      newErrors.email = dictionary?.contact?.form?.validation?.emailInvalid || "Please enter a valid email address"
     }
-    
+
     if (!formData.subject.trim()) {
-      newErrors.subject = formLabels.required
+      newErrors.subject = dictionary?.contact?.form?.validation?.subjectRequired || "Please select a subject"
     }
-    
+
     if (!formData.message.trim()) {
-      newErrors.message = formLabels.required
+      newErrors.message = dictionary?.contact?.form?.validation?.messageRequired || "Message is required"
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = dictionary?.contact?.form?.validation?.messageMinLength || "Message must be at least 10 characters long"
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
-  // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
     
-    // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }))
     }
   }
 
-  // Handle form submission
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!validateForm()) {
       return
     }
-    
-    setSubmitStatus("submitting")
-    
-    // Simulate API call
+
+    setIsSubmitting(true)
+
     try {
-      // In a real implementation, this would be an API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      setSubmitStatus("success")
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // Reset form after successful submission
+      // Here you would typically send the form data to your API
+      console.log("Form submitted:", formData)
+      
+      setIsSubmitted(true)
       setFormData({
         name: "",
         email: "",
         subject: "",
-        message: "",
+        message: ""
       })
     } catch (error) {
-      console.error("Error submitting form:", error)
-      setSubmitStatus("error")
+      console.error("Form submission error:", error)
+      // Handle error appropriately
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
-  if (submitStatus === "success") {
-    return (
-      <div className="text-center p-6 bg-nxl-forest/30 border border-nxl-gold/20 rounded-sm">
-        <h3 className="font-display text-xl text-nxl-gold mb-4">{formLabels.successTitle}</h3>
-        <p className="font-body text-nxl-ivory/90">{formLabels.successMessage}</p>
-        <button 
-          onClick={() => setSubmitStatus("idle")}
-          className="mt-6 bg-nxl-gold hover:bg-nxl-gold/80 text-nxl-black font-serif py-2 px-6 uppercase text-sm tracking-wider transition-colors rounded-sm"
-        >
-          {dictionary?.general?.backToForm || "Back to Form"}
-        </button>
-      </div>
-    )
+  if (!dictionary) {
+    return <div className="bg-nxl-navy/50 p-8 rounded-sm border border-nxl-gold/20 h-96 animate-pulse"></div>
   }
 
-  if (submitStatus === "error") {
+  if (isSubmitted) {
     return (
-      <div className="text-center p-6 bg-red-900/20 border border-red-500/30 rounded-sm">
-        <h3 className="font-display text-xl text-red-400 mb-4">{formLabels.errorTitle}</h3>
-        <p className="font-body text-nxl-ivory/90">{formLabels.errorMessage}</p>
-        <button 
-          onClick={() => setSubmitStatus("idle")}
-          className="mt-6 bg-nxl-gold hover:bg-nxl-gold/80 text-nxl-black font-serif py-2 px-6 uppercase text-sm tracking-wider transition-colors rounded-sm"
-        >
-          {dictionary?.general?.tryAgain || "Try Again"}
-        </button>
+      <div className="bg-nxl-navy/50 p-8 rounded-sm border border-nxl-gold/20 text-center">
+        <div className="mb-6">
+          <div className="w-16 h-16 bg-nxl-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="font-display text-2xl text-white drop-shadow-lg uppercase tracking-wider mb-4">
+            {dictionary.contact?.form?.success?.title || "Message Sent Successfully"}
+          </h3>
+          <p className="font-body text-white/90 drop-shadow-md text-lg mb-6">
+            {dictionary.contact?.form?.success?.description || "Thank you for reaching out to us. We'll get back to you within 24 hours."}
+          </p>
+          <button
+            onClick={() => setIsSubmitted(false)}
+            className="px-6 py-3 bg-nxl-gold text-nxl-black font-button uppercase tracking-wider hover:bg-nxl-gold/90 transition-colors duration-200"
+          >
+            {dictionary.contact?.form?.success?.sendAnother || "Send Another Message"}
+          </button>
+        </div>
       </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label htmlFor="name" className="block font-serif text-nxl-ivory mb-2">
-          {formLabels.name} <span className="text-nxl-gold">*</span>
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={`w-full bg-nxl-black border ${errors.name ? 'border-red-500/70' : 'border-nxl-gold/30'} 
-            focus:border-nxl-gold/60 focus:ring-1 focus:ring-nxl-gold/50 rounded-sm px-4 py-3
-            font-body text-nxl-ivory placeholder-nxl-ivory/50 focus:outline-none transition-colors`}
-        />
-        {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
-      </div>
+    <div className="bg-nxl-navy/50 p-8 rounded-sm border border-nxl-gold/20">
+      <h3 className="font-display text-2xl md:text-3xl text-white drop-shadow-lg uppercase tracking-wider mb-8">
+        {dictionary.contact?.form?.title || "Send Us a Message"}
+      </h3>
       
-      <div>
-        <label htmlFor="email" className="block font-serif text-nxl-ivory mb-2">
-          {formLabels.email} <span className="text-nxl-gold">*</span>
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={`w-full bg-nxl-black border ${errors.email ? 'border-red-500/70' : 'border-nxl-gold/30'} 
-            focus:border-nxl-gold/60 focus:ring-1 focus:ring-nxl-gold/50 rounded-sm px-4 py-3
-            font-body text-nxl-ivory placeholder-nxl-ivory/50 focus:outline-none transition-colors`}
-        />
-        {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
-      </div>
-      
-      <div>
-        <label htmlFor="subject" className="block font-serif text-nxl-ivory mb-2">
-          {formLabels.subject} <span className="text-nxl-gold">*</span>
-        </label>
-        <input
-          type="text"
-          id="subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          className={`w-full bg-nxl-black border ${errors.subject ? 'border-red-500/70' : 'border-nxl-gold/30'} 
-            focus:border-nxl-gold/60 focus:ring-1 focus:ring-nxl-gold/50 rounded-sm px-4 py-3
-            font-body text-nxl-ivory placeholder-nxl-ivory/50 focus:outline-none transition-colors`}
-        />
-        {errors.subject && <p className="mt-1 text-sm text-red-400">{errors.subject}</p>}
-      </div>
-      
-      <div>
-        <label htmlFor="message" className="block font-serif text-nxl-ivory mb-2">
-          {formLabels.message} <span className="text-nxl-gold">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={5}
-          className={`w-full bg-nxl-black border ${errors.message ? 'border-red-500/70' : 'border-nxl-gold/30'} 
-            focus:border-nxl-gold/60 focus:ring-1 focus:ring-nxl-gold/50 rounded-sm px-4 py-3
-            font-body text-nxl-ivory placeholder-nxl-ivory/50 focus:outline-none transition-colors`}
-        />
-        {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
-      </div>
-      
-      <button
-        type="submit"
-        disabled={submitStatus === "submitting"}
-        className="w-full bg-nxl-gold hover:bg-nxl-gold/80 text-nxl-black font-serif py-3 
-          uppercase text-sm tracking-wider transition-colors rounded-sm disabled:opacity-70 disabled:cursor-not-allowed"
-      >
-        {submitStatus === "submitting" ? formLabels.sending : formLabels.submit}
-      </button>
-    </form>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Name Field */}
+        <div>
+          <label htmlFor="name" className="block font-serif text-white/90 drop-shadow-sm mb-2">
+            {dictionary.contact?.form?.name || "Name"} *
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            className={`w-full p-3 bg-nxl-black border rounded-sm text-white/95 focus:outline-none transition-colors duration-200 ${
+              errors.name 
+                ? 'border-red-500 focus:border-red-500' 
+                : 'border-nxl-gold/30 focus:border-nxl-gold'
+            }`}
+            placeholder={dictionary.contact?.form?.placeholders?.name || "Enter your full name"}
+          />
+          {errors.name && (
+            <p className="mt-1 text-red-400 text-sm font-body">{errors.name}</p>
+          )}
+        </div>
+        
+        {/* Email Field */}
+        <div>
+          <label htmlFor="email" className="block font-serif text-white/90 drop-shadow-sm mb-2">
+            {dictionary.contact?.form?.email || "Email"} *
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={`w-full p-3 bg-nxl-black border rounded-sm text-white/95 focus:outline-none transition-colors duration-200 ${
+              errors.email 
+                ? 'border-red-500 focus:border-red-500' 
+                : 'border-nxl-gold/30 focus:border-nxl-gold'
+            }`}
+            placeholder={dictionary.contact?.form?.placeholders?.email || "Enter your email address"}
+          />
+          {errors.email && (
+            <p className="mt-1 text-red-400 text-sm font-body">{errors.email}</p>
+          )}
+        </div>
+        
+        {/* Subject Field */}
+        <div>
+          <label htmlFor="subject" className="block font-serif text-white/90 drop-shadow-sm mb-2">
+            {dictionary.contact?.form?.subject || "Subject"} *
+          </label>
+          <select
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            onChange={handleInputChange}
+            className={`w-full p-3 bg-nxl-black border rounded-sm text-white/95 focus:outline-none transition-colors duration-200 ${
+              errors.subject 
+                ? 'border-red-500 focus:border-red-500' 
+                : 'border-nxl-gold/30 focus:border-nxl-gold'
+            }`}
+          >
+            <option value="" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectPlaceholder || "Please select a subject"}
+            </option>
+            <option value="order" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.order || "Order Inquiry"}
+            </option>
+            <option value="product" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.product || "Product Information"}
+            </option>
+            <option value="wholesale" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.wholesale || "Wholesale Inquiry"}
+            </option>
+            <option value="partnership" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.partnership || "Partnership Opportunities"}
+            </option>
+            <option value="feedback" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.feedback || "Feedback & Suggestions"}
+            </option>
+            <option value="other" className="bg-nxl-black">
+              {dictionary.contact?.form?.subjectOptions?.other || "Other"}
+            </option>
+          </select>
+          {errors.subject && (
+            <p className="mt-1 text-red-400 text-sm font-body">{errors.subject}</p>
+          )}
+        </div>
+        
+        {/* Message Field */}
+        <div>
+          <label htmlFor="message" className="block font-serif text-white/90 drop-shadow-sm mb-2">
+            {dictionary.contact?.form?.message || "Message"} *
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            rows={5}
+            className={`w-full p-3 bg-nxl-black border rounded-sm text-white/95 focus:outline-none transition-colors duration-200 resize-y ${
+              errors.message 
+                ? 'border-red-500 focus:border-red-500' 
+                : 'border-nxl-gold/30 focus:border-nxl-gold'
+            }`}
+            placeholder={dictionary.contact?.form?.placeholders?.message || "Tell us about your inquiry, feedback, or how we can help you..."}
+          />
+          {errors.message && (
+            <p className="mt-1 text-red-400 text-sm font-body">{errors.message}</p>
+          )}
+          <p className="mt-1 text-white/70 drop-shadow-sm text-sm font-body">
+            {dictionary.contact?.form?.characterCount?.replace("{count}", formData.message.length.toString()) || `${formData.message.length}/500 characters`}
+          </p>
+        </div>
+        
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`w-full py-3 px-6 font-serif text-lg font-semibold rounded-sm transition-all duration-200 ${
+            isSubmitting
+              ? 'bg-nxl-gold/50 text-nxl-black/50 cursor-not-allowed'
+              : 'bg-nxl-gold text-nxl-black hover:bg-nxl-gold/90 hover:transform hover:scale-[1.02]'
+          }`}
+        >
+          {isSubmitting ? (
+            <div className="flex items-center justify-center space-x-2">
+              <div className="w-4 h-4 border-2 border-nxl-black/30 border-t-nxl-black rounded-full animate-spin"></div>
+              <span>{dictionary.contact?.form?.submitting || "Sending..."}</span>
+            </div>
+          ) : (
+            dictionary.contact?.form?.submit || "Send Message"
+          )}
+        </button>
+        
+        {/* Required fields note */}
+        <p className="text-white/70 drop-shadow-sm text-sm font-body text-center">
+          * {dictionary.contact?.form?.required || "Required fields"}
+        </p>
+      </form>
+    </div>
   )
 }
+
+export default ContactForm

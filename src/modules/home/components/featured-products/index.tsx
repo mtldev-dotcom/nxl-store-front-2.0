@@ -23,11 +23,13 @@ export default async function FeaturedProducts({
   region,
   locale,
   countryCode,
+  dictionary,
 }: {
   collections: HttpTypes.StoreCollection[]
   region: HttpTypes.StoreRegion
   locale?: string
   countryCode: string
+  dictionary?: Record<string, any>
 }) {
   // Map each collection to a list item containing its product rail
   return collections.map((collection) => {
@@ -39,6 +41,7 @@ export default async function FeaturedProducts({
           region={region} 
           countryCode={countryCode}
           locale={locale}
+          dictionary={dictionary}
         />
       </li>
     )

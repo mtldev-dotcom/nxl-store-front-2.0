@@ -20,6 +20,7 @@ import Image from "next/image"
 // Internationalization helpers
 import { getDictionary } from "@lib/i18n/get-dictionary" // Load locale-specific texts
 import { Locale } from "@lib/i18n/config"                // Locale type
+import ContactForm from "./contact-form"
 
 /**
  * generateMetadata
@@ -107,10 +108,10 @@ export default async function Contact(props: {
         </div>
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <div className="text-center p-8">
-            <h1 className="font-display text-5xl md:text-6xl text-nxl-gold uppercase tracking-wider mb-6">
+            <h1 className="font-display text-5xl md:text-6xl text-white drop-shadow-lg uppercase tracking-wider mb-6">
               {dictionary.navigation.contact}
             </h1>
-            <p className="font-serif text-xl md:text-2xl text-nxl-ivory max-w-2xl mx-auto">
+            <p className="font-serif text-xl md:text-2xl text-white/95 drop-shadow-md max-w-2xl mx-auto">
               {getDictValue(dictionary, ['contact', 'hero', 'subtitle'], "We'd love to hear from you")}
             </p>
           </div>
@@ -138,10 +139,10 @@ export default async function Contact(props: {
                     <h3 className="font-serif text-2xl text-nxl-gold mb-2">
                       {getDictValue(dictionary, ['contact', 'info', 'phone', 'title'], "Phone")}
                     </h3>
-                    <p className="font-body text-nxl-ivory/90 text-lg mb-1">
+                    <p className="font-body text-white/95 drop-shadow-sm text-lg mb-1">
                       {getDictValue(dictionary, ['contact', 'info', 'phone', 'number'], "+1 (888) 555-GOLF")}
                     </p>
-                    <p className="font-body text-nxl-ivory/70 text-sm">
+                    <p className="font-body text-white/90 drop-shadow-sm text-sm">
                       {getDictValue(dictionary, ['contact', 'info', 'phone', 'hours'], "Monday-Friday, 9am-5pm EST")}
                     </p>
                   </div>
@@ -158,10 +159,10 @@ export default async function Contact(props: {
                     <h3 className="font-serif text-2xl text-nxl-gold mb-2">
                       {getDictValue(dictionary, ['contact', 'info', 'email', 'title'], "Email")}
                     </h3>
-                    <p className="font-body text-nxl-ivory/90 text-lg mb-1">
+                    <p className="font-body text-nxl-ivory text-lg mb-1">
                       {getDictValue(dictionary, ['contact', 'info', 'email', 'address'], "info@nextxlevel.com")}
                     </p>
-                    <p className="font-body text-nxl-ivory/70 text-sm">
+                    <p className="font-body text-nxl-ivory text-sm">
                       {getDictValue(dictionary, ['contact', 'info', 'email', 'response'], "We'll respond within 24 hours")}
                     </p>
                   </div>
@@ -178,13 +179,13 @@ export default async function Contact(props: {
                     <h3 className="font-serif text-2xl text-nxl-gold mb-2">
                       {getDictValue(dictionary, ['contact', 'info', 'address', 'title'], "Address")}
                     </h3>
-                    <p className="font-body text-nxl-ivory/90">
+                    <p className="font-body text-nxl-ivory">
                       {getDictValue(dictionary, ['contact', 'info', 'address', 'line1'], "123 Fairway Drive")}
                     </p>
-                    <p className="font-body text-nxl-ivory/90">
+                    <p className="font-body text-nxl-ivory">
                       {getDictValue(dictionary, ['contact', 'info', 'address', 'line2'], "Toronto, Ontario M5V 2K7")}
                     </p>
-                    <p className="font-body text-nxl-ivory/90">
+                    <p className="font-body text-nxl-ivory">
                       {getDictValue(dictionary, ['contact', 'info', 'address', 'line3'], "Canada")}
                     </p>
                   </div>
@@ -229,88 +230,7 @@ export default async function Contact(props: {
             </div>
             
             {/* Contact Form */}
-            <div className="bg-nxl-navy/50 p-8 rounded-sm border border-nxl-gold/20">
-              <h3 className="font-display text-2xl md:text-3xl text-nxl-gold uppercase tracking-wider mb-8">
-                {getDictValue(dictionary, ['contact', 'form', 'title'], "Send Us a Message")}
-              </h3>
-              
-              <form className="space-y-6">
-                {/* Name Field */}
-                <div>
-                  <label htmlFor="name" className="block font-serif text-nxl-ivory/90 mb-2">
-                    {getDictValue(dictionary, ['contact', 'form', 'name'], "Name")}
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full p-3 bg-nxl-black border border-nxl-gold/30 rounded-sm text-nxl-ivory/90 focus:border-nxl-gold focus:outline-none"
-                  />
-                </div>
-                
-                {/* Email Field */}
-                <div>
-                  <label htmlFor="email" className="block font-serif text-nxl-ivory/90 mb-2">
-                    {getDictValue(dictionary, ['contact', 'form', 'email'], "Email")}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full p-3 bg-nxl-black border border-nxl-gold/30 rounded-sm text-nxl-ivory/90 focus:border-nxl-gold focus:outline-none"
-                  />
-                </div>
-                
-                {/* Subject Field */}
-                <div>
-                  <label htmlFor="subject" className="block font-serif text-nxl-ivory/90 mb-2">
-                    {getDictValue(dictionary, ['contact', 'form', 'subject'], "Subject")}
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    className="w-full p-3 bg-nxl-black border border-nxl-gold/30 rounded-sm text-nxl-ivory/90 focus:border-nxl-gold focus:outline-none"
-                  >
-                    <option value="" className="bg-nxl-black">
-                      {getDictValue(dictionary, ['contact', 'form', 'subjectPlaceholder'], "Please select a subject")}
-                    </option>
-                    <option value="order" className="bg-nxl-black">
-                      {getDictValue(dictionary, ['contact', 'form', 'subjectOptions', 'order'], "Order Inquiry")}
-                    </option>
-                    <option value="product" className="bg-nxl-black">
-                      {getDictValue(dictionary, ['contact', 'form', 'subjectOptions', 'product'], "Product Information")}
-                    </option>
-                    <option value="wholesale" className="bg-nxl-black">
-                      {getDictValue(dictionary, ['contact', 'form', 'subjectOptions', 'wholesale'], "Wholesale Inquiry")}
-                    </option>
-                    <option value="other" className="bg-nxl-black">
-                      {getDictValue(dictionary, ['contact', 'form', 'subjectOptions', 'other'], "Other")}
-                    </option>
-                  </select>
-                </div>
-                
-                {/* Message Field */}
-                <div>
-                  <label htmlFor="message" className="block font-serif text-nxl-ivory/90 mb-2">
-                    {getDictValue(dictionary, ['contact', 'form', 'message'], "Message")}
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    className="w-full p-3 bg-nxl-black border border-nxl-gold/30 rounded-sm text-nxl-ivory/90 focus:border-nxl-gold focus:outline-none"
-                  ></textarea>
-                </div>
-                
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full py-3 px-6 bg-nxl-gold text-nxl-black font-serif text-lg font-semibold rounded-sm hover:bg-nxl-gold/90 transition-colors"
-                >
-                  {getDictValue(dictionary, ['contact', 'form', 'submit'], "Send")}
-                </button>
-              </form>
-            </div>
+            <ContactForm locale={locale} />
           </div>
         </div>
       </section>
@@ -334,10 +254,10 @@ export default async function Contact(props: {
             
             <div className="space-y-8">
               <div>
-                <p className="font-body text-nxl-ivory/90 text-lg mb-4">
+                <p className="font-body text-nxl-ivory text-lg mb-4">
                   {getDictValue(dictionary, ['contact', 'location', 'hours'], "Our showroom is open Monday-Friday, 10am-6pm, and Saturday 11am-4pm.")}
                 </p>
-                <p className="font-body text-nxl-ivory/90 text-lg">
+                <p className="font-body text-nxl-ivory text-lg">
                   {getDictValue(dictionary, ['contact', 'location', 'appointment'], "Please call ahead to schedule a personal shopping appointment for the best experience.")}
                 </p>
               </div>
@@ -345,16 +265,16 @@ export default async function Contact(props: {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="bg-nxl-black/50 p-6 rounded-sm border border-nxl-gold/20">
                   <h3 className="font-serif text-xl text-nxl-gold mb-3">Toronto</h3>
-                  <p className="font-body text-nxl-ivory/90">123 Fairway Drive</p>
-                  <p className="font-body text-nxl-ivory/90">Toronto, ON M5V 2K7</p>
-                  <p className="font-body text-nxl-ivory/90">Canada</p>
+                  <p className="font-body text-nxl-ivory">123 Fairway Drive</p>
+                  <p className="font-body text-nxl-ivory">Toronto, ON M5V 2K7</p>
+                  <p className="font-body text-nxl-ivory">Canada</p>
                 </div>
                 
                 <div className="bg-nxl-black/50 p-6 rounded-sm border border-nxl-gold/20">
                   <h3 className="font-serif text-xl text-nxl-gold mb-3">Vancouver</h3>
-                  <p className="font-body text-nxl-ivory/90">456 Golf View Terrace</p>
-                  <p className="font-body text-nxl-ivory/90">Vancouver, BC V6B 5K2</p>
-                  <p className="font-body text-nxl-ivory/90">Canada</p>
+                  <p className="font-body text-nxl-ivory">456 Golf View Terrace</p>
+                  <p className="font-body text-nxl-ivory">Vancouver, BC V6B 5K2</p>
+                  <p className="font-body text-nxl-ivory">Canada</p>
                 </div>
               </div>
             </div>
@@ -375,7 +295,7 @@ export default async function Contact(props: {
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'shipping', 'question'], "What are your shipping rates?")}
               </h3>
-              <p className="font-body text-nxl-ivory/90">
+              <p className="font-body text-nxl-ivory">
                 {getDictValue(dictionary, ['contact', 'faq', 'shipping', 'answer'], 
                   "We offer free shipping on all Canadian orders over $150. For orders under $150, a flat shipping fee of $12 applies. International shipping rates vary by destination.")}
               </p>
@@ -386,7 +306,7 @@ export default async function Contact(props: {
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'tracking', 'question'], "How can I track my order?")}
               </h3>
-              <p className="font-body text-nxl-ivory/90">
+              <p className="font-body text-nxl-ivory">
                 {getDictValue(dictionary, ['contact', 'faq', 'tracking', 'answer'], 
                   "Once your order ships, you'll receive a confirmation email with tracking information. You can also log into your account to see order status at any time.")}
               </p>
@@ -397,7 +317,7 @@ export default async function Contact(props: {
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'returns', 'question'], "What is your return policy?")}
               </h3>
-              <p className="font-body text-nxl-ivory/90">
+              <p className="font-body text-nxl-ivory">
                 {getDictValue(dictionary, ['contact', 'faq', 'returns', 'answer'], 
                   "We accept returns within 30 days of purchase for unworn items with original tags attached. Returns are processed within 5-7 business days after receipt.")}
               </p>
@@ -408,7 +328,7 @@ export default async function Contact(props: {
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'wholesale', 'question'], "Do you offer wholesale opportunities?")}
               </h3>
-              <p className="font-body text-nxl-ivory/90">
+              <p className="font-body text-nxl-ivory">
                 {getDictValue(dictionary, ['contact', 'faq', 'wholesale', 'answer'], 
                   "Yes, we work with professional golf shops and select retailers. Please contact our wholesale department at wholesale@nextxlevel.com for more information.")}
               </p>

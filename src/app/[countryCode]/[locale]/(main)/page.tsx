@@ -111,9 +111,9 @@ export default async function Home(props: {
     console.error("Region data is missing. Check your Medusa backend setup.");
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-4">
-        <h1 className="text-2xl font-bold mb-4">Region Configuration Error</h1>
-        <p>Unable to load region data for this country code: {countryCode}</p>
-        <p className="text-sm mt-2">Please check your Medusa backend setup and ensure regions are correctly configured.</p>
+        <h1 className="text-2xl font-bold mb-4">{dictionary.general.regionError}</h1>
+        <p>{dictionary.general.regionErrorDescription}: {countryCode}</p>
+        <p className="text-sm mt-2">{dictionary.general.regionErrorAdvice}</p>
       </div>
     );
   }
@@ -134,8 +134,7 @@ export default async function Home(props: {
               {dictionary.general.featuredProducts}
             </h2>
             <p className="font-body text-lg text-nxl-ivory max-w-2xl mx-auto">
-              Discover our carefully curated collection of premium golf apparel, 
-              designed for style and performance.
+              {dictionary.general.featuredProductsDescription}
             </p>
           </header>
           
@@ -145,7 +144,8 @@ export default async function Home(props: {
                 collections={collections} 
                 region={region} 
                 locale={locale} 
-                countryCode={countryCode} 
+                countryCode={countryCode}
+                dictionary={dictionary}
               />
             ) : (
               <div className="text-center py-16">
@@ -153,9 +153,9 @@ export default async function Home(props: {
                   <svg className="w-16 h-16 text-nxl-gold/30 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
-                  <h3 className="font-serif text-xl text-nxl-ivory mb-2">Coming Soon</h3>
+                  <h3 className="font-serif text-xl text-nxl-ivory mb-2">{dictionary.general.comingSoon}</h3>
                   <p className="text-nxl-ivory/60 font-body">
-                    Our featured products collection is being curated. Check back soon for premium golf apparel.
+                    {dictionary.general.comingSoonDescription}
                   </p>
                 </div>
               </div>
