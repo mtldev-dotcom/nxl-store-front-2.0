@@ -42,7 +42,7 @@ export default async function ProductPreview({
         <div className="mt-6 space-y-2 px-1">
           <div className="flex justify-between items-baseline">
             <Text 
-              className="font-serif text-nxl-gold font-medium group-hover:text-nxl-gold/80 transition-colors duration-300" 
+              className=" text-nxl-gold font-medium group-hover:text-nxl-gold/80 transition-colors duration-300" 
               data-testid="product-title"
             >
               {translatedProduct.title}
