@@ -54,7 +54,7 @@ export default async function ProductPreview({
           
           {/* Product type/category displayed as subtle text */}
           <Text className="font-body text-sm text-nxl-ivory/90">
-            {product.type?.value || "Golf Apparel"}
+            {product.type?.value || ""}
           </Text>
         </div>
         
