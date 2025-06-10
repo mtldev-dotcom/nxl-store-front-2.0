@@ -1,3 +1,4 @@
+@import "./base/_variables.css";
 @import "./base/_theme.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
@@ -5,26 +6,38 @@
 
 /* Custom scrollbar for luxury feel */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0E0E0E;
+  background: var(--color-nxl-black);
+  border-radius: var(--border-radius-sm);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1A2436;
-  border: 1px solid #C6A94C;
+  background: var(--color-nxl-navy);
+  border: 2px solid var(--color-nxl-gold);
+  border-radius: var(--border-radius-lg);
+  transition: background var(--transition-base);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1C2B22;
+  background: var(--color-nxl-green);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-nxl-black);
 }
 
 /* Global selection styling */
 ::selection {
-  background: #C6A94C;
-  color: #0E0E0E;
+  background: var(--color-nxl-gold);
+  color: var(--color-nxl-black);
+}
+
+::-moz-selection {
+  background: var(--color-nxl-gold);
+  color: var(--color-nxl-black);
 }
 
 @layer utilities {
@@ -62,10 +75,44 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    border: 1px solid #C6A94C;
-    -webkit-text-fill-color: #F0ECE6;
-    -webkit-box-shadow: 0 0 0px 1000px #1A2436 inset;
+    border: 1px solid var(--color-nxl-gold);
+    -webkit-text-fill-color: var(--color-nxl-ivory);
+    -webkit-box-shadow: 0 0 0px 1000px var(--color-nxl-navy) inset;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .nxl-btn-primary {
+      @apply border-2 border-nxl-gold;
+    }
+    
+    .nxl-btn-secondary {
+      @apply border-2 border-nxl-gold bg-nxl-black-soft;
+    }
+  }
+
+  /* Focus indicators for keyboard navigation */
+  .focus-visible:focus {
+    @apply outline-none ring-2 ring-nxl-gold ring-offset-2 ring-offset-nxl-black;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply absolute left-4 top-4 z-tooltip bg-nxl-gold text-nxl-black px-4 py-2 rounded-md 
+           transform -translate-y-16 focus:translate-y-0 transition-transform;
   }
 
   input[type="search"]::-webkit-search-decoration,
@@ -77,7 +124,7 @@
   
   /* Luxury focus outlines */
   .focus-gold {
-    @apply focus:outline-none focus:ring-2 focus:ring-nxl-gold/50 focus:border-nxl-gold;
+    @apply focus:outline-none focus:ring-2 focus:ring-nxl-gold focus:ring-opacity-50 focus:border-nxl-gold;
   }
   
   /* Image hover effects */
@@ -122,12 +169,12 @@
   /* Luxury button styling */
   .nxl-btn-primary {
     @apply px-6 py-3 bg-nxl-gold text-nxl-black border border-nxl-gold font-button uppercase tracking-wider 
-           hover:bg-nxl-gold/90 transition-all duration-300 shimmer text-base;
+           hover:bg-nxl-gold-light transition-all duration-300 shimmer text-base;
   }
 
   .nxl-btn-secondary {
     @apply px-6 py-3 bg-transparent text-nxl-gold border border-nxl-gold font-button uppercase tracking-wider 
-           hover:bg-nxl-gold/10 transition-all duration-300 shimmer text-base;
+           hover:bg-nxl-gold-muted transition-all duration-300 shimmer text-base;
   }
   
   .nxl-btn-dark {
@@ -137,13 +184,13 @@
   
   /* Custom form input styling */
   .nxl-input {
-    @apply bg-nxl-black border border-nxl-gold/30 text-nxl-ivory p-3 font-body focus-gold
-           placeholder:text-nxl-ivory/50 placeholder:font-body;
+    @apply bg-nxl-black border border-nxl-gold border-opacity-30 text-nxl-ivory p-3 font-body focus-gold
+           placeholder:text-nxl-ivory placeholder:opacity-50 placeholder:font-body;
   }
   
   /* Luxury card styling */
   .nxl-card {
-    @apply bg-nxl-black border border-nxl-gold/20 p-6 transition-all duration-300 hover:border-nxl-gold/40;
+    @apply bg-nxl-black border border-nxl-gold border-opacity-20 p-6 transition-all duration-300 hover:border-opacity-40;
   }
   
   /* Text styles */
@@ -209,7 +256,7 @@
   }
   
   .nxl-body {
-    @apply font-body text-nxl-ivory/90;
+    @apply font-body text-nxl-ivory opacity-90;
   }
   
   .nxl-button {

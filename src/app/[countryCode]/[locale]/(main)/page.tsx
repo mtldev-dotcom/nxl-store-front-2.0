@@ -119,34 +119,50 @@ export default async function Home(props: {
   }
 
   return (
-    <>
-    <h1 className="hidden">Next X Level</h1>
+    <main id="main-content" className="min-h-screen">
       {/* Hero Section: main banner with call-to-action */}
       <Hero dictionary={dictionary} />
 
       {/* Featured Products Section: highlighted collections */}
-<div className="py-16" style={{ backgroundColor: "var(--color-white)" }}>
+      <section className="py-16 lg:py-24 bg-nxl-black" aria-labelledby="featured-products-heading">
         <div className="content-container">
-          <h2 className="font-display text-3xl md:text-4xl text-nxl-gold uppercase tracking-wider text-center mb-10">
-            {dictionary.general.featuredProducts}
-          </h2>
-          <ul className="flex flex-col gap-y-10">
-            {/* 
-              The FeaturedProducts component expects at least one collection
-              with handle "features". If `collections` is empty or missing a
-              "features" handle, this list will render nothing.
-              Confirm your backend collection handle is spelled exactly "features"
-              and published.
-            */
-            }
+          <header className="text-center mb-16">
+            <h2 
+              id="featured-products-heading"
+              className="font-display text-3xl md:text-4xl lg:text-5xl text-nxl-gold uppercase tracking-wider mb-4"
+            >
+              {dictionary.general.featuredProducts}
+            </h2>
+            <p className="font-body text-lg text-nxl-ivory max-w-2xl mx-auto">
+              Discover our carefully curated collection of premium golf apparel, 
+              designed for style and performance.
+            </p>
+          </header>
+          
+          <div className="space-y-16">
             {collections && collections.length > 0 ? (
-              <FeaturedProducts collections={collections} region={region} locale={locale} countryCode={countryCode} />
+              <FeaturedProducts 
+                collections={collections} 
+                region={region} 
+                locale={locale} 
+                countryCode={countryCode} 
+              />
             ) : (
-              <p className="text-center text-nxl-ivory">No featured products available at this time.</p>
+              <div className="text-center py-16">
+                <div className="max-w-md mx-auto">
+                  <svg className="w-16 h-16 text-nxl-gold/30 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                  <h3 className="font-serif text-xl text-nxl-ivory mb-2">Coming Soon</h3>
+                  <p className="text-nxl-ivory/60 font-body">
+                    Our featured products collection is being curated. Check back soon for premium golf apparel.
+                  </p>
+                </div>
+              </div>
             )}
-          </ul>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Brand Story Section: company background and values */}
       <BrandStory dictionary={dictionary} />
@@ -159,6 +175,6 @@ export default async function Home(props: {
 
       {/* Newsletter Signup Section: email capture form */}
       <Newsletter dictionary={dictionary} />
-    </>
+    </main>
   )
 }

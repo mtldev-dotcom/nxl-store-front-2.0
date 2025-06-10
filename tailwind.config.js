@@ -35,11 +35,23 @@ module.exports = {
           90: "#111827",
         },
         nxl: {
-          black: "#0E0E0E",
-          green: "#1C2B22",
-          gold: "#C6A94C",
-          navy: "#1A2436",
-          ivory: "#F0ECE6"
+          black: "var(--color-nxl-black)",
+          green: "var(--color-nxl-green)",
+          gold: "var(--color-nxl-gold)",
+          navy: "var(--color-nxl-navy)",
+          ivory: "var(--color-nxl-ivory)",
+          white: "var(--color-nxl-white)",
+          'gold-light': "var(--color-nxl-gold-light)",
+          'gold-dark': "var(--color-nxl-gold-dark)",
+          'gold-muted': "var(--color-nxl-gold-muted)",
+          'ivory-muted': "var(--color-nxl-ivory-muted)",
+          'black-soft': "var(--color-nxl-black-soft)",
+        },
+        status: {
+          success: "var(--color-success)",
+          warning: "var(--color-warning)",
+          error: "var(--color-error)",
+          info: "var(--color-info)",
         },
       },
       borderRadius: {
@@ -66,35 +78,34 @@ module.exports = {
         "3xl": "2rem",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
-          "sans-serif",
-        ],
-        serif: [
-          "Playfair Display",
-          "Georgia",
-          "serif"
-        ],
-        display: [
-          "Cinzel",
-          "Trajan Pro",
-          "serif"
-        ],
-        body: [
-          "Libre Baskerville",
-          "Georgia",
-          "serif"
-        ],
-        button: [
-          "Cormorant Garamond",
-          "serif"
-        ]
+        sans: "var(--font-sans)",
+        serif: "var(--font-serif)",
+        display: "var(--font-display)",
+        body: "var(--font-body)",
+        button: "var(--font-button)",
+      },
+      spacing: {
+        'xs': "var(--space-xs)",
+        'sm': "var(--space-sm)",
+        'md': "var(--space-md)",
+        'lg': "var(--space-lg)",
+        'xl': "var(--space-xl)",
+        '2xl': "var(--space-2xl)",
+        '3xl': "var(--space-3xl)",
+        '4xl': "var(--space-4xl)",
+      },
+      zIndex: {
+        'dropdown': "var(--z-dropdown)",
+        'sticky': "var(--z-sticky)",
+        'fixed': "var(--z-fixed)",
+        'modal-backdrop': "var(--z-modal-backdrop)",
+        'modal': "var(--z-modal)",
+        'popover': "var(--z-popover)",
+        'tooltip': "var(--z-tooltip)",
+        'toast': "var(--z-toast)",
+      },
+      boxShadow: {
+        'luxury': "var(--shadow-luxury)",
       },
       keyframes: {
         ring: {

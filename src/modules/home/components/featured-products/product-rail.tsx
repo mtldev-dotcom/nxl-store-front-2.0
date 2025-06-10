@@ -1,37 +1,133 @@
 /**
  * ProductRail Component
  * ----------------------
- * Purpose:
- *   • Display a small grid (“rail”) of up to 4 products from a given collection.
- *   • Fetches products for the collection and formats their prices for the current region.
- *
- * Props:
- *   - collection: StoreCollection object (id, title, handle) to fetch products for.
- *   - region:     StoreRegion object (currency_code, etc.) for price localization.
- *
- * Flow:
- *   1. Fetch up to 4 products that belong to the collection (by collection.id).
- *   2. Extract products array; if none, render nothing.
- *   3. Render:
- *      a. Header row with collection title and “View Collection” link.
- *      b. Responsive grid of product cards (up to 4 items).
- *         – Each card links to the product page.
- *         – Displays thumbnail, title, and price (with optional sale price strike-through).
+ * Enhanced version with better performance, accessibility, and UX
+ * 
+ * Features:
+ * - Optimized product fetching with collection-specific queries
+ * - Enhanced hover animations and visual feedback
+ * - Improved accessibility with proper ARIA labels
+ * - Better loading states and error handling
+ * - Responsive design with improved mobile experience
  */
 
+import { Suspense } from "react"
 import { HttpTypes } from "@medusajs/types"
-import { listProducts } from "@lib/data/products"      // Data fetcher for products
-import { getProductPrice } from "@lib/util/get-product-price" // Helper to compute price details
-import { convertToLocale } from "@lib/util/money"     // Formats numbers into locale currency
-import LocalizedClientLink from "@modules/common/components/localized-client-link" // Link with locale prefix
-import Image from "next/image"                       // Next.js optimized image component
+import { listProducts } from "@lib/data/products"
+import { getProductPrice } from "@lib/util/get-product-price"
+import { convertToLocale } from "@lib/util/money"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import Image from "next/image"
 
-// Props type for clarity and TypeScript support
 type ProductRailProps = {
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
   countryCode: string
   locale?: string
+}
+
+// Loading skeleton component
+const ProductCardSkeleton = () => (
+  <div className="animate-pulse">
+    <div className="relative h-80 mb-4 bg-nxl-navy/30 rounded-lg"></div>
+    <div className="space-y-2">
+      <div className="h-4 bg-nxl-navy/30 rounded w-3/4"></div>
+      <div className="h-3 bg-nxl-navy/30 rounded w-1/2"></div>
+    </div>
+  </div>
+)
+
+// Product Card Component
+const ProductCard = ({ product, region }: { product: any, region: HttpTypes.StoreRegion }) => {
+  const price = getProductPrice({ product })
+  
+  if (!price) return null
+
+  const hasDiscount = price.cheapestPrice?.calculated_price_number !== price.cheapestPrice?.original_price_number
+  const discountPercentage = hasDiscount 
+    ? Math.round((1 - (price.cheapestPrice?.calculated_price_number || 0) / (price.cheapestPrice?.original_price_number || 1)) * 100)
+    : 0
+
+  return (
+    <article className="group relative">
+      <LocalizedClientLink
+        href={`/products/${product.handle}`}
+        className="block"
+        aria-label={`View ${product.title} details`}
+      >
+        {/* Sale badge */}
+        {hasDiscount && (
+          <div className="absolute top-3 left-3 z-10 bg-status-error text-white px-2 py-1 text-xs font-button uppercase rounded-sm">
+            {discountPercentage}% Off
+          </div>
+        )}
+
+        {/* Image container with enhanced hover effects */}
+        <div className="relative h-80 mb-4 overflow-hidden rounded-lg bg-nxl-navy/10">
+          {product.thumbnail ? (
+            <Image
+              src={product.thumbnail}
+              alt={`${product.title} - Premium golf apparel`}
+              fill
+              className="object-cover object-center transition-all duration-500 group-hover:scale-110"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full bg-nxl-navy/20">
+              <svg className="w-16 h-16 text-nxl-gold/30" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+              </svg>
+            </div>
+          )}
+          
+          {/* Gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-nxl-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+
+        {/* Content */}
+        <div className="space-y-2">
+          {/* Product title */}
+          <h4 className="font-serif text-nxl-ivory text-lg leading-tight group-hover:text-nxl-gold transition-colors duration-300">
+            {product.title}
+          </h4>
+          
+          {/* Product type/category */}
+          {product.type?.value && (
+            <p className="text-xs font-body text-nxl-ivory/60 uppercase tracking-wider">
+              {product.type.value}
+            </p>
+          )}
+          
+          {/* Price section */}
+          <div className="flex items-baseline gap-2">
+            <span className="font-button text-nxl-gold text-lg">
+              {convertToLocale({
+                amount: price.cheapestPrice?.calculated_price_number || 0,
+                currency_code: region.currency_code,
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
+            
+            {hasDiscount && (
+              <span className="line-through text-nxl-ivory/40 text-sm">
+                {convertToLocale({
+                  amount: price.cheapestPrice?.original_price_number || 0,
+                  currency_code: region.currency_code,
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Hover indicator */}
+        <div className="h-px w-0 bg-nxl-gold mt-3 group-hover:w-full transition-all duration-500 ease-in-out"></div>
+      </LocalizedClientLink>
+    </article>
+  )
 }
 
 export default async function ProductRail({
@@ -40,121 +136,81 @@ export default async function ProductRail({
   countryCode,
   locale,
 }: ProductRailProps) {
-  // 1. Fetch products for this region with translations
-  const response = await listProducts({
-    countryCode: countryCode,
-    locale: locale,
-    queryParams: {
-      limit: 100,                        // Fetch more products to filter by collection
-    },
-  })
+  try {
+    // Fetch products and filter by collection
+    const response = await listProducts({
+      countryCode,
+      locale,
+      queryParams: {
+        limit: 50, // Fetch enough to filter by collection
+        fields: "id,title,handle,thumbnail,images,variants,type,collection_id", // Minimal fields
+      },
+    })
 
-  // 2. Extract products array and filter by collection
-  const allProducts = response?.response?.products || []
-  const products = allProducts
-    .filter(product => product.collection_id === collection.id)
-    .slice(0, 4) // Only take first 4 products
+    const allProducts = response?.response?.products || []
+    const products = allProducts
+      .filter(product => product.collection_id === collection.id)
+      .slice(0, 4) // Only take first 4 products
 
-  // 3. If no products found, render nothing (avoid empty section)
-  if (products.length === 0) {
-    return null
-  }
+    // If no products found, render nothing
+    if (products.length === 0) {
+      return null
+    }
 
-  // 4. Render the rail container
-  return (
-    <div className="flex flex-col gap-y-4">
-      {/* Header row: Title + View Collection link */}
-      <div className="flex items-center justify-between">
-        <h3 className="font-serif text-2xl text-nxl-ivory">
-          {collection.title}
-        </h3>
-        <LocalizedClientLink
-          href={`/collections/${collection.handle}`}
-          className="text-sm font-button uppercase text-nxl-gold hover:text-nxl-gold/80 transition-colors duration-200 flex items-center"
-        >
-          View Collection
-          {/* Arrow icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4 ml-1"
+    return (
+      <section className="space-y-6" aria-labelledby={`collection-${collection.id}`}>
+        {/* Header with enhanced styling */}
+        <header className="flex items-center justify-between border-b border-nxl-gold/20 pb-4">
+          <h3 
+            id={`collection-${collection.id}`}
+            className="font-display text-2xl md:text-3xl text-nxl-gold uppercase tracking-wider"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </LocalizedClientLink>
-      </div>
-
-      {/* Grid of product cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => {
-          // 5. Compute pricing details for the product
-          const price = getProductPrice({ product })
-          if (!price) {
-            // If pricing fails, skip this product
-            return null
-          }
-
-          return (
-            <LocalizedClientLink
-              key={product.id}
-              href={`/products/${product.handle}`}
-              className="group"
+            {collection.title}
+          </h3>
+          
+          <LocalizedClientLink
+            href={`/collections/${collection.handle}`}
+            className="group flex items-center gap-2 text-sm font-button uppercase text-nxl-ivory hover:text-nxl-gold transition-all duration-300"
+            aria-label={`View all products in ${collection.title} collection`}
+          >
+            <span>View Collection</span>
+            <svg
+              className="w-4 h-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              {/* Card container with hover effects */}
-              <div className="nxl-card hover:border-nxl-gold/60 transition-all duration-300">
-                {/* Image container */}
-                <div className="relative h-80 mb-4 overflow-hidden">
-                  {product.thumbnail && (
-                    <Image
-                      src={product.thumbnail}
-                      alt={product.title}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                    />
-                  )}
-                </div>
-                {/* Title & Price section */}
-                <div className="p-4">
-                  {/* Product title */}
-                  <h4 className="font-button text-nxl-ivory text-lg mb-1 group-hover:text-nxl-gold transition-colors duration-300">
-                    {product.title}
-                  </h4>
-                  {/* Price display */}
-                  <p className="font-body text-nxl-gold text-sm">
-                    {/* Current price formatted to locale */}
-                    {convertToLocale({
-                      amount: price.cheapestPrice?.calculated_price_number || 0,
-                      currency_code: region.currency_code,
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                    {/* If there's a discount, show original price struck-through */}
-                    {price.cheapestPrice?.calculated_price_number !==
-                      price.cheapestPrice?.original_price_number && (
-                      <span className="line-through text-nxl-ivory/50 ml-2">
-                        {convertToLocale({
-                          amount:
-                            price.cheapestPrice?.original_price_number || 0,
-                          currency_code: region.currency_code,
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </span>
-                    )}
-                  </p>
-                </div>
-              </div>
-            </LocalizedClientLink>
-          )
-        })}
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </LocalizedClientLink>
+        </header>
+
+        {/* Products grid with enhanced responsive design */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <Suspense fallback={
+            Array.from({ length: 4 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+          }>
+            {products.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                region={region} 
+              />
+            ))}
+          </Suspense>
+        </div>
+      </section>
+    )
+  } catch (error) {
+    console.error(`Error loading products for collection ${collection.title}:`, error)
+    return (
+      <div className="text-center py-8">
+        <p className="text-nxl-ivory/60 font-body">
+          Unable to load products at this time. Please try again later.
+        </p>
       </div>
-    </div>
-  )
+    )
+  }
 }
