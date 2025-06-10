@@ -24,7 +24,7 @@ export default async function Footer({ params }: FooterProps) {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
 
   return (
-<footer className="w-full" style={{ backgroundColor: "var(--color-charcoal)", color: "var(--color-slate-gray)", borderTop: "1px solid var(--color-charcoal)" }}>
+<footer className="w-full" style={{ backgroundColor: "var(--color-slate-gray)", color: "var(--color-charcoal)", borderTop: "1px solid var(--color-charcoal)" }}>
       <div className="content-container flex flex-col w-full">
         <div className="flex flex-col gap-y-12 py-20">
           {/* Header with logo */}
@@ -73,7 +73,7 @@ export default async function Footer({ params }: FooterProps) {
             {/* 2. Description and social links */}
             <div className="flex flex-col gap-4">
               <span className="font-serif text-base text-nxl-gold mb-2">{dictionary.footer.aboutUs}</span>
-<p className="body-copy  text-nxl-ivory">
+<p className="body-copy" style={{ color: "var(--color-charcoal)" }}>
                 {dictionary.footer.premiumDescription}
               </p>
               <div className="mt-4 flex space-x-4">
