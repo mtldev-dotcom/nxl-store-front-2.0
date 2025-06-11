@@ -58,7 +58,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         )}
 
         {/* Support Section */}
-        <div className="mt-16 pt-8 border-t border-nxl-gold border-opacity-20">
+        {/* <div className="mt-16 pt-8 border-t border-nxl-gold border-opacity-20">
           <div className="flex flex-col small:flex-row items-start small:items-center justify-between gap-6">
             <div className="flex-1">
               <h3 className="nxl-heading text-xl small:text-2xl mb-3">
@@ -78,7 +78,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
               </UnderlineLink>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
