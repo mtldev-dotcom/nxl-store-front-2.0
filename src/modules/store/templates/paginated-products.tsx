@@ -141,16 +141,17 @@ export default async function PaginatedProducts({
 
       {/* Products Grid */}
       <ul
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
         data-testid="products-list"
       >
         {products.map((product, index) => {
           return (
             <li 
               key={product.id}
-              className="group"
+              className="animate-fade-in-up"
               style={{
-                animationDelay: `${index * 0.1}s`
+                animationDelay: `${index * 0.1}s`,
+                animationFillMode: 'both'
               }}
             >
               <ProductPreview 
