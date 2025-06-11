@@ -6,11 +6,11 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react"
-import { FiShoppingCart } from "react-icons/fi"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import DeleteButton from "@modules/common/components/delete-button"
+import CartIconEnhanced from "@modules/common/components/cart-icon-enhanced"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -85,15 +85,11 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-<PopoverButton className="h-full">
-          <LocalizedClientLink
-            className="font-body text-[var(--color-charcoal)] hover:text-nxl-gold transition-colors duration-300 flex items-center gap-2 font-medium"
-            href="/cart"
-            data-testid="nav-cart-link"
-          >
-            <FiShoppingCart size={20} />
-            <span>({totalItems})</span>
-          </LocalizedClientLink>
+        <PopoverButton className="h-full">
+          <CartIconEnhanced 
+            cart={cartState || null}
+            className="font-body text-[var(--color-charcoal)] hover:text-nxl-gold transition-colors duration-300"
+          />
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}

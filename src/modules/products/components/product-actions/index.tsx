@@ -1,10 +1,12 @@
 "use client"
 
-import { addToCart } from "@lib/data/cart"
+import { addToCart, retrieveCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import Divider from "@modules/common/components/divider"
+import CartNotification from "@modules/common/components/cart-notification"
+import MiniCartDrawer from "@modules/common/components/mini-cart-drawer"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
 import { useParams } from "next/navigation"
@@ -35,6 +37,9 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const [addedToCart, setAddedToCart] = useState(false)
+  const [showNotification, setShowNotification] = useState(false)
+  const [showMiniCart, setShowMiniCart] = useState(false)
+  const [currentCart, setCurrentCart] = useState<HttpTypes.StoreCart | null>(null)
   const countryCode = useParams().countryCode as string
   const { translate } = useTranslation()
 
@@ -113,8 +118,21 @@ export default function ProductActions({
         quantity: 1,
         countryCode,
       })
+      
+      // Fetch updated cart data
+      const updatedCart = await retrieveCart()
+      setCurrentCart(updatedCart)
+      
       setAddedToCart(true)
-      setTimeout(() => setAddedToCart(false), 3000) // Reset after 3 seconds
+      setShowNotification(true)
+      
+      // Auto-show mini cart after notification
+      setTimeout(() => {
+        setShowMiniCart(true)
+      }, 2000)
+      
+      // Reset added state after animation
+      setTimeout(() => setAddedToCart(false), 3000)
     } catch (error) {
       console.error('Error adding to cart:', error)
     } finally {
@@ -280,6 +298,24 @@ export default function ProductActions({
           optionsDisabled={!!disabled || isAdding}
         />
       </div>
+
+      {/* Cart Notification */}
+      <CartNotification
+        isVisible={showNotification}
+        onClose={() => setShowNotification(false)}
+        product={product}
+        variant={selectedVariant}
+        onViewCart={() => setShowMiniCart(true)}
+        onContinueShopping={() => setShowNotification(false)}
+      />
+
+      {/* Mini Cart Drawer */}
+      <MiniCartDrawer
+        isOpen={showMiniCart}
+        onClose={() => setShowMiniCart(false)}
+        cart={currentCart}
+        countryCode={countryCode}
+      />
     </>
   )
 }

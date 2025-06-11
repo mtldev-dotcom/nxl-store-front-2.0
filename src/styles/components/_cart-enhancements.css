@@ -1,0 +1,254 @@
+/* Cart Enhancement Animations and Styles */
+
+/* Add to Cart Button Animation */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--nxl-gold) 0%,
+    var(--nxl-gold-light, #f4d03f) 50%,
+    var(--nxl-gold) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Cart Icon Bounce Animation */
+@keyframes cart-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0) scale(1.1);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0) scale(1.05);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0) scale(1.02);
+  }
+}
+
+.cart-bounce {
+  animation: cart-bounce 0.8s ease-in-out;
+}
+
+/* Button Success State Animation */
+@keyframes success-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.btn-success-animation {
+  animation: success-pulse 0.6s ease-in-out;
+}
+
+/* Loading Spinner for Add to Cart Button */
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  animation: loading-spin 1s linear infinite;
+}
+
+/* Cart Notification Slide In */
+@keyframes slide-in-from-top {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-notification {
+  animation: slide-in-from-top 0.3s ease-out;
+}
+
+/* Mini Cart Drawer Slide In */
+@keyframes slide-in-from-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-drawer {
+  animation: slide-in-from-right 0.3s ease-out;
+}
+
+/* Quantity Badge Pulse */
+@keyframes badge-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.badge-pulse {
+  animation: badge-pulse 0.4s ease-in-out;
+}
+
+/* Progress Bar Animation */
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.progress-fill {
+  animation: progress-fill 0.5s ease-out;
+}
+
+/* Micro-interactions */
+.cart-item-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.cart-item-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Button States */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: loading-spin 1s linear infinite;
+}
+
+/* Enhanced hover effects */
+.cart-enhancement-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-enhancement-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Gold gradient backgrounds */
+.gold-gradient {
+  background: linear-gradient(135deg, var(--nxl-gold) 0%, #f1c40f 100%);
+}
+
+.gold-gradient-hover {
+  background: linear-gradient(135deg, var(--nxl-gold) 0%, #f39c12 100%);
+}
+
+/* Notification Toast Styles */
+.toast-enter {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+}
+
+.toast-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.3s ease-out;
+}
+
+.toast-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast-exit-active {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+  transition: all 0.2s ease-in;
+}
+
+/* Enhanced focus states for accessibility */
+.cart-btn:focus-visible {
+  outline: 2px solid var(--nxl-gold);
+  outline-offset: 2px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .cart-notification {
+    margin: 0 16px;
+    max-width: calc(100vw - 32px);
+  }
+  
+  .mini-cart-drawer {
+    max-width: 100vw;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .cart-item-hover:hover {
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer,
+  .cart-bounce,
+  .btn-success-animation,
+  .loading-spinner,
+  .slide-in-notification,
+  .slide-in-drawer,
+  .badge-pulse,
+  .progress-fill {
+    animation: none;
+  }
+  
+  .cart-enhancement-hover {
+    transition: none;
+  }
+}

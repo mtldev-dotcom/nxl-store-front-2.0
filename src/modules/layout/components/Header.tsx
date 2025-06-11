@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
+import { FiUser, FiSearch } from "react-icons/fi";
 import LocalizedClientLink from "@modules/common/components/localized-client-link";
+import CartButton from "./cart-button";
 import SideMenu from "@modules/layout/components/side-menu";
 import LanguageSelect from "@modules/layout/components/language-select";
 
@@ -122,18 +123,8 @@ export default function Header({
             </LocalizedClientLink>
           </div>
 
-          {/* Cart Button with Enhanced Styling */}
-          <LocalizedClientLink
-            href="/cart"
-            className={`${linkTextClasses} relative p-2 rounded-md hover:bg-nxl-gold/10 transition-all duration-300 group`}
-            aria-label="Shopping cart"
-          >
-            <FiShoppingCart size={20} />
-            {/* Cart count badge (when implemented) */}
-            {/* <span className="absolute -top-1 -right-1 bg-nxl-gold text-nxl-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-              3
-            </span> */}
-          </LocalizedClientLink>
+          {/* Enhanced Cart Button */}
+          <CartButton dictionary={dictionary} />
         </div>
       </nav>
 
