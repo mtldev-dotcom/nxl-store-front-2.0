@@ -101,13 +101,13 @@ export default function Header({
         {/* Right Section - Actions */}
         <div className="flex items-center gap-x-4 h-full flex-1 basis-0 justify-end">
           {/* Search Button */}
-          <button
+          {/* <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
             className={`${linkTextClasses} p-2 rounded-md hover:bg-nxl-gold/10 transition-all duration-300`}
             aria-label="Search products"
           >
             <FiSearch size={20} />
-          </button>
+          </button> */}
 
           {/* Desktop-only items */}
           <div className="hidden md:flex items-center gap-x-4">

@@ -191,7 +191,7 @@ export default async function Footer({ params }: FooterProps) {
                 <FooterSelectors regions={regions} dictionary={dictionary} />
                 
                 {/* Newsletter signup */}
-                <div className="pt-4 border-t border-nxl-gold border-opacity-20">
+                {/* <div className="pt-4 border-t border-nxl-gold border-opacity-20">
                   <p className="font-body text-nxl-ivory text-sm mb-3">Stay Updated</p>
                   <form className="space-y-3">
                     <input 
@@ -207,7 +207,7 @@ export default async function Footer({ params }: FooterProps) {
                       Subscribe
                     </button>
                   </form>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

@@ -174,7 +174,7 @@ export default async function Home(props: {
       <LifestyleBenefits dictionary={dictionary} />
 
       {/* Newsletter Signup Section: email capture form */}
-      <Newsletter dictionary={dictionary} />
+      {/* <Newsletter dictionary={dictionary} /> */}
     </main>
   )
 }
