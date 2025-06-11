@@ -21,15 +21,15 @@ const LineItemUnitPrice = ({
   )
 
   return (
-    <div className="flex flex-col text-nxl-ivory/80 justify-center h-full">
+    <div className="flex flex-col text-nxl-black justify-center h-full">
       {hasReducedPrice && (
         <>
           <p>
             {style === "default" && (
-              <span className="text-nxl-ivory/70">Original: </span>
+              <span className="text-nxl-black">Original: </span>
             )}
             <span
-              className="line-through text-nxl-ivory/70"
+              className="line-through text-nxl-black"
               data-testid="product-unit-original-price"
             >
               {convertToLocale({
@@ -44,9 +44,9 @@ const LineItemUnitPrice = ({
         </>
       )}
       <span
-        className={clx("text-base-regular", {
+        className={clx("text-nxl-black font-medium", {
           "text-nxl-gold": hasReducedPrice,
-          "text-nxl-ivory": !hasReducedPrice,
+          "text-nxl-black": !hasReducedPrice,
         })}
         data-testid="product-unit-price"
       >

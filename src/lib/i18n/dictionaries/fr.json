@@ -168,16 +168,81 @@
     "noRelatedProducts": "Aucun produit associé trouvé pour le moment."
   },
   "cart": {
-    "empty": "Votre panier est vide",
+    "title": "Panier d'Achat",
+    "subtitle": "Vérifiez vos articles et procédez au paiement",
+    "empty": "Votre Panier est Vide",
+    "emptyDescription": "Il semble que vous n'ayez encore rien ajouté à votre panier. Découvrez notre collection premium et trouvez quelque chose que vous aimerez.",
     "continueShoping": "Continuer Vos Achats",
+    "startShopping": "Commencer Vos Achats",
+    "browseCollections": "Parcourir les Collections",
     "subtotal": "Sous-total",
+    "subtotalExclusive": "Sous-total (excl. livraison et taxes)",
     "shipping": "Livraison",
+    "shippingFree": "Gratuite",
     "tax": "Taxe",
+    "taxes": "Taxes",
     "total": "Total",
     "checkout": "Passer à la Caisse",
+    "secureCheckout": "Paiement Sécurisé",
     "remove": "Supprimer",
+    "delete": "Supprimer",
     "viewCart": "Voir le Panier",
-    "quantity": "Quantité"
+    "quantity": "Quantité",
+    "item": "article",
+    "items": "articles",
+    "summary": "Résumé",
+    "orderSummary": "Récapitulatif de Commande",
+    "freeShippingProgress": "Progression Livraison Gratuite",
+    "freeShippingQualified": "Félicitations ! Vous avez qualifié pour la livraison gratuite",
+    "freeShippingRemaining": "restant",
+    "freeShippingAddMore": "Ajoutez {amount} de plus pour la livraison gratuite",
+    "addPromotionCode": "Ajouter un Code Promo",
+    "promotionCode": "Code Promo",
+    "applyCode": "Appliquer le Code",
+    "trustIndicators": {
+      "returnPolicy": "Politique de retour de 30 jours",
+      "customerSupport": "Support client disponible",
+      "secureCheckout": "Paiement Sécurisé",
+      "sslProtected": "Protégé par SSL",
+      "estimatedDelivery": "Livraison estimée : 3-5 jours ouvrables"
+    },
+    "quantityControls": {
+      "decrease": "Diminuer la quantité",
+      "increase": "Augmenter la quantité",
+      "max": "Max",
+      "outOfStock": "Rupture de stock",
+      "limitReached": "Quantité maximale atteinte"
+    },
+    "itemDetails": {
+      "variant": "Variante",
+      "size": "Taille",
+      "color": "Couleur",
+      "price": "Prix",
+      "unitPrice": "Prix Unitaire",
+      "total": "Total"
+    },
+    "signInPrompt": {
+      "title": "Vous avez déjà un compte ?",
+      "description": "Connectez-vous pour une meilleure expérience",
+      "signIn": "Se Connecter"
+    },
+    "helpfulLinks": {
+      "needHelp": "Besoin d'aide pour trouver ce que vous cherchez ?",
+      "searchProducts": "Rechercher des Produits",
+      "contactUs": "Nous Contacter"
+    },
+    "errors": {
+      "updateFailed": "Échec de la mise à jour de l'article du panier",
+      "removeFailed": "Échec de la suppression de l'article du panier",
+      "quantityInvalid": "Quantité sélectionnée invalide",
+      "itemNotFound": "Article introuvable dans le panier",
+      "generalError": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "loading": {
+      "updating": "Mise à jour...",
+      "removing": "Suppression...",
+      "addingToCart": "Ajout au panier..."
+    }
   },
   "footer": {
     "customerService": "Service Client",

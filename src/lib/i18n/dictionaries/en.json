@@ -168,16 +168,81 @@
     "noRelatedProducts": "No related products found at this time."
   },
   "cart": {
-    "empty": "Your cart is empty",
+    "title": "Shopping Cart",
+    "subtitle": "Review your items and proceed to checkout",
+    "empty": "Your Cart is Empty",
+    "emptyDescription": "Looks like you haven't added anything to your cart yet. Discover our premium collection and find something you'll love.",
     "continueShoping": "Continue Shopping",
+    "startShopping": "Start Shopping",
+    "browseCollections": "Browse Collections",
     "subtotal": "Subtotal",
+    "subtotalExclusive": "Subtotal (excl. shipping and taxes)",
     "shipping": "Shipping",
+    "shippingFree": "Free",
     "tax": "Tax",
+    "taxes": "Taxes",
     "total": "Total",
     "checkout": "Proceed to Checkout",
+    "secureCheckout": "Secure Checkout",
     "remove": "Remove",
+    "delete": "Delete",
     "viewCart": "View Cart",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "item": "item",
+    "items": "items",
+    "summary": "Summary",
+    "orderSummary": "Order Summary",
+    "freeShippingProgress": "Free Shipping Progress",
+    "freeShippingQualified": "Congratulations! You've qualified for free shipping",
+    "freeShippingRemaining": "remaining",
+    "freeShippingAddMore": "Add {amount} more for free shipping",
+    "addPromotionCode": "Add Promotion Code(s)",
+    "promotionCode": "Promotion Code",
+    "applyCode": "Apply Code",
+    "trustIndicators": {
+      "returnPolicy": "30-day return policy",
+      "customerSupport": "Customer support available",
+      "secureCheckout": "Secure Checkout",
+      "sslProtected": "SSL Protected",
+      "estimatedDelivery": "Estimated delivery: 3-5 business days"
+    },
+    "quantityControls": {
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity",
+      "max": "Max",
+      "outOfStock": "Out of stock",
+      "limitReached": "Maximum quantity reached"
+    },
+    "itemDetails": {
+      "variant": "Variant",
+      "size": "Size",
+      "color": "Color",
+      "price": "Price",
+      "unitPrice": "Unit Price",
+      "total": "Total"
+    },
+    "signInPrompt": {
+      "title": "Already have an account?",
+      "description": "Sign in for a better experience",
+      "signIn": "Sign In"
+    },
+    "helpfulLinks": {
+      "needHelp": "Need help finding what you're looking for?",
+      "searchProducts": "Search Products",
+      "contactUs": "Contact Us"
+    },
+    "errors": {
+      "updateFailed": "Failed to update cart item",
+      "removeFailed": "Failed to remove item from cart",
+      "quantityInvalid": "Invalid quantity selected",
+      "itemNotFound": "Item not found in cart",
+      "generalError": "Something went wrong. Please try again."
+    },
+    "loading": {
+      "updating": "Updating...",
+      "removing": "Removing...",
+      "addingToCart": "Adding to cart..."
+    }
   },
   "footer": {
     "customerService": "Customer Service",

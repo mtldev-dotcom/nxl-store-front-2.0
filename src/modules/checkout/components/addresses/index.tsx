@@ -40,20 +40,32 @@ const Addresses = ({
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
-    <div className="bg-white">
+    <div className="bg-nxl-black/80 backdrop-blur-sm border border-nxl-gold/30 rounded-xl p-6 shadow-xl">
       <div className="flex flex-row items-center justify-between mb-6">
-        <Heading
-          level="h2"
-          className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
-        >
-          Shipping Address
-          {!isOpen && <CheckCircleSolid />}
-        </Heading>
+        <div className="flex items-center gap-3">
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+            !isOpen && cart?.shipping_address 
+              ? 'bg-green-500 text-white' 
+              : 'bg-nxl-gold/20 text-nxl-gold border border-nxl-gold/30'
+          }`}>
+            {!isOpen && cart?.shipping_address ? (
+              <CheckCircleSolid className="w-5 h-5" />
+            ) : (
+              <span className="text-sm font-semibold">1</span>
+            )}
+          </div>
+          <Heading
+            level="h2"
+            className="text-2xl font-semibold text-nxl-gold"
+          >
+            Shipping Address
+          </Heading>
+        </div>
         {!isOpen && cart?.shipping_address && (
           <Text>
             <button
               onClick={handleEdit}
-              className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+              className="text-nxl-gold hover:text-nxl-gold/80 font-medium transition-colors duration-200"
               data-testid="edit-address-button"
             >
               Edit

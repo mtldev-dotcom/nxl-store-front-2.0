@@ -18,9 +18,10 @@ type ItemProps = {
   item: HttpTypes.StoreCartLineItem
   type?: "full" | "preview"
   currencyCode: string
+  dictionary?: any
 }
 
-const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
+const Item = ({ item, type = "full", currencyCode, dictionary }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -46,96 +47,123 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
   return (
     <Table.Row className="w-full hover:bg-nxl-gold/5 transition-colors duration-200 border-b border-nxl-gold/20 last:border-b-0" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-6 w-24">
-        <LocalizedClientLink
-          href={`/products/${item.product_handle}`}
-          className={clx("flex", {
-            "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
-          })}
-        >
-          <Thumbnail
-            thumbnail={item.thumbnail}
-            images={item.variant?.product?.images}
-            size="square"
-          />
-        </LocalizedClientLink>
-      </Table.Cell>
-
-      <Table.Cell className="text-left">
-        <Text
-          className="txt-medium-plus text-nxl-gold font-medium"
-          data-testid="product-title"
-        >
-          {item.product_title}
-        </Text>
-        <LineItemOptions variant={item.variant} data-testid="product-variant" />
-      </Table.Cell>
-
-      {type === "full" && (
-        <Table.Cell>
-          <div className="flex gap-2 items-center w-28">
-            <DeleteButton id={item.id} data-testid="product-delete-button" />
-            <CartItemSelect
-              value={item.quantity}
-              onChange={(value) => changeQuantity(parseInt(value.target.value))}
-              className="w-14 h-10 p-4"
-              data-testid="product-select-button"
-            >
-              {/* TODO: Update this with the v2 way of managing inventory */}
-              {Array.from(
-                {
-                  length: Math.min(maxQuantity, 10),
-                },
-                (_, i) => (
-                  <option value={i + 1} key={i}>
-                    {i + 1}
-                  </option>
-                )
-              )}
-
-              <option value={1} key={1}>
-                1
-              </option>
-            </CartItemSelect>
-            {updating && <Spinner />}
+      {/* Product Image & Info */}
+      <Table.Cell className="!pl-4 py-6 pr-4">
+        <div className="flex items-start gap-4">
+          <LocalizedClientLink
+            href={`/products/${item.product_handle}`}
+            className="flex-shrink-0"
+          >
+            <div className={clx("rounded-lg overflow-hidden border border-nxl-gold/20", {
+              "w-16 h-16": type === "preview",
+              "w-20 h-20": type === "full",
+            })}>
+              <Thumbnail
+                thumbnail={item.thumbnail}
+                images={item.variant?.product?.images}
+                size="square"
+              />
+            </div>
+          </LocalizedClientLink>
+          
+          <div className="flex-1 min-w-0">
+            <LocalizedClientLink href={`/products/${item.product_handle}`}>
+              <Text
+                className="text-base font-semibold text-nxl-gold hover:text-nxl-gold/80 transition-colors line-clamp-2"
+                data-testid="product-title"
+              >
+                {item.product_title}
+              </Text>
+            </LocalizedClientLink>
+            <div className="mt-1">
+              <LineItemOptions variant={item.variant} data-testid="product-variant" />
+            </div>
+            {/* Mobile: Show price under product info */}
+            <div className="mt-2 block small:hidden">
+              <LineItemPrice
+                item={item}
+                style="tight"
+                currencyCode={currencyCode}
+              />
+            </div>
           </div>
-          <ErrorMessage error={error} data-testid="product-error-message" />
-        </Table.Cell>
-      )}
+        </div>
+      </Table.Cell>
 
+      {/* Empty spacer cell */}
+      <Table.Cell className="w-0 p-0"></Table.Cell>
+
+      {/* Quantity Controls */}
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
-          <LineItemUnitPrice
-            item={item}
-            style="tight"
-            currencyCode={currencyCode}
-          />
+        <Table.Cell className="py-6 text-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2">
+              <DeleteButton id={item.id} data-testid="product-delete-button" />
+              <div className="flex items-center border border-nxl-gold/40 rounded-lg bg-nxl-black/50 shadow-sm">
+                <button
+                  onClick={() => changeQuantity(Math.max(1, item.quantity - 1))}
+                  disabled={updating || item.quantity <= 1}
+                  className="w-8 h-8 flex items-center justify-center text-nxl-black hover:bg-nxl-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-l-lg font-medium"
+                  data-testid="quantity-decrease"
+                >
+                  −
+                </button>
+                <span className="w-12 h-8 flex items-center justify-center text-nxl-black font-semibold text-sm border-x border-nxl-gold/20">
+                  {item.quantity}
+                </span>
+                <button
+                  onClick={() => changeQuantity(Math.min(maxQuantity, item.quantity + 1))}
+                  disabled={updating || item.quantity >= maxQuantity}
+                  className="w-8 h-8 flex items-center justify-center text-nxl-black hover:bg-nxl-gold/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors rounded-r-lg font-medium"
+                  data-testid="quantity-increase"
+                >
+                  +
+                </button>
+              </div>
+              {updating && <Spinner />}
+            </div>
+            <div className="text-xs text-nxl-ivory/65 font-medium">
+              {dictionary?.cart?.quantityControls?.max || "Max"}: {maxQuantity}
+            </div>
+            <ErrorMessage error={error} data-testid="product-error-message" />
+          </div>
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
-        <span
-          className={clx("!pr-0", {
-            "flex flex-col items-end h-full justify-center": type === "preview",
-          })}
-        >
+      {/* Unit Price - Desktop only */}
+      {type === "full" && (
+        <Table.Cell className="hidden small:table-cell py-6 text-right">
+          <div className="text-right">
+            <LineItemUnitPrice
+              item={item}
+              style="default"
+              currencyCode={currencyCode}
+            />
+          </div>
+        </Table.Cell>
+      )}
+
+      {/* Total Price */}
+      <Table.Cell className="!pr-4 py-6 text-right">
+        <div className="text-right">
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-nxl-ivory/70">{item.quantity}x </Text>
+            <div className="flex items-center justify-end gap-1 mb-1">
+              <Text className="text-sm text-nxl-ivory/70">{item.quantity}× </Text>
               <LineItemUnitPrice
                 item={item}
                 style="tight"
                 currencyCode={currencyCode}
               />
-            </span>
+            </div>
           )}
-          <LineItemPrice
-            item={item}
-            style="tight"
-            currencyCode={currencyCode}
-          />
-        </span>
+          <div className="font-semibold">
+            <LineItemPrice
+              item={item}
+              style="tight"
+              currencyCode={currencyCode}
+            />
+          </div>
+        </div>
       </Table.Cell>
     </Table.Row>
   )
