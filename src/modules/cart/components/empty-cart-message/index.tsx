@@ -36,7 +36,7 @@ const EmptyCartMessage = ({ dictionary }: EmptyCartMessageProps) => {
           {dictionary.cart.empty}
         </Heading>
         
-        <Text className="text-lg text-nxl-ivory/85 mb-8 leading-relaxed font-light max-w-lg mx-auto">
+        <Text className="text-lg text-nxl-ivory mb-8 leading-relaxed font-light max-w-lg mx-auto">
           {dictionary.cart.emptyDescription}
         </Text>
 
@@ -58,8 +58,8 @@ const EmptyCartMessage = ({ dictionary }: EmptyCartMessageProps) => {
         </div>
 
         {/* Enhanced helpful links */}
-        <div className="mt-8 pt-6 border-t border-nxl-gold/25">
-          <Text className="text-sm text-nxl-ivory/70 mb-3 font-medium">
+        {/* <div className="mt-8 pt-6 border-t border-nxl-gold/25">
+          <Text className="text-sm text-nxl-ivory mb-3 font-medium">
             {dictionary.cart.helpfulLinks.needHelp}
           </Text>
           <div className="flex justify-center gap-6 text-sm">
@@ -71,7 +71,7 @@ const EmptyCartMessage = ({ dictionary }: EmptyCartMessageProps) => {
               {dictionary.cart.helpfulLinks.contactUs}
             </InteractiveLink>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

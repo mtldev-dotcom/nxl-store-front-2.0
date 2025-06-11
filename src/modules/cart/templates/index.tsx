@@ -17,7 +17,8 @@ const CartTemplate = async ({
   customer: HttpTypes.StoreCustomer | null
   params: { locale: Locale }
 }) => {
-  const dictionary = await getDictionary(params.locale)
+  const { locale } = await params
+  const dictionary = await getDictionary(locale)
 
   return (
     <div className="py-8 sm:py-12 min-h-screen bg-gradient-to-br from-nxl-black via-nxl-black to-nxl-black/95">
