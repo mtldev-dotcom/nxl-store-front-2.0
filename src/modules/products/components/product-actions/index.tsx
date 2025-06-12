@@ -126,10 +126,10 @@ export default function ProductActions({
       setAddedToCart(true)
       setShowNotification(true)
       
-      // Auto-show mini cart after notification
-      setTimeout(() => {
-        setShowMiniCart(true)
-      }, 2000)
+      // Auto-show mini cart after notification - DISABLED
+      // setTimeout(() => {
+      //   setShowMiniCart(true)
+      // }, 2000)
       
       // Reset added state after animation
       setTimeout(() => setAddedToCart(false), 3000)
@@ -305,7 +305,7 @@ export default function ProductActions({
         onClose={() => setShowNotification(false)}
         product={product}
         variant={selectedVariant}
-        onViewCart={() => setShowMiniCart(true)}
+        onViewCart={() => {}} // Disabled - mini cart drawer is disabled
         onContinueShopping={() => setShowNotification(false)}
       />
 
