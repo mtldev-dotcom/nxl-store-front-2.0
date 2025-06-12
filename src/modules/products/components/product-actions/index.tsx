@@ -1,7 +1,8 @@
 "use client"
 
-import { addToCart, retrieveCart } from "@lib/data/cart"
+import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
+import { useCart } from "@lib/context/cart-context"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import Divider from "@modules/common/components/divider"
@@ -39,9 +40,9 @@ export default function ProductActions({
   const [addedToCart, setAddedToCart] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showMiniCart, setShowMiniCart] = useState(false)
-  const [currentCart, setCurrentCart] = useState<HttpTypes.StoreCart | null>(null)
   const countryCode = useParams().countryCode as string
   const { translate } = useTranslation()
+  const { cart, refreshCart } = useCart()
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
@@ -119,9 +120,8 @@ export default function ProductActions({
         countryCode,
       })
       
-      // Fetch updated cart data
-      const updatedCart = await retrieveCart()
-      setCurrentCart(updatedCart)
+      // Refresh cart data using context
+      await refreshCart()
       
       setAddedToCart(true)
       setShowNotification(true)
@@ -313,7 +313,7 @@ export default function ProductActions({
       <MiniCartDrawer
         isOpen={showMiniCart}
         onClose={() => setShowMiniCart(false)}
-        cart={currentCart}
+        cart={cart}
         countryCode={countryCode}
       />
     </>

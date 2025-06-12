@@ -89,6 +89,7 @@ const CartDropdown = ({
           <CartIconEnhanced 
             cart={cartState || null}
             className="font-body text-[var(--color-charcoal)] hover:text-nxl-gold transition-colors duration-300"
+            asButton={false}
           />
         </PopoverButton>
         <Transition

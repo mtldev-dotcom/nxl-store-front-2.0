@@ -8,13 +8,15 @@ interface CartIconEnhancedProps {
   onClick?: () => void
   className?: string
   showBadge?: boolean
+  asButton?: boolean
 }
 
 const CartIconEnhanced = ({
   cart,
   onClick,
   className = "",
-  showBadge = true
+  showBadge = true,
+  asButton = true
 }: CartIconEnhancedProps) => {
   const [itemCount, setItemCount] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -30,12 +32,13 @@ const CartIconEnhanced = ({
     setItemCount(newCount)
   }, [cart?.items, itemCount])
 
-  return (
-    <button
-      onClick={onClick}
-      className={`relative p-2 text-nxl-ivory hover:text-nxl-gold transition-colors duration-300 group ${className}`}
-      aria-label={`Shopping cart with ${itemCount} items`}
-    >
+  const commonProps = {
+    className: `relative p-2 text-nxl-ivory hover:text-nxl-gold transition-colors duration-300 group ${className}`,
+    ...(asButton && { onClick, 'aria-label': `Shopping cart with ${itemCount} items` })
+  }
+
+  const content = (
+    <>
       {/* Cart Icon */}
       <div className={`transition-transform duration-300 ${isAnimating ? 'scale-110' : 'scale-100'} group-hover:scale-105`}>
         <svg 
@@ -66,7 +69,21 @@ const CartIconEnhanced = ({
 
       {/* Hover Effect Ring */}
       <div className="absolute inset-0 rounded-full border-2 border-nxl-gold/0 group-hover:border-nxl-gold/30 transition-colors duration-300" />
-    </button>
+    </>
+  )
+
+  if (asButton) {
+    return (
+      <button {...commonProps}>
+        {content}
+      </button>
+    )
+  }
+
+  return (
+    <div {...commonProps}>
+      {content}
+    </div>
   )
 }
 
