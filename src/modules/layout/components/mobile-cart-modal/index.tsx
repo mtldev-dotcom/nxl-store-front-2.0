@@ -72,8 +72,8 @@ export default function MobileCartModal({
       />
       
       {/* Modal */}
-      <div className="fixed inset-0 flex items-end">
-        <div className="w-full bg-white rounded-t-lg max-h-[90vh] flex flex-col">
+      <div className="fixed bottom-0 left-0 right-0">
+        <div className="w-full bg-white rounded-t-2xl max-h-[85vh] min-h-[60vh] flex flex-col shadow-2xl">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <h2 className="text-lg font-serif text-nxl-black">
