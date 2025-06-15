@@ -15,6 +15,7 @@ import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
+import MobileCartModal from "@modules/layout/components/mobile-cart-modal"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
 
@@ -31,9 +32,12 @@ const CartDropdown = ({
     undefined
   )
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
+  const [mobileCartOpen, setMobileCartOpen] = useState(false)
 
   const open = () => setCartDropdownOpen(true)
   const close = () => setCartDropdownOpen(false)
+  const openMobileCart = () => setMobileCartOpen(true)
+  const closeMobileCart = () => setMobileCartOpen(false)
 
   const totalItems =
     cartState?.items?.reduce((acc, item) => {
@@ -78,20 +82,29 @@ const CartDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItems, itemRef.current])
 
+  const handleCartClick = () => {
+    // On mobile, open the mobile cart modal
+    if (window.innerWidth < 640) { // sm breakpoint
+      openMobileCart()
+    }
+    // On desktop, the hover/popover behavior handles it
+  }
+
   return (
-    <div
-      className="h-full z-50"
-      onMouseEnter={openAndCancel}
-      onMouseLeave={close}
-    >
-      <Popover className="relative h-full">
-        <PopoverButton className="h-full">
-          <CartIconEnhanced 
-            cart={cartState || null}
-            className="font-body text-[var(--color-charcoal)] hover:text-nxl-gold transition-colors duration-300"
-            asButton={false}
-          />
-        </PopoverButton>
+    <>
+      <div
+        className="h-full z-50"
+        onMouseEnter={openAndCancel}
+        onMouseLeave={close}
+      >
+        <Popover className="relative h-full">
+          <PopoverButton className="h-full" onClick={handleCartClick}>
+            <CartIconEnhanced 
+              cart={cartState || null}
+              className="font-body text-[var(--color-charcoal)] hover:text-nxl-gold transition-colors duration-300"
+              asButton={false}
+            />
+          </PopoverButton>
         <Transition
           show={cartDropdownOpen}
           as={Fragment}
@@ -228,7 +241,16 @@ const CartDropdown = ({
           </PopoverPanel>
         </Transition>
       </Popover>
-    </div>
+      </div>
+      
+      {/* Mobile Cart Modal */}
+      <MobileCartModal
+        isOpen={mobileCartOpen}
+        onClose={closeMobileCart}
+        cart={cartState}
+        dictionary={dictionary}
+      />
+    </>
   )
 }
 
