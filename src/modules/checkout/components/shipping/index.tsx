@@ -12,6 +12,7 @@ import Divider from "@modules/common/components/divider"
 import MedusaRadio from "@modules/common/components/radio"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useTranslation } from "@lib/context/translation-context"
 
 const PICKUP_OPTION_ON = "__PICKUP_ON"
 const PICKUP_OPTION_OFF = "__PICKUP_OFF"
@@ -51,6 +52,7 @@ const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
 }) => {
+  const { translate } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
 
@@ -166,7 +168,7 @@ const Shipping: React.FC<ShippingProps> = ({
           <Heading
             level="h2"
             className={clx(
-              "text-2xl font-semibold text-nxl-gold",
+              "text-2xl font-semibold text-nxl-gold font-display",
               {
                 "opacity-50 pointer-events-none select-none":
                   !isOpen && cart.shipping_methods?.length === 0,
@@ -186,7 +188,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 className="text-nxl-gold hover:text-nxl-gold/80 font-medium transition-colors duration-200"
                 data-testid="edit-delivery-button"
               >
-                Edit
+                {translate("checkout", "edit")}
               </button>
             </Text>
           )}
@@ -195,11 +197,11 @@ const Shipping: React.FC<ShippingProps> = ({
         <>
           <div className="grid">
             <div className="flex flex-col">
-              <span className="font-medium txt-medium text-ui-fg-base">
-                Shipping method
+              <span className="font-medium txt-medium text-nxl-gold">
+                Shipping Method
               </span>
-              <span className="mb-4 text-ui-fg-muted txt-medium">
-                How would you like you order delivered
+              <span className="mb-4 text-nxl-ivory/70 txt-medium">
+                How would you like your order delivered?
               </span>
             </div>
             <div data-testid="delivery-options-container">
@@ -304,10 +306,10 @@ const Shipping: React.FC<ShippingProps> = ({
           {showPickupOptions === PICKUP_OPTION_ON && (
             <div className="grid">
               <div className="flex flex-col">
-                <span className="font-medium txt-medium text-ui-fg-base">
+                <span className="font-medium txt-medium text-nxl-gold">
                   Store
                 </span>
-                <span className="mb-4 text-ui-fg-muted txt-medium">
+                <span className="mb-4 text-nxl-ivory/70 txt-medium">
                   Choose a store near you
                 </span>
               </div>
@@ -372,13 +374,13 @@ const Shipping: React.FC<ShippingProps> = ({
             />
             <Button
               size="large"
-              className="mt"
+              className="mt-6 bg-nxl-gold hover:bg-nxl-gold/90 text-nxl-black font-semibold transition-all duration-300"
               onClick={handleSubmit}
               isLoading={isLoading}
               disabled={!cart.shipping_methods || !cart.shipping_methods[0]}
               data-testid="submit-delivery-option-button"
             >
-              Continue to payment
+              {translate("checkout", "continueToPayment")}
             </Button>
           </div>
         </>
@@ -387,10 +389,10 @@ const Shipping: React.FC<ShippingProps> = ({
           <div className="text-small-regular">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
+                <Text className="txt-medium-plus text-nxl-gold mb-1 font-semibold">
                   Method
                 </Text>
-                <Text className="txt-medium text-ui-fg-subtle">
+                <Text className="txt-medium text-nxl-ivory/80">
                   {cart.shipping_methods?.at(-1)?.name}{" "}
                   {convertToLocale({
                     amount: cart.shipping_methods?.at(-1)?.amount!,

@@ -269,14 +269,116 @@
     "madein": "Fièrement fabriqué au Canada."
   },
   "checkout": {
+    "title": "Paiement Sécurisé",
+    "subtitle": "Complétez votre expérience Next X Level",
+    "steps": {
+      "address": "Adresse",
+      "delivery": "Livraison", 
+      "payment": "Paiement",
+      "review": "Révision"
+    },
     "shippingAddress": "Adresse de Livraison",
     "billingAddress": "Adresse de Facturation",
-    "paymentMethod": "Méthode de Paiement",
-    "placeOrder": "Passer la Commande",
+    "sameAsBilling": "Utiliser la même adresse pour la facturation",
+    "useDifferentBilling": "Utiliser une adresse de facturation différente",
+    "form": {
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "address": "Adresse",
+      "company": "Entreprise",
+      "postalCode": "Code postal",
+      "city": "Ville",
+      "stateProvince": "État / Province",
+      "billingAddressSameAsShipping": "Adresse de facturation identique à l'adresse de livraison",
+      "email": "Courriel",
+      "phone": "Téléphone"
+    },
+    "continueToDelivery": "Continuer vers la Livraison",
+    "continueToPayment": "Continuer vers le Paiement",
+    "continueToReview": "Continuer vers la Révision",
+    "placeOrder": "Passer Votre Commande",
+    "processingOrder": "Traitement de Votre Commande...",
     "orderSummary": "Récapitulatif de la Commande",
+    "inYourCart": "Dans Votre Panier",
+    "cartSummary": "Résumé du Panier",
     "backToCart": "Retour au Panier",
     "back": "Retour",
-    "title": "Paiement"
+    "edit": "Modifier",
+    "complete": "Terminé",
+    "step": "Étape",
+    "of": "sur",
+    "delivery": {
+      "title": "Options de Livraison",
+      "subtitle": "Choisissez comment vous souhaitez recevoir votre commande",
+      "shippingMethod": "Méthode d'Expédition",
+      "howDeliverOrder": "Comment souhaitez-vous que votre commande soit livrée?",
+      "pickupOrder": "Récupérer votre commande",
+      "store": "Magasin",
+      "chooseStore": "Choisissez un magasin près de chez vous",
+      "method": "Méthode",
+      "estimatedDelivery": "Livraison Estimée",
+      "freeShipping": "Livraison Gratuite",
+      "standardShipping": "Livraison Standard",
+      "expressShipping": "Livraison Express"
+    },
+    "payment": {
+      "title": "Informations de Paiement",
+      "subtitle": "Paiement sécurisé avec cryptage aux normes industrielles",
+      "paymentMethod": "Méthode de Paiement",
+      "paymentDetails": "Détails du Paiement",
+      "enterCardDetails": "Saisir les Détails de la Carte",
+      "continueToReview": "Continuer vers la Révision",
+      "giftCard": "Carte Cadeau",
+      "securePayment": "Vos informations de paiement sont sécurisées et cryptées",
+      "acceptedCards": "Nous acceptons toutes les principales cartes de crédit"
+    },
+    "review": {
+      "title": "Réviser Votre Commande",
+      "subtitle": "Veuillez réviser les détails de votre commande avant de finaliser votre achat",
+      "orderDetails": "Détails de la Commande",
+      "shippingTo": "Livraison à",
+      "billingTo": "Facturation à",
+      "contact": "Contact",
+      "deliveryMethod": "Méthode de Livraison",
+      "paymentMethod": "Méthode de Paiement",
+      "orderTotal": "Total de la Commande",
+      "placeSecureOrder": "Passer une Commande Sécurisée",
+      "byPlacingOrder": "En passant cette commande, vous acceptez nos",
+      "termsAndConditions": "Termes et Conditions",
+      "and": "et",
+      "privacyPolicy": "Politique de Confidentialité"
+    },
+    "errors": {
+      "addressRequired": "Les informations d'adresse sont requises",
+      "shippingRequired": "Veuillez sélectionner une méthode d'expédition",
+      "paymentRequired": "Veuillez sélectionner une méthode de paiement",
+      "cardIncomplete": "Veuillez compléter vos informations de carte",
+      "generalError": "Une erreur s'est produite. Veuillez réessayer.",
+      "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+    },
+    "success": {
+      "title": "Commande Confirmée!",
+      "subtitle": "Merci pour votre achat Next X Level",
+      "orderNumber": "Numéro de Commande",
+      "emailSent": "Un email de confirmation a été envoyé à",
+      "trackOrder": "Suivre Votre Commande",
+      "continueShopping": "Continuer Vos Achats",
+      "estimatedDelivery": "Livraison Estimée"
+    },
+    "loading": {
+      "processing": "Traitement en cours...",
+      "validating": "Validation...",
+      "securing": "Sécurisation de votre commande...",
+      "almostDone": "Presque terminé..."
+    },
+    "trustSignals": {
+      "secureCheckout": "Paiement Sécurisé",
+      "sslProtected": "Protégé par SSL",
+      "encryptedPayment": "Paiement Crypté 256 bits",
+      "moneyBackGuarantee": "Garantie de Remboursement 30 Jours",
+      "freeReturns": "Retours et Échanges Gratuits",
+      "customerSupport": "Support Client 24/7"
+    }
   },
   "error": {
     "pageNotFound": "Page Non Trouvée",

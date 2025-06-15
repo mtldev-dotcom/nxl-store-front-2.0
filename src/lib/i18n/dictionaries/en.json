@@ -269,14 +269,116 @@
     "madein": "Proudly made in Canada."
   },
   "checkout": {
+    "title": "Secure Checkout",
+    "subtitle": "Complete your Next X Level experience",
+    "steps": {
+      "address": "Address",
+      "delivery": "Delivery", 
+      "payment": "Payment",
+      "review": "Review"
+    },
     "shippingAddress": "Shipping Address",
     "billingAddress": "Billing Address",
-    "paymentMethod": "Payment Method",
-    "placeOrder": "Place Order",
+    "sameAsBilling": "Use same address for billing",
+    "useDifferentBilling": "Use different billing address",
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "address": "Address",
+      "company": "Company",
+      "postalCode": "Postal code",
+      "city": "City",
+      "stateProvince": "State / Province",
+      "billingAddressSameAsShipping": "Billing address same as shipping address",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "continueToDelivery": "Continue to Delivery",
+    "continueToPayment": "Continue to Payment",
+    "continueToReview": "Continue to Review",
+    "placeOrder": "Place Your Order",
+    "processingOrder": "Processing Your Order...",
     "orderSummary": "Order Summary",
+    "inYourCart": "In Your Cart",
+    "cartSummary": "Cart Summary",
     "backToCart": "Back to Cart",
     "back": "Back",
-    "title": "Checkout"
+    "edit": "Edit",
+    "complete": "Complete",
+    "step": "Step",
+    "of": "of",
+    "delivery": {
+      "title": "Delivery Options",
+      "subtitle": "Choose how you'd like to receive your order",
+      "shippingMethod": "Shipping Method",
+      "howDeliverOrder": "How would you like your order delivered?",
+      "pickupOrder": "Pick up your order",
+      "store": "Store",
+      "chooseStore": "Choose a store near you",
+      "method": "Method",
+      "estimatedDelivery": "Estimated Delivery",
+      "freeShipping": "Free Shipping",
+      "standardShipping": "Standard Shipping",
+      "expressShipping": "Express Shipping"
+    },
+    "payment": {
+      "title": "Payment Information",
+      "subtitle": "Secure payment with industry-standard encryption",
+      "paymentMethod": "Payment Method",
+      "paymentDetails": "Payment Details",
+      "enterCardDetails": "Enter Card Details",
+      "continueToReview": "Continue to Review",
+      "giftCard": "Gift Card",
+      "securePayment": "Your payment information is secure and encrypted",
+      "acceptedCards": "We accept all major credit cards"
+    },
+    "review": {
+      "title": "Review Your Order",
+      "subtitle": "Please review your order details before completing your purchase",
+      "orderDetails": "Order Details",
+      "shippingTo": "Shipping to",
+      "billingTo": "Billing to",
+      "contact": "Contact",
+      "deliveryMethod": "Delivery Method",
+      "paymentMethod": "Payment Method",
+      "orderTotal": "Order Total",
+      "placeSecureOrder": "Place Secure Order",
+      "byPlacingOrder": "By placing this order, you agree to our",
+      "termsAndConditions": "Terms & Conditions",
+      "and": "and",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "errors": {
+      "addressRequired": "Address information is required",
+      "shippingRequired": "Please select a shipping method",
+      "paymentRequired": "Please select a payment method",
+      "cardIncomplete": "Please complete your card information",
+      "generalError": "An error occurred. Please try again.",
+      "networkError": "Network error. Please check your connection."
+    },
+    "success": {
+      "title": "Order Confirmed!",
+      "subtitle": "Thank you for your Next X Level purchase",
+      "orderNumber": "Order Number",
+      "emailSent": "A confirmation email has been sent to",
+      "trackOrder": "Track Your Order",
+      "continueShopping": "Continue Shopping",
+      "estimatedDelivery": "Estimated Delivery"
+    },
+    "loading": {
+      "processing": "Processing...",
+      "validating": "Validating...",
+      "securing": "Securing your order...",
+      "almostDone": "Almost done..."
+    },
+    "trustSignals": {
+      "secureCheckout": "Secure Checkout",
+      "sslProtected": "SSL Protected",
+      "encryptedPayment": "256-bit Encrypted Payment",
+      "moneyBackGuarantee": "30-Day Money Back Guarantee",
+      "freeReturns": "Free Returns & Exchanges",
+      "customerSupport": "24/7 Customer Support"
+    }
   },
   "error": {
     "pageNotFound": "Page not found",
