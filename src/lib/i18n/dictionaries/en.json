@@ -112,7 +112,8 @@
     "contact": "Contact",
     "account": "Account",
     "cart": "Cart",
-    "search": "Search"
+    "search": "Search",
+    "keyboardHint": "Use ← → arrow keys or ESC to close"
   },
   "product": {
     "price": "Price",
@@ -164,7 +165,25 @@
     "relatedProductsDesc": "Discover more premium pieces from our collection that complement your style.",
     "noRelatedProducts": "No related products found at this time.",
     "selectSize": "Select Size",
-    "selectColor": "Select Color"
+    "selectColor": "Select Color",
+    "whyChooseNxl": "Why Choose Next X Level",
+    "canadianCraftsmanship": "Premium Canadian craftsmanship",
+    "fastShippingCanada": "2-3 day shipping across Canada",
+    "lifetimeSatisfaction": "Lifetime satisfaction guarantee",
+    "premiumBenefits": "Premium Benefits",
+    "needHelp": "Need Help?",
+    "contactExperts": "Contact Our Experts",
+    "expertHelp": "Need expert help with sizing, care, or product questions?",
+    "share": "Share",
+    "wishlist": "Wishlist",
+    "fullSize": "Full Size",
+    "zoom": "Zoom",
+    "previousImage": "Previous Image",
+    "nextImage": "Next Image",
+    "closeFullscreen": "Close Fullscreen",
+    "imageOf": "Image of",
+    "viewFullscreen": "View Fullscreen",
+    "swipeForMore": "Swipe for more images"
   },
   "cart": {
     "title": "Shopping Cart",

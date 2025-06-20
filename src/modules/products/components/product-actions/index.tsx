@@ -9,6 +9,7 @@ import Divider from "@modules/common/components/divider"
 import CartNotification from "@modules/common/components/cart-notification"
 import MiniCartDrawer from "@modules/common/components/mini-cart-drawer"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
+import SizeGuide from "@modules/products/components/size-guide"
 import { isEqual } from "lodash"
 import { useParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
@@ -40,6 +41,7 @@ export default function ProductActions({
   const [addedToCart, setAddedToCart] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showMiniCart, setShowMiniCart] = useState(false)
+  const [isWishlisted, setIsWishlisted] = useState(false)
   const countryCode = useParams().countryCode as string
   const { translate } = useTranslation()
   const { cart, refreshCart } = useCart()
@@ -119,24 +121,49 @@ export default function ProductActions({
         quantity: 1,
         countryCode,
       })
-      
+
       // Refresh cart data using context
       await refreshCart()
-      
+
       setAddedToCart(true)
       setShowNotification(true)
-      
+
       // Auto-show mini cart after notification - DISABLED
       // setTimeout(() => {
       //   setShowMiniCart(true)
       // }, 2000)
-      
+
       // Reset added state after animation
       setTimeout(() => setAddedToCart(false), 3000)
     } catch (error) {
       console.error('Error adding to cart:', error)
     } finally {
       setIsAdding(false)
+    }
+  }
+
+  // Handle wishlist toggle
+  const handleWishlistToggle = () => {
+    setIsWishlisted(!isWishlisted)
+    // TODO: Implement actual wishlist functionality
+  }
+
+  // Handle social sharing
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.title,
+          text: product.description || `Check out ${product.title} from Next X Level`,
+          url: window.location.href,
+        })
+      } catch (err) {
+        console.log('Share was cancelled or failed')
+      }
+    } else {
+      // Fallback to copy URL
+      await navigator.clipboard.writeText(window.location.href)
+      // TODO: Show toast notification
     }
   }
 
@@ -160,9 +187,9 @@ export default function ProductActions({
   // Get inventory status text
   const getInventoryStatus = () => {
     if (!selectedVariant) return null
-    
+
     const inventory = selectedVariant.inventory_quantity || 0
-    
+
     if (inventory <= 0 && selectedVariant.allow_backorder) {
       return (
         <div className="text-sm text-nxl-gold/80 font-body">
@@ -170,7 +197,7 @@ export default function ProductActions({
         </div>
       )
     }
-    
+
     if (inventory > 0 && inventory <= 5) {
       return (
         <div className="text-sm text-nxl-gold/80 font-body">
@@ -178,18 +205,33 @@ export default function ProductActions({
         </div>
       )
     }
-    
+
     return null
+  }
+
+  // Determine product type for size guide
+  const getProductType = () => {
+    const productTitle = product.title?.toLowerCase() || ""
+    const productType = product.type?.value?.toLowerCase() || ""
+
+    if (productTitle.includes("hoodie") || productTitle.includes("sweatshirt") ||
+      productType.includes("hoodie") || productType.includes("sweatshirt")) {
+      return "hoodie"
+    }
+    return "apparel"
   }
 
   return (
     <>
-      <div className="flex flex-col gap-y-6" ref={actionsRef}>
-        {/* Product Options */}
+      <div className="flex flex-col gap-y-8" ref={actionsRef}>
+        {/* Enhanced Product Options */}
         {(product.variants?.length ?? 0) > 1 && (
-          <div className="space-y-4">
-            <div className="text-sm font-button uppercase tracking-wider text-nxl-gold border-b border-nxl-gold/20 pb-2">
-              {translate("product", "selectOptions", "Select Options")}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="text-sm font-button uppercase tracking-wider text-nxl-gold border-b border-nxl-gold/20 pb-2">
+                {translate("product", "selectOptions", "Select Options")}
+              </div>
+              <SizeGuide productType={getProductType()} />
             </div>
             {(product.options || []).map((option) => (
               <div key={option.id} className="space-y-2">
@@ -206,14 +248,24 @@ export default function ProductActions({
           </div>
         )}
 
-        {/* Price Section */}
-        <div className="bg-nxl-navy/20 border border-nxl-gold/10 rounded-lg p-4">
-          <ProductPrice product={product} variant={selectedVariant} />
-          {getInventoryStatus()}
+        {/* Enhanced Price Section with Luxury Styling */}
+        <div className="bg-gradient-to-r from-nxl-navy/30 via-nxl-navy/20 to-transparent border border-nxl-gold/20 rounded-xl p-6 backdrop-blur-sm">
+          <div className="space-y-3">
+            <ProductPrice product={product} variant={selectedVariant} />
+            {getInventoryStatus()}
+
+            {/* Trust Indicators */}
+            <div className="flex items-center gap-2 pt-2">
+              <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-xs font-body text-nxl-ivory/70 uppercase tracking-wider">Authentic • Premium Quality</span>
+            </div>
+          </div>
         </div>
 
-        {/* Add to Cart Button */}
-        <div className="space-y-3">
+        {/* Enhanced Add to Cart Section */}
+        <div className="space-y-4">
           <Button
             onClick={handleAddToCart}
             disabled={
@@ -225,64 +277,97 @@ export default function ProductActions({
               addedToCart
             }
             variant="primary"
-            className={`nxl-btn-primary w-full h-12 transition-all duration-300 ${
-              addedToCart 
-                ? 'bg-nxl-green text-nxl-ivory border-nxl-green' 
-                : 'shimmer'
-            }`}
+            className={`nxl-btn-primary w-full h-14 transition-all duration-300 text-lg font-bold ${addedToCart
+              ? 'bg-nxl-green text-nxl-ivory border-nxl-green transform scale-105'
+              : 'shimmer hover:shadow-luxury'
+              }`}
             isLoading={isAdding}
             data-testid="add-product-button"
           >
             {getButtonText()}
           </Button>
 
-          {/* Additional Action Buttons */}
+          {/* Enhanced Action Buttons Grid */}
           <div className="grid grid-cols-2 gap-3">
             <Button
+              onClick={handleWishlistToggle}
               variant="secondary"
-              className="nxl-btn-secondary h-10 text-sm"
+              className={`h-12 text-sm transition-all duration-300 ${isWishlisted
+                ? 'bg-nxl-gold text-nxl-black border-nxl-gold'
+                : 'nxl-btn-secondary hover:shadow-md'
+                }`}
               disabled={!selectedVariant}
             >
-              {translate("product", "addToWishlist", "Add to Wishlist")}
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill={isWishlisted ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span>{isWishlisted ? translate("product", "wishlisted", "Saved") : translate("product", "addToWishlist", "Save")}</span>
+              </div>
             </Button>
-            
+
             <Button
+              onClick={handleShare}
               variant="secondary"
-              className="nxl-btn-secondary h-10 text-sm"
+              className="nxl-btn-secondary h-12 text-sm hover:shadow-md transition-all duration-300"
               disabled={!selectedVariant}
             >
-              {translate("product", "shareProduct", "Share")}
+              <div className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                </svg>
+                <span>{translate("product", "shareProduct", "Share")}</span>
+              </div>
             </Button>
           </div>
         </div>
 
-        {/* Product Features */}
-        <div className="space-y-3 pt-4 border-t border-nxl-gold/10">
-          <div className="flex items-center gap-3 text-sm">
-            <svg className="w-5 h-5 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="font-body text-nxl-ivory/90">
-              {translate("product", "freeShipping", "Free shipping on orders over $100")}
-            </span>
+        {/* Enhanced Product Features with Visual Improvements */}
+        <div className="space-y-4 pt-6 border-t border-nxl-gold/10">
+          <h4 className="text-sm font-button uppercase tracking-wider text-nxl-gold mb-4">{translate("product", "premiumBenefits", "Premium Benefits")}</h4>
+
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 p-3 bg-nxl-navy/10 border border-nxl-gold/10 rounded-lg hover:bg-nxl-navy/20 transition-colors">
+              <div className="w-8 h-8 bg-nxl-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span className="font-body text-nxl-ivory/90 text-sm">
+                {translate("product", "freeShipping", "Free shipping on orders over $100")}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 p-3 bg-nxl-navy/10 border border-nxl-gold/10 rounded-lg hover:bg-nxl-navy/20 transition-colors">
+              <div className="w-8 h-8 bg-nxl-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="font-body text-nxl-ivory/90 text-sm">
+                {translate("product", "qualityGuarantee", "Premium quality guarantee")}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 p-3 bg-nxl-navy/10 border border-nxl-gold/10 rounded-lg hover:bg-nxl-navy/20 transition-colors">
+              <div className="w-8 h-8 bg-nxl-gold/20 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <span className="font-body text-nxl-ivory/90 text-sm">
+                {translate("product", "easyReturns", "30-day easy returns")}
+              </span>
+            </div>
           </div>
-          
-          <div className="flex items-center gap-3 text-sm">
-            <svg className="w-5 h-5 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="font-body text-nxl-ivory/90">
-              {translate("product", "qualityGuarantee", "Premium quality guarantee")}
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-3 text-sm">
-            <svg className="w-5 h-5 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            <span className="font-body text-nxl-ivory/90">
-              {translate("product", "easyReturns", "30-day easy returns")}
-            </span>
+
+          {/* Customer Support CTA */}
+          <div className="mt-6 p-4 bg-gradient-to-r from-nxl-gold/10 to-transparent border border-nxl-gold/20 rounded-lg">
+            <h5 className="text-sm font-button uppercase tracking-wider text-nxl-gold mb-2">{translate("product", "needHelp", "Need Help?")}</h5>
+            <p className="text-xs text-nxl-ivory/80 font-body mb-3">{translate("product", "expertHelp", "Need expert help with sizing, care, or product questions?")}</p>
+            <button className="text-xs font-button uppercase tracking-wider text-nxl-gold hover:text-nxl-gold-light transition-colors underline underline-offset-2">
+              {translate("product", "contactExperts", "Contact Our Experts")}
+            </button>
           </div>
         </div>
 
@@ -305,7 +390,7 @@ export default function ProductActions({
         onClose={() => setShowNotification(false)}
         product={product}
         variant={selectedVariant}
-        onViewCart={() => {}} // Disabled - mini cart drawer is disabled
+        onViewCart={() => { }} // Disabled - mini cart drawer is disabled
         onContinueShopping={() => setShowNotification(false)}
       />
 

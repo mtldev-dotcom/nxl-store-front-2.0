@@ -115,7 +115,8 @@
     "languages": {
       "english": "Anglais",
       "french": "Français"
-    }
+    },
+    "keyboardHint": "Utilisez les flèches ← → ou ESC pour fermer"
   },
   "product": {
     "price": "Prix",
@@ -167,7 +168,25 @@
     "relatedProductsDesc": "Découvrez plus de pièces premium de notre collection qui complètent votre style.",
     "noRelatedProducts": "Aucun produit associé trouvé pour le moment.",
     "selectSize": "Sélectionner la Taille",
-    "selectColor": "Sélectionner la Couleur"
+    "selectColor": "Sélectionner la Couleur",
+    "whyChooseNxl": "Pourquoi Choisir Next X Level",
+    "canadianCraftsmanship": "Artisanat canadien premium",
+    "fastShippingCanada": "Livraison en 2-3 jours partout au Canada",
+    "lifetimeSatisfaction": "Garantie de satisfaction à vie",
+    "premiumBenefits": "Avantages Premium",
+    "needHelp": "Besoin d'Aide ?",
+    "contactExperts": "Contactez nos Experts",
+    "expertHelp": "Besoin d'aide d'expert pour la taille, l'entretien ou des questions produits ?",
+    "share": "Partager",
+    "wishlist": "Liste de Souhaits",
+    "fullSize": "Taille Complète",
+    "zoom": "Zoom",
+    "previousImage": "Image Précédente",
+    "nextImage": "Image Suivante",
+    "closeFullscreen": "Fermer Plein Écran",
+    "imageOf": "Image de",
+    "viewFullscreen": "Voir en Plein Écran",
+    "swipeForMore": "Glissez pour plus d'images"
   },
   "cart": {
     "title": "Panier d'Achat",

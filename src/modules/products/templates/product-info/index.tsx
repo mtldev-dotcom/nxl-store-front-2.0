@@ -2,20 +2,22 @@ import { HttpTypes } from "@medusajs/types"
 import { Heading, Text } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { getTranslatedProduct, getTranslatedCollection, StoreProductWithTranslations } from "@lib/util/translations"
+import { Dictionary } from "@lib/i18n/use-dictionary"
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
   locale?: string
+  dictionary?: Dictionary
 }
 
-const ProductInfo = ({ product, locale }: ProductInfoProps) => {
+const ProductInfo = ({ product, locale, dictionary }: ProductInfoProps) => {
   // Get translated product data with fallback handling
-  const translatedProduct = locale && product 
-    ? getTranslatedProduct(product as StoreProductWithTranslations, locale) 
+  const translatedProduct = locale && product
+    ? getTranslatedProduct(product as StoreProductWithTranslations, locale)
     : product
-  
-  const translatedCollection = locale && product.collection 
-    ? getTranslatedCollection(product.collection, locale) 
+
+  const translatedCollection = locale && product.collection
+    ? getTranslatedCollection(product.collection, locale)
     : product.collection
 
   return (
@@ -41,7 +43,7 @@ const ProductInfo = ({ product, locale }: ProductInfoProps) => {
           >
             {translatedProduct.title}
           </Heading>
-          
+
           {/* Subtitle if available */}
           {translatedProduct.subtitle && (
             <Text className="text-lg font-body text-nxl-ivory/80 italic">
@@ -80,21 +82,21 @@ const ProductInfo = ({ product, locale }: ProductInfoProps) => {
         <div className="space-y-2 pt-4 border-t border-nxl-gold/10">
           {product.material && (
             <div className="flex items-center justify-between text-sm">
-              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">Material</span>
+              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">{dictionary?.product?.material || 'Material'}</span>
               <span className="font-body text-nxl-ivory">{product.material}</span>
             </div>
           )}
-          
+
           {product.weight && (
             <div className="flex items-center justify-between text-sm">
-              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">Weight</span>
+              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">{dictionary?.product?.weight || 'Weight'}</span>
               <span className="font-body text-nxl-ivory">{product.weight}g</span>
             </div>
           )}
 
           {product.origin_country && (
             <div className="flex items-center justify-between text-sm">
-              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">Origin</span>
+              <span className="font-button uppercase tracking-wide text-nxl-ivory/60">{dictionary?.product?.origin || 'Origin'}</span>
               <span className="font-body text-nxl-ivory">{product.origin_country}</span>
             </div>
           )}
@@ -104,7 +106,7 @@ const ProductInfo = ({ product, locale }: ProductInfoProps) => {
         {product.variants && product.variants.length > 0 && (
           <div className="pt-2">
             <span className="text-xs font-mono text-nxl-ivory/40 uppercase tracking-wider">
-              SKU: {product.variants[0].sku || 'N/A'}
+              {dictionary?.product?.sku || 'SKU'}: {product.variants[0].sku || 'N/A'}
             </span>
           </div>
         )}
