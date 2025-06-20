@@ -5,7 +5,7 @@ import FilterRadioGroup from "@modules/common/components/filter-radio-group"
 import { getDictionary } from "@lib/i18n/get-dictionary"
 import { Locale } from "@lib/i18n/config"
 
-export type SortOptions = "price_asc" | "price_desc" | "created_at"
+export type SortOptions = "price_asc" | "price_desc"
 
 type SortProductsProps = {
   sortBy: SortOptions
@@ -39,10 +39,6 @@ const SortProducts = ({
   }
 
   const sortOptions = [
-    {
-      value: "created_at",
-      label: dictionary.store?.filters?.sortOptions?.created_at || "Latest Arrivals",
-    },
     {
       value: "price_asc",
       label: dictionary.store?.filters?.sortOptions?.price_asc || "Price: Low to High",

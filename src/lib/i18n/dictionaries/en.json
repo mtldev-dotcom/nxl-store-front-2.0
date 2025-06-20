@@ -105,17 +105,14 @@
   },
   "navigation": {
     "home": "Home",
-    "shop": "Shop",
+    "shop": "Store",
     "categories": "Categories",
     "collections": "Collections",
     "about": "About",
     "contact": "Contact",
-    "menu": "Menu",
-    "language": "Language",
-    "languages": {
-      "english": "English",
-      "french": "Français"
-    }
+    "account": "Account",
+    "cart": "Cart",
+    "search": "Search"
   },
   "product": {
     "price": "Price",
@@ -134,13 +131,13 @@
     "freeShipping": "Free shipping on orders over $100",
     "qualityGuarantee": "Premium quality guarantee",
     "easyReturns": "30-day easy returns",
-    "description": "Discover",
+    "description": "Description",
     "atNxl": "at Next X Level",
     "premiumQuality": "Premium quality athletic wear for the discerning athlete.",
     "athleticWear": "athletic wear",
     "premium": "premium",
     "luxury": "luxury",
-    "details": "Details",
+    "details": "Product Details",
     "reviews": "Reviews",
     "relatedProducts": "Related Products",
     "specifications": "Specifications",
@@ -165,12 +162,14 @@
     "easyReturnsDesc": "Just return your product and we'll refund your money. No questions asked – we'll do our best to make sure your return is hassle-free.",
     "relatedProductsTitle": "You Might Also Like",
     "relatedProductsDesc": "Discover more premium pieces from our collection that complement your style.",
-    "noRelatedProducts": "No related products found at this time."
+    "noRelatedProducts": "No related products found at this time.",
+    "selectSize": "Select Size",
+    "selectColor": "Select Color"
   },
   "cart": {
     "title": "Shopping Cart",
     "subtitle": "Review your items and proceed to checkout",
-    "empty": "Your Cart is Empty",
+    "empty": "Your cart is empty",
     "emptyDescription": "Looks like you haven't added anything to your cart yet. Discover our premium collection and find something you'll love.",
     "continueShoping": "Continue Shopping",
     "startShopping": "Start Shopping",
@@ -182,7 +181,7 @@
     "tax": "Tax",
     "taxes": "Taxes",
     "total": "Total",
-    "checkout": "Proceed to Checkout",
+    "checkout": "Checkout",
     "secureCheckout": "Secure Checkout",
     "remove": "Remove",
     "delete": "Delete",
@@ -242,7 +241,8 @@
       "updating": "Updating...",
       "removing": "Removing...",
       "addingToCart": "Adding to cart..."
-    }
+    },
+    "update": "Update Cart"
   },
   "footer": {
     "customerService": "Customer Service",
@@ -269,7 +269,7 @@
     "madein": "Proudly made in Canada."
   },
   "checkout": {
-    "title": "Secure Checkout",
+    "title": "Checkout",
     "subtitle": "Complete your Next X Level experience",
     "steps": {
       "address": "Address",
@@ -296,8 +296,8 @@
     "continueToDelivery": "Continue to Delivery",
     "continueToPayment": "Continue to Payment",
     "continueToReview": "Continue to Review",
-    "placeOrder": "Place Your Order",
-    "processingOrder": "Processing Your Order...",
+    "placeOrder": "Place Order",
+    "processing": "Processing...",
     "orderSummary": "Order Summary",
     "inYourCart": "In Your Cart",
     "cartSummary": "Cart Summary",
@@ -398,10 +398,10 @@
     "viewProducts": "View Products"
   },
   "account": {
-    "dashboard": "Dashboard",
+    "title": "My Account",
+    "profile": "Profile",
     "orders": "Orders",
     "addresses": "Addresses",
-    "profile": "Profile",
     "logout": "Logout",
     "login": "Login",
     "register": "Register",
@@ -462,7 +462,7 @@
       "title": "Our Brand Story",
       "paragraph1": "Born from a love of design and a passion for versatility, Next X Level emerged with a simple mission: create clothing that transitions seamlessly across every aspect of modern life. From high-end nightclubs to cozy chalet evenings, our garments are designed to perform and impress.",
       "paragraph2": "We saw that most apparel left a gap between luxury quality and real-world functionality. Our goal became clear: source premium materials, refine every stitch, and deliver timeless designs at an accessible price point.",
-      "paragraph3": "Today, we continue to push boundaries—crafting pieces that blend cutting-edge fabric technology with impeccable craftsmanship. Each item is made to stand the test of time, whether you’re navigating city streets, relaxing fireside, or enjoying weekend sports."
+      "paragraph3": "Today, we continue to push boundaries—crafting pieces that blend cutting-edge fabric technology with impeccable craftsmanship. Each item is made to stand the test of time, whether you're navigating city streets, relaxing fireside, or enjoying weekend sports."
     },
     "values": {
       "title": "Our Values",
@@ -504,9 +504,9 @@
     "commitment": {
       "title": "Our Commitment",
       "paragraph1": "At Next X Level, we believe true luxury means responsibility. Our materials are sourced from sustainable suppliers, and our Canadian production facilities operate with minimal environmental impact.",
-      "paragraph2": "We use eco-friendly packaging, partner with ethical mills, and constantly innovate to reduce our carbon footprint—because premium apparel should never come at the planet’s expense.",
+      "paragraph2": "We use eco-friendly packaging, partner with ethical mills, and constantly innovate to reduce our carbon footprint—because premium apparel should never come at the planet's expense.",
       "paragraph3": "Our commitment extends beyond products to every interaction we have—with customers, communities, and the environment. We strive to build a brand that stands for quality, integrity, and inclusive style.",
-      "quote": "We don’t just make clothes. We craft experiences for every moment of your life."
+      "quote": "We don't just make clothes. We craft experiences for every moment of your life."
     }
   },
   "store": {
@@ -518,18 +518,17 @@
     },
     "explore": "Explore",
     "allProducts": "All Products",
-    "description": "Discover our complete collection of versatile premium apparel",
+    "description": "Discover our complete collection of premium apparel",
     "filters": {
       "title": "Filters",
       "sortBy": "Sort by",
       "categories": "Categories",
-      "size": "Size",
-      "color": "Color",
+      "collections": "Collections",
       "priceRange": "Price Range",
       "apply": "Apply",
       "clearAll": "Clear All Filters",
-      "showing": "Showing {start}-{end} of {total} products",
-      "sortedBy": "Sorted by",
+      "size": "Size",
+      "color": "Color",
       "sortOptions": {
         "created_at": "Latest Arrivals",
         "price_asc": "Price: Low to High",
@@ -556,7 +555,8 @@
     "viewToggle": {
       "grid": "Grid view",
       "list": "List view"
-    }
+    },
+    "noProducts": "No products found"
   },
   "contact": {
     "hero": {
@@ -635,7 +635,7 @@
       },
       "tracking": {
         "question": "How can I track my order?",
-        "answer": "Once your order ships, you’ll receive a confirmation email with tracking details. You can also log into your account to view order status at any time."
+        "answer": "Once your order ships, you'll receive a confirmation email with tracking details. You can also log into your account to view order status at any time."
       },
       "returns": {
         "question": "What is your return policy?",
@@ -646,5 +646,26 @@
         "answer": "Yes, we partner with select boutiques and retailers. Please contact our wholesale department at wholesale@nextxlevel.com for more information."
       }
     }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "select": "Select",
+    "continue": "Continue"
   }
 }

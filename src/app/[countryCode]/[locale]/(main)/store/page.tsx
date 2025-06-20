@@ -3,7 +3,7 @@
  * ---------------------------------------------------------------------------------------
  * Purpose:
  *   • Render the main store listing page for a given country context.
- *   • Apply optional query parameters (sorting, pagination) from URL search params.
+ *   • Apply optional query parameters (sorting, pagination, filtering) from URL search params.
  *   • Use Next.js App Router to provide static metadata.
  *
  * High-level flow:
@@ -11,7 +11,7 @@
  *   2. Define `Params` type for incoming route and search parameters.
  *   3. Default export → Async server component:
  *        a. Await route params            (countryCode)
- *        b. Await searchParams           (sortBy & page)
+ *        b. Await searchParams           (sortBy, page, filters)
  *        c. Render `StoreTemplate` with props.
  *****************************************************************************************/
 
@@ -26,7 +26,7 @@ import StoreTemplate from "@modules/store/templates"
 /* =============================================================================
  * 1) Page Metadata
  * =============================================================================
- * Using Next.js’s App Router metadata export to set <head> tags:
+ * Using Next.js's App Router metadata export to set <head> tags:
  *   - `title`       → Page title shown in browser tab and SEO
  *   - `description` → Meta description for SEO previews
  * --------------------------------------------------------------------------- */
@@ -36,23 +36,25 @@ export const metadata: Metadata = {
 }
 
 /* =============================================================================
- * 2) Params Type Definition
+ * 2) Type Definition for Page Parameters
  * =============================================================================
- * Describes the shape of props passed into the async component:
- *   - `searchParams` → Promise wrapping an object with optional:
- *         • sortBy : SortOptions (e.g., "price_asc", "price_desc")
- *         • page   : string (page number in pagination)
- *   - `params`       → Promise wrapping an object with:
- *         • countryCode : string (ISO-2 country code from dynamic route)
+ * Define the shape of both route parameters and URL search parameters:
+ *   - `params`      → Dynamic route segments (countryCode, locale)
+ *   - `searchParams`→ URL query parameters for filtering and pagination
  * --------------------------------------------------------------------------- */
 type Params = {
-  searchParams: Promise<{
-    sortBy?: SortOptions
-    page?: string
-  }>
   params: Promise<{
     countryCode: string
     locale: string
+  }>
+  searchParams: Promise<{
+    sortBy?: SortOptions           // Sort option (price_asc, price_desc, created_at)
+    page?: string                  // Pagination page number
+    category_id?: string[]         // Category filter IDs (multiple allowed)
+    collection_id?: string[]       // Collection filter IDs (multiple allowed) 
+    min_price?: string             // Minimum price filter
+    max_price?: string             // Maximum price filter
+    q?: string                     // Search query
   }>
 }
 
@@ -60,20 +62,30 @@ type Params = {
  * 3) StorePage Component (default export)
  * =============================================================================
  * Async server component executed on each request (or ISR revalidation):
- *   a. Await `params` to get dynamic route segment (countryCode).
+ *   a. Await `params` to get dynamic route segment (countryCode, locale).
  *   b. Await `searchParams` to retrieve optional query settings.
- *   c. Destructure `sortBy` and `page` from searchParams.
+ *   c. Destructure all filter parameters from searchParams.
  *   d. Render the `StoreTemplate` component with all necessary props:
  *        - sortBy       : desired sort order
  *        - page         : pagination page number
  *        - countryCode  : region context for pricing/localization
+ *        - locale       : language context for translations
+ *        - filters      : all filter parameters for categories, collections, price
  * --------------------------------------------------------------------------- */
 export default async function StorePage(props: Params) {
-  // Await the dynamic route parameter for the country
+  // Await the dynamic route parameter for the country and locale
   const params = await props.params
-  // Await URL search parameters for sorting & pagination
+  // Await URL search parameters for sorting, pagination, and filtering
   const searchParams = await props.searchParams
-  const { sortBy, page } = searchParams
+  const {
+    sortBy,
+    page,
+    category_id,
+    collection_id,
+    min_price,
+    max_price,
+    q
+  } = searchParams
 
   // Render the store template with props injected
   return (
@@ -82,6 +94,13 @@ export default async function StorePage(props: Params) {
       page={page}
       countryCode={params.countryCode}
       locale={params.locale}
+      searchParams={{
+        category_id,
+        collection_id,
+        min_price,
+        max_price,
+        q
+      }}
     />
   )
 }

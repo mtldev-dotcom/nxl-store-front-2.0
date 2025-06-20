@@ -165,7 +165,9 @@
     "easyReturnsDesc": "Il suffit de retourner votre produit et nous vous rembourserons. Aucune question posée - nous ferons de notre mieux pour que votre retour soit sans tracas.",
     "relatedProductsTitle": "Vous Pourriez Aussi Aimer",
     "relatedProductsDesc": "Découvrez plus de pièces premium de notre collection qui complètent votre style.",
-    "noRelatedProducts": "Aucun produit associé trouvé pour le moment."
+    "noRelatedProducts": "Aucun produit associé trouvé pour le moment.",
+    "selectSize": "Sélectionner la Taille",
+    "selectColor": "Sélectionner la Couleur"
   },
   "cart": {
     "title": "Panier d'Achat",
@@ -236,7 +238,8 @@
       "removeFailed": "Échec de la suppression de l'article du panier",
       "quantityInvalid": "Quantité sélectionnée invalide",
       "itemNotFound": "Article introuvable dans le panier",
-      "generalError": "Une erreur s'est produite. Veuillez réessayer."
+      "generalError": "Une erreur s'est produite. Veuillez réessayer.",
+      "update": "Mettre à Jour le Panier"
     },
     "loading": {
       "updating": "Mise à jour...",
@@ -354,7 +357,8 @@
       "paymentRequired": "Veuillez sélectionner une méthode de paiement",
       "cardIncomplete": "Veuillez compléter vos informations de carte",
       "generalError": "Une erreur s'est produite. Veuillez réessayer.",
-      "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+      "networkError": "Erreur réseau. Veuillez vérifier votre connexion.",
+      "processing": "Traitement en cours..."
     },
     "success": {
       "title": "Commande Confirmée!",
@@ -382,10 +386,10 @@
   },
   "error": {
     "pageNotFound": "Page Non Trouvée",
-    "pageNotFoundDesc": "La page que vous essayez d’accéder n’existe pas.",
-    "goToFrontpage": "Aller à l’Accueil",
-    "somethingWentWrong": "Une erreur s’est produite",
-    "cartTransferFailed": "Une erreur s’est produite lors du transfert de votre panier",
+    "pageNotFoundDesc": "La page que vous essayez d'accéder n'existe pas.",
+    "goToFrontpage": "Aller à l'Accueil",
+    "somethingWentWrong": "Une erreur s'est produite",
+    "cartTransferFailed": "Une erreur s'est produite lors du transfert de votre panier",
     "runTransferAgain": "Réessayer",
     "transferring": "Transfert en cours..."
   },
@@ -460,19 +464,19 @@
     },
     "story": {
       "title": "Notre Histoire",
-      "paragraph1": "Née d’un amour pour le design et d’une passion pour la polyvalence, Next X Level a vu le jour avec une mission claire : créer des vêtements capables de s’adapter à chaque moment de la vie moderne. De la boîte de nuit huppée aux soirées au chalet, nos pièces sont conçues pour performer et impressionner.",
+      "paragraph1": "Née d'un amour pour le design et d'une passion pour la polyvalence, Next X Level a vu le jour avec une mission claire : créer des vêtements capables de s'adapter à chaque moment de la vie moderne. De la boîte de nuit huppée aux soirées au chalet, nos pièces sont conçues pour performer et impressionner.",
       "paragraph2": "Nous avons rapidement réalisé que la plupart des vêtements exigeaient un compromis entre luxe et fonctionnalité. Notre objectif est devenu évident : sélectionner des matériaux haut de gamme, perfectionner chaque couture et offrir des designs intemporels à un prix accessible.",
-      "paragraph3": "Aujourd’hui, nous repoussons sans cesse les limites en créant des pièces qui allient technologie textile de pointe et savoir-faire irréprochable. Chaque article est conçu pour résister à l’épreuve du temps, que vous parcouriez les rues de la ville, que vous vous détendiez près du feu ou que vous pratiquiez vos activités du week-end."
+      "paragraph3": "Aujourd'hui, nous repoussons sans cesse les limites en créant des pièces qui allient technologie textile de pointe et savoir-faire irréprochable. Chaque article est conçu pour résister à l'épreuve du temps, que vous parcouriez les rues de la ville, que vous vous détendiez près du feu ou que vous pratiquiez vos activités du week-end."
     },
     "values": {
       "title": "Nos Valeurs Fondamentales",
       "quality": {
         "title": "Qualité Sans Compromis",
-        "description": "Nous sélectionnons les meilleurs matériaux et collaborons avec des artisans qualifiés pour créer des vêtements qui durent tant en durabilité qu’en style."
+        "description": "Nous sélectionnons les meilleurs matériaux et collaborons avec des artisans qualifiés pour créer des vêtements qui durent tant en durabilité qu'en style."
       },
       "innovation": {
         "title": "Innovation",
-        "description": "Nous réimaginons l’essence même du vêtement de tous les jours, intégrant des textiles performants à un design soigné."
+        "description": "Nous réimaginons l'essence même du vêtement de tous les jours, intégrant des textiles performants à un design soigné."
       },
       "craftsmanship": {
         "title": "Savoir-Faire",
@@ -488,7 +492,7 @@
       "member1": {
         "name": "James Wilson",
         "role": "Fondateur et PDG",
-        "bio": "Fort d’une expérience en design de mode et d’une passion pour l’esthétique raffinée, James a fondé Next X Level pour redéfinir le prêt-à-porter premium."
+        "bio": "Fort d'une expérience en design de mode et d'une passion pour l'esthétique raffinée, James a fondé Next X Level pour redéfinir le prêt-à-porter premium."
       },
       "member2": {
         "name": "Olivia Chen",
@@ -503,9 +507,9 @@
     },
     "commitment": {
       "title": "Notre Engagement",
-      "paragraph1": "Chez Next X Level, nous croyons que le véritable luxe rime avec responsabilité. Nos matériaux proviennent de fournisseurs respectueux de l’environnement, et nos installations de production canadiennes fonctionnent avec un impact minimal sur la planète.",
+      "paragraph1": "Chez Next X Level, nous croyons que le véritable luxe rime avec responsabilité. Nos matériaux proviennent de fournisseurs respectueux de l'environnement, et nos installations de production canadiennes fonctionnent avec un impact minimal sur la planète.",
       "paragraph2": "Nous utilisons des emballages éco-responsables, collaborons avec des filatures éthiques et innovons sans cesse pour réduire notre empreinte carbone—car un vêtement premium ne devrait jamais nuire à la planète.",
-      "paragraph3": "Notre engagement s’étend au-delà des produits, pour chaque interaction avec nos clients, nos communautés et l’environnement. Nous nous efforçons de bâtir une marque qui incarne la qualité, l’intégrité et un style inclusif.",
+      "paragraph3": "Notre engagement s'étend au-delà des produits, pour chaque interaction avec nos clients, nos communautés et l'environnement. Nous nous efforçons de bâtir une marque qui incarne la qualité, l'intégrité et un style inclusif.",
       "quote": "Nous ne faisons pas que des vêtements. Nous créons des expériences pour chaque moment de votre vie."
     }
   },
@@ -518,18 +522,17 @@
     },
     "explore": "Explorer",
     "allProducts": "Tous les Produits",
-    "description": "Découvrez notre collection complète de vêtements premium polyvalents",
+    "description": "Découvrez notre collection complète de vêtements haut de gamme",
     "filters": {
       "title": "Filtres",
       "sortBy": "Trier par",
       "categories": "Catégories",
-      "size": "Taille",
-      "color": "Couleur",
+      "collections": "Collections",
       "priceRange": "Gamme de Prix",
       "apply": "Appliquer",
       "clearAll": "Effacer Tous les Filtres",
-      "showing": "Affichage {start}-{end} sur {total} produits",
-      "sortedBy": "Trié par",
+      "size": "Taille",
+      "color": "Couleur",
       "sortOptions": {
         "created_at": "Dernières Arrivées",
         "price_asc": "Prix: Du Plus Bas au Plus Haut",
@@ -556,7 +559,8 @@
     "viewToggle": {
       "grid": "Vue grille",
       "list": "Vue liste"
-    }
+    },
+    "noProducts": "Aucun produit trouvé"
   },
   "contact": {
     "hero": {
@@ -625,26 +629,47 @@
       "title": "Visitez Notre Showroom",
       "mapPlaceholder": "Une carte interactive serait intégrée ici",
       "hours": "Notre showroom est ouvert du lundi au vendredi, de 10 h à 18 h, et le samedi de 11 h à 16 h.",
-      "appointment": "Veuillez appeler à l’avance pour planifier un rendez-vous d’achat personnalisé pour une meilleure expérience."
+      "appointment": "Veuillez appeler à l'avance pour planifier un rendez-vous d'achat personnalisé pour une meilleure expérience."
     },
     "faq": {
       "title": "Questions Fréquemment Posées",
       "shipping": {
-        "question": "Quels sont vos frais d’expédition ?",
-        "answer": "Nous offrons la livraison gratuite sur toutes les commandes canadiennes de plus de 150 $. Pour les commandes de moins de 150 $, des frais forfaitaires de 12 $ s’appliquent. Les tarifs d’expédition internationale varient selon la destination."
+        "question": "Quels sont vos frais d'expédition ?",
+        "answer": "Nous offrons la livraison gratuite sur toutes les commandes canadiennes de plus de 150 $. Pour les commandes de moins de 150 $, des frais forfaitaires de 12 $ s'appliquent. Les tarifs d'expédition internationale varient selon la destination."
       },
       "tracking": {
         "question": "Comment puis-je suivre ma commande ?",
-        "answer": "Une fois votre commande expédiée, vous recevrez un e-mail de confirmation avec les informations de suivi. Vous pouvez également vous connecter à votre compte pour vérifier l’état de votre commande à tout moment."
+        "answer": "Une fois votre commande expédiée, vous recevrez un e-mail de confirmation avec les informations de suivi. Vous pouvez également vous connecter à votre compte pour vérifier l'état de votre commande à tout moment."
       },
       "returns": {
         "question": "Quelle est votre politique de retour ?",
-        "answer": "Nous acceptons les retours dans les 30 jours suivant l’achat pour les articles non portés avec leurs étiquettes d’origine attachées. Les retours sont traités dans un délai de 5 à 7 jours ouvrables après réception."
+        "answer": "Nous acceptons les retours dans les 30 jours suivant l'achat pour les articles non portés avec leurs étiquettes d'origine attachées. Les retours sont traités dans un délai de 5 à 7 jours ouvrables après réception."
       },
       "wholesale": {
         "question": "Proposez-vous des opportunités de vente en gros ?",
-        "answer": "Oui, nous collaborons avec des boutiques et détaillants sélectionnés. Veuillez contacter notre service vente en gros à wholesale@nextxlevel.com pour plus d’informations."
+        "answer": "Oui, nous collaborons avec des boutiques et détaillants sélectionnés. Veuillez contacter notre service vente en gros à wholesale@nextxlevel.com pour plus d'informations."
       }
     }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "view": "Voir",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "select": "Sélectionner",
+    "continue": "Continuer"
   }
 }

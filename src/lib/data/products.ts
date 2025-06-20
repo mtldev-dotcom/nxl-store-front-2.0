@@ -15,7 +15,10 @@ export const listProducts = async ({
   locale,
 }: {
   pageParam?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams & {
+    collection_id?: string[]
+    category_id?: string[]
+  }
   countryCode?: string
   regionId?: string
   locale?: string
@@ -58,36 +61,79 @@ export const listProducts = async ({
   // Build translation fields based on locale
   const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
 
-  return sdk.client
-    .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
-      `/store/products`,
-      {
-        method: "GET",
-        query: {
-          limit,
-          offset,
-          region_id: region?.id,
-          fields:
-            `*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags${translationsField}`,
-          ...queryParams,
-        },
-        headers,
-        next,
-        cache: "force-cache",
-      }
-    )
-    .then(({ products, count }) => {
-      const nextPage = count > offset + limit ? pageParam + 1 : null
+  // Clean and validate query parameters
+  const cleanQueryParams: any = { ...queryParams }
 
-      return {
-        response: {
-          products,
-          count,
-        },
-        nextPage: nextPage,
-        queryParams,
-      }
-    })
+  // Handle collection_id array properly
+  if (cleanQueryParams.collection_id && Array.isArray(cleanQueryParams.collection_id)) {
+    // Only keep valid collection IDs
+    const validCollectionIds = cleanQueryParams.collection_id.filter((id: string) =>
+      id && typeof id === 'string' && id.trim().length > 0
+    )
+
+    if (validCollectionIds.length === 0) {
+      delete cleanQueryParams.collection_id
+    } else {
+      cleanQueryParams.collection_id = validCollectionIds
+    }
+  }
+
+  // Handle category_id array properly
+  if (cleanQueryParams.category_id && Array.isArray(cleanQueryParams.category_id)) {
+    // Only keep valid category IDs
+    const validCategoryIds = cleanQueryParams.category_id.filter((id: string) =>
+      id && typeof id === 'string' && id.trim().length > 0
+    )
+
+    if (validCategoryIds.length === 0) {
+      delete cleanQueryParams.category_id
+    } else {
+      cleanQueryParams.category_id = validCategoryIds
+    }
+  }
+
+  try {
+    return sdk.client
+      .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
+        `/store/products`,
+        {
+          method: "GET",
+          query: {
+            limit,
+            offset,
+            region_id: region?.id,
+            fields:
+              `*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags${translationsField}`,
+            ...cleanQueryParams,
+          },
+          headers,
+          next,
+          cache: "force-cache",
+        }
+      )
+      .then(({ products, count }) => {
+        const nextPage = count > offset + limit ? pageParam + 1 : null
+
+        return {
+          response: {
+            products,
+            count,
+          },
+          nextPage: nextPage,
+          queryParams,
+        }
+      })
+  } catch (error) {
+    console.error("Error fetching products:", error)
+    console.error("Query params that caused error:", cleanQueryParams)
+
+    // Return empty result instead of throwing
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
+  }
 }
 
 /**
@@ -97,12 +143,15 @@ export const listProducts = async ({
 export const listProductsWithSort = async ({
   page = 0,
   queryParams,
-  sortBy = "created_at",
+  sortBy = "price_asc",
   countryCode,
   locale,
 }: {
   page?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams & {
+    collection_id?: string[]
+    category_id?: string[]
+  }
   sortBy?: SortOptions
   countryCode: string
   locale?: string
@@ -113,33 +162,44 @@ export const listProductsWithSort = async ({
 }> => {
   const limit = queryParams?.limit || 12
 
-  const {
-    response: { products, count },
-  } = await listProducts({
-    pageParam: 0,
-    queryParams: {
-      ...queryParams,
-      limit: 100,
-    },
-    countryCode,
-    locale,
-  })
+  try {
+    const {
+      response: { products, count },
+    } = await listProducts({
+      pageParam: 0,
+      queryParams: {
+        ...queryParams,
+        limit: 100,
+      },
+      countryCode,
+      locale,
+    })
 
-  const sortedProducts = sortProducts(products, sortBy)
+    const sortedProducts = sortProducts(products, sortBy)
 
-  const pageParam = (page - 1) * limit
+    const pageParam = (page - 1) * limit
 
-  const nextPage = count > pageParam + limit ? pageParam + limit : null
+    const nextPage = count > pageParam + limit ? pageParam + limit : null
 
-  const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
+    const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
 
-  return {
-    response: {
-      products: paginatedProducts,
-      count,
-    },
-    nextPage,
-    queryParams,
+    return {
+      response: {
+        products: paginatedProducts,
+        count,
+      },
+      nextPage,
+      queryParams,
+    }
+  } catch (error) {
+    console.error("Error in listProductsWithSort:", error)
+
+    // Return empty result instead of throwing
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
   }
 }
 

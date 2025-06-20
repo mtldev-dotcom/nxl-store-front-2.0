@@ -116,13 +116,6 @@ export default async function ProductPreview({
           </h3>
         </LocalizedClientLink>
 
-        {/* Enhanced Product Description with better mobile handling */}
-        {translatedProduct.description && (
-          <Text className="text-nxl-ivory/80 text-sm font-body line-clamp-2 leading-relaxed hidden sm:block">
-            {translatedProduct.description}
-          </Text>
-        )}
-
         {/* Enhanced Pricing Section */}
         <div className="flex items-center justify-between pt-2">
           <div className="flex flex-col gap-1">

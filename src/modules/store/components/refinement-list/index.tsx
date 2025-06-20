@@ -7,19 +7,47 @@ import { Locale } from "@lib/i18n/config"
 
 import SortProducts, { SortOptions } from "./sort-products"
 
+type CategoryWithCount = {
+  id: string
+  name: string
+  handle: string
+  product_count: number
+}
+
+type CollectionWithCount = {
+  id: string
+  title: string
+  handle: string
+  product_count: number
+}
+
 type RefinementListProps = {
   sortBy: SortOptions
   search?: boolean
   'data-testid'?: string
   locale?: Locale
+  categories: CategoryWithCount[]
+  collections: CollectionWithCount[]
 }
 
-const RefinementList = ({ sortBy, 'data-testid': dataTestId, locale = "en" }: RefinementListProps) => {
+const RefinementList = ({
+  sortBy,
+  'data-testid': dataTestId,
+  locale = "en",
+  categories = [],
+  collections = []
+}: RefinementListProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [dictionary, setDictionary] = useState<any>(null)
+
+  // Get current filters from URL
+  const selectedCategories = searchParams.getAll('category_id') || []
+  const selectedCollections = searchParams.getAll('collection_id') || []
+  const minPrice = searchParams.get('min_price') || ''
+  const maxPrice = searchParams.get('max_price') || ''
 
   useEffect(() => {
     const loadTranslations = async () => {
@@ -30,9 +58,19 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, locale = "en" }: Re
   }, [locale])
 
   const createQueryString = useCallback(
-    (name: string, value: string) => {
+    (updates: Record<string, string | string[] | null>) => {
       const params = new URLSearchParams(searchParams)
-      params.set(name, value)
+
+      Object.entries(updates).forEach(([key, value]) => {
+        if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
+          params.delete(key)
+        } else if (Array.isArray(value)) {
+          params.delete(key)
+          value.forEach(v => params.append(key, v))
+        } else {
+          params.set(key, value)
+        }
+      })
 
       return params.toString()
     },
@@ -40,37 +78,62 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, locale = "en" }: Re
   )
 
   const setQueryParams = (name: string, value: string) => {
-    const query = createQueryString(name, value)
+    const query = createQueryString({ [name]: value })
     router.push(`${pathname}?${query}`)
   }
 
-  if (!dictionary) {
-    return <div className="bg-nxl-navy/20 rounded-sm border border-nxl-gold/20 p-6 h-64 animate-pulse"></div>
+  const toggleCategoryFilter = (categoryId: string) => {
+    const newSelection = selectedCategories.includes(categoryId)
+      ? selectedCategories.filter(id => id !== categoryId)
+      : [...selectedCategories, categoryId]
+
+    const query = createQueryString({ category_id: newSelection })
+    router.push(`${pathname}?${query}`)
   }
 
-  // Category filter options with translations
-  const categories = [
-    { id: "polos", label: dictionary.store?.categories?.polos || "Polo Shirts", count: 12 },
-    { id: "hoodies", label: dictionary.store?.categories?.hoodies || "Hoodies & Sweatshirts", count: 8 },
-    { id: "joggers", label: dictionary.store?.categories?.joggers || "Joggers & Pants", count: 6 },
-    { id: "caps", label: dictionary.store?.categories?.caps || "Caps & Hats", count: 4 },
-    { id: "accessories", label: dictionary.store?.categories?.accessories || "Accessories", count: 5 },
-  ]
+  const toggleCollectionFilter = (collectionId: string) => {
+    const newSelection = selectedCollections.includes(collectionId)
+      ? selectedCollections.filter(id => id !== collectionId)
+      : [...selectedCollections, collectionId]
 
-  // Size filter options
-  const sizes = ["XS", "S", "M", "L", "XL", "XXL"]
+    const query = createQueryString({ collection_id: newSelection })
+    router.push(`${pathname}?${query}`)
+  }
 
-  // Color filter options
-  const colors = [
-    { name: "Black", class: "bg-black", value: "black" },
-    { name: "White", class: "bg-white border border-gray-300", value: "white" },
-    { name: "Navy", class: "bg-blue-900", value: "navy" },
-    { name: "Gray", class: "bg-gray-500", value: "gray" },
-    { name: "Green", class: "bg-green-700", value: "green" },
-  ]
+  const applyPriceFilter = () => {
+    const query = createQueryString({
+      min_price: minPrice || null,
+      max_price: maxPrice || null
+    })
+    router.push(`${pathname}?${query}`)
+  }
+
+  const clearAllFilters = () => {
+    const query = createQueryString({
+      category_id: null,
+      collection_id: null,
+      min_price: null,
+      max_price: null
+    })
+    router.push(`${pathname}?${query}`)
+  }
+
+  const setPrice = (value: string, type: 'min' | 'max') => {
+    if (type === 'min') {
+      const query = createQueryString({ min_price: value || null })
+      router.replace(`${pathname}?${query}`, { scroll: false })
+    } else {
+      const query = createQueryString({ max_price: value || null })
+      router.replace(`${pathname}?${query}`, { scroll: false })
+    }
+  }
+
+  if (!dictionary) {
+    return <div className="bg-nxl-navy/20 rounded-sm border border-nxl-gold-muted p-6 h-64 animate-pulse"></div>
+  }
 
   return (
-    <div className="bg-nxl-navy/20 rounded-sm border border-nxl-gold/20 p-6">
+    <div className="bg-nxl-navy/20 rounded-sm border border-nxl-gold-muted p-6">
       {/* Mobile Toggle */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
@@ -94,66 +157,74 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, locale = "en" }: Re
         </div>
 
         {/* Categories */}
-        <div>
-          <h3 className="font-serif text-white drop-shadow-md text-lg mb-4">
-            {dictionary.store?.filters?.categories || "Categories"}
-          </h3>
-          <div className="space-y-3">
-            {categories.map((category) => (
-              <label key={category.id} className="flex items-center justify-between cursor-pointer group">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="sr-only"
-                  />
-                  <div className="w-4 h-4 border border-nxl-gold/50 rounded-sm mr-3 group-hover:border-nxl-gold transition-colors flex items-center justify-center">
-                    <svg className="w-3 h-3 text-nxl-gold opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+        {categories.length > 0 && (
+          <div>
+            <h3 className="font-serif text-white drop-shadow-md text-lg mb-4">
+              {dictionary.store?.filters?.categories || "Categories"}
+            </h3>
+            <div className="space-y-3">
+              {categories.map((category) => (
+                <label key={category.id} className="flex items-center justify-between cursor-pointer group">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={selectedCategories.includes(category.id)}
+                      onChange={() => toggleCategoryFilter(category.id)}
+                    />
+                    <div className={`w-4 h-4 border border-nxl-gold-muted rounded-sm mr-3 group-hover:border-nxl-gold transition-colors flex items-center justify-center ${selectedCategories.includes(category.id) ? 'bg-nxl-gold border-nxl-gold' : ''
+                      }`}>
+                      {selectedCategories.includes(category.id) && (
+                        <svg className="w-3 h-3 text-nxl-black" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-white/95 drop-shadow-sm group-hover:text-nxl-gold transition-colors">
+                      {category.name}
+                    </span>
                   </div>
-                  <span className="text-white/95 drop-shadow-sm group-hover:text-nxl-gold transition-colors">
-                    {category.label}
-                  </span>
-                </div>
-                <span className="text-white/70 drop-shadow-sm text-sm">({category.count})</span>
-              </label>
-            ))}
+                  <span className="text-white/70 drop-shadow-sm text-sm">({category.product_count})</span>
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Size Filter */}
-        <div>
-          <h3 className="font-serif text-white drop-shadow-md text-lg mb-4">
-            {dictionary.store?.filters?.size || "Size"}
-          </h3>
-          <div className="grid grid-cols-3 gap-2">
-            {sizes.map((size) => (
-              <button
-                key={size}
-                className="p-2 border border-nxl-gold/30 rounded-sm text-white/95 drop-shadow-sm hover:border-nxl-gold hover:bg-nxl-gold/10 transition-all duration-200 text-sm"
-              >
-                {size}
-              </button>
-            ))}
+        {/* Collections */}
+        {collections.length > 0 && (
+          <div>
+            <h3 className="font-serif text-white drop-shadow-md text-lg mb-4">
+              {dictionary.store?.filters?.collections || "Collections"}
+            </h3>
+            <div className="space-y-3">
+              {collections.map((collection) => (
+                <label key={collection.id} className="flex items-center justify-between cursor-pointer group">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={selectedCollections.includes(collection.id)}
+                      onChange={() => toggleCollectionFilter(collection.id)}
+                    />
+                    <div className={`w-4 h-4 border border-nxl-gold-muted rounded-sm mr-3 group-hover:border-nxl-gold transition-colors flex items-center justify-center ${selectedCollections.includes(collection.id) ? 'bg-nxl-gold border-nxl-gold' : ''
+                      }`}>
+                      {selectedCollections.includes(collection.id) && (
+                        <svg className="w-3 h-3 text-nxl-black" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <span className="text-white/95 drop-shadow-sm group-hover:text-nxl-gold transition-colors">
+                      {collection.title}
+                    </span>
+                  </div>
+                  <span className="text-white/70 drop-shadow-sm text-sm">({collection.product_count})</span>
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Color Filter */}
-        <div>
-          <h3 className="font-serif text-white drop-shadow-md text-lg mb-4">
-            {dictionary.store?.filters?.color || "Color"}
-          </h3>
-          <div className="grid grid-cols-5 gap-3">
-            {colors.map((color) => (
-              <button
-                key={color.value}
-                className={`w-8 h-8 rounded-sm ${color.class} hover:ring-2 hover:ring-nxl-gold transition-all duration-200`}
-                title={color.name}
-                aria-label={color.name}
-              />
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Price Range */}
         <div>
@@ -165,25 +236,37 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, locale = "en" }: Re
               <input
                 type="number"
                 placeholder="Min"
-                className="w-full px-3 py-2 bg-nxl-black border border-nxl-gold/30 rounded-sm text-white/95 focus:border-nxl-gold focus:outline-none"
+                value={minPrice}
+                onChange={(e) => setPrice(e.target.value, 'min')}
+                className="w-full px-3 py-2 bg-nxl-black border border-nxl-gold-muted rounded-sm text-white/95 focus:border-nxl-gold focus:outline-none"
               />
               <span className="text-white/70">-</span>
               <input
                 type="number"
                 placeholder="Max"
-                className="w-full px-3 py-2 bg-nxl-black border border-nxl-gold/30 rounded-sm text-white/95 focus:border-nxl-gold focus:outline-none"
+                value={maxPrice}
+                onChange={(e) => setPrice(e.target.value, 'max')}
+                className="w-full px-3 py-2 bg-nxl-black border border-nxl-gold-muted rounded-sm text-white/95 focus:border-nxl-gold focus:outline-none"
               />
             </div>
-            <button className="w-full py-2 bg-nxl-gold text-nxl-black font-button uppercase tracking-wider hover:bg-nxl-gold/90 transition-colors duration-200 text-sm">
+            <button
+              onClick={applyPriceFilter}
+              className="w-full py-2 bg-nxl-gold text-nxl-black font-button uppercase tracking-wider hover:bg-nxl-gold-light transition-colors duration-200 text-sm"
+            >
               {dictionary.store?.filters?.apply || "Apply"}
             </button>
           </div>
         </div>
 
         {/* Clear Filters */}
-        <button className="w-full py-2 border border-nxl-gold/30 text-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold/10 transition-colors duration-200 text-sm">
-          {dictionary.store?.filters?.clearAll || "Clear All Filters"}
-        </button>
+        {(selectedCategories.length > 0 || selectedCollections.length > 0 || minPrice || maxPrice) && (
+          <button
+            onClick={clearAllFilters}
+            className="w-full py-2 border border-nxl-gold-muted text-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-muted/10 transition-colors duration-200 text-sm"
+          >
+            {dictionary.store?.filters?.clearAll || "Clear All Filters"}
+          </button>
+        )}
       </div>
     </div>
   )
