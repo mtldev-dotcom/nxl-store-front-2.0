@@ -3,11 +3,16 @@
 </p>
 
 <h1 align="center">
-  Next X Level Golf Apparel Store
+  Next X Level Premium Storefront
 </h1>
 
 <p align="center">
-A premium e-commerce experience for golf enthusiasts, built with modern web technologies and luxury design principles.</p>
+  <strong>Premium Canadian Apparel • Luxury Materials • Modern Performance • Versatile Style</strong>
+</p>
+
+<p align="center">
+A luxury e-commerce experience that merges athletic performance with refined elegance, built with cutting-edge web technologies and optimized for mobile-first commerce.
+</p>
 
 <p align="center">
   <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
@@ -19,155 +24,392 @@ A premium e-commerce experience for golf enthusiasts, built with modern web tech
   <a href="https://twitter.com/intent/follow?screen_name=nextxlevel">
     <img src="https://img.shields.io/twitter/follow/nextxlevel.svg?label=Follow%20@nextxlevel" alt="Follow @nextxlevel" />
   </a>
+  <img src="https://img.shields.io/badge/Mobile-Optimized-gold.svg" alt="Mobile Optimized" />
+  <img src="https://img.shields.io/badge/Accessibility-WCAG%202.1-blue.svg" alt="WCAG 2.1 Compliant" />
 </p>
 
-# Overview
+---
 
-The Next X Level Golf Apparel Store is built with:
+## 🎯 **Brand Vision**
 
-- [Next.js 15](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Medusa](https://medusajs.com/) (Commerce Backend)
+Next X Level is a **premium Canadian apparel brand** that seamlessly blends luxury materials, modern performance, and versatile style. Our mission is to deliver high-quality garments that look just as at home around a fire in a mountain chalet as they do at a 5 à 7 cocktail event, on the golf course, at the tennis court, or out on the town.
 
-## Features
+### **Our Promise**
+*"Take your look—and your lifestyle—to the Next Level."*
 
-- **Premium E-commerce Experience**:
-  - Elegant Product Detail Pages
-  - Luxury Product Collections
-  - Seamless Cart Experience
-  - Streamlined Checkout Process
-  - User Account Management
-  - Order Tracking
-  - Responsive Luxury Design
+We bridge the gap between everyday functionality and refined elegance by sourcing textiles used by top luxury labels (Hugo Boss, Under Armour, Louis Vuitton) and offering them at accessible price points.
 
-- **Home Page Sections**:
-  - Hero Banner with Brand Showcase
-  - Featured Products Gallery
-  - Brand Story Section
-  - Product Categories (Polos, Hoodies, Joggers, Caps)
-  - Lifestyle Benefits Highlights
-  - Newsletter Subscription
+---
 
-- **Internationalization**:
-  - Multi-language support (English and French)
-  - Country-based region selection
-  - Nested URL structure (`/{countryCode}/{locale}/...`)
-  - Language and region selection in both navigation and footer
-  - Server-side and client-side translation management
+## 🏗️ **Technical Foundation**
 
-- **Advanced Technical Features**:
-  - App Router Architecture
-  - Next.js Fetching/Caching
-  - Server Components
-  - Server Actions
-  - Streaming Content
-  - Static Pre-Rendering
-  - Custom Luxury UI Components
+Built with modern web technologies for optimal performance and user experience:
 
-# Quickstart
+- **[Next.js 15](https://nextjs.org/)** - App Router with React Server Components
+- **[Medusa V2](https://medusajs.com/)** - Headless commerce backend
+- **[Tailwind CSS](https://tailwindcss.com/)** - Mobile-first styling framework
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+- **[React 19 RC](https://react.dev/)** - Latest React features
 
-### Setting up the environment variables
+---
 
-Navigate into your projects directory and get your environment variables ready:
+## ✨ **Key Features**
 
-```shell
-cd next-x-level-front-store/
+### **🛍️ Premium E-commerce Experience**
+- **Mobile-First Design** - Optimized for touch interactions and mobile commerce
+- **Luxury Product Galleries** - High-performance image optimization with Next.js Image
+- **Advanced Product Discovery** - Enhanced search and filtering capabilities
+- **Seamless Cart Experience** - Optimized for mobile checkout flows
+- **One-Click Checkout** - Streamlined purchase process
+- **Account Management** - Customer dashboard with order tracking
+- **Wishlist & Favorites** - Save products for later
+
+### **📱 Mobile Optimization Excellence**
+- **Bottom Navigation** - Native app-like mobile navigation
+- **Touch-Optimized Interactions** - 44px minimum touch targets
+- **Safe Area Support** - iPhone notch and home indicator compatibility
+- **Performance** - Optimized images, lazy loading, and prefetching
+- **Gesture Support** - Swipe navigation and pull-to-refresh
+- **Haptic Feedback** - Enhanced mobile interactions
+
+### **🌍 Internationalization & Accessibility**
+- **Multi-language Support** - English and French with easy expansion
+- **Region-Specific Pricing** - Dynamic currency and shipping
+- **WCAG 2.1 Compliance** - Full accessibility support
+- **Screen Reader Optimized** - Semantic HTML and ARIA labels
+- **Keyboard Navigation** - Complete keyboard accessibility
+- **High Contrast Mode** - Support for visual accessibility preferences
+
+### **🎨 Luxury Brand Experience**
+- **Premium Design System** - Consistent luxury aesthetics
+- **Custom Typography** - Cinzel, Playfair Display, Libre Baskerville
+- **Sophisticated Animations** - Subtle micro-interactions
+- **Gold Accent System** - Consistent luxury color palette
+- **Dark Theme** - Premium dark mode experience
+
+---
+
+## 🎨 **Design System**
+
+### **Color Palette**
+Our sophisticated color system reflects luxury and athletic performance:
+
+```css
+/* Primary Brand Colors */
+--color-nxl-black: #0A0A0A;     /* Primary backgrounds */
+--color-nxl-gold: #D4B660;      /* Primary accent, CTAs */
+--color-nxl-navy: #1E2A3A;      /* Secondary backgrounds */
+--color-nxl-green: #1A2B20;     /* Subtle accents */
+--color-nxl-ivory: #F8F6F1;     /* Light text, backgrounds */
+--color-nxl-white: #FFFFFF;     /* Pure white elements */
+```
+
+### **Typography Scale**
+Premium typography hierarchy designed for readability and luxury appeal:
+
+- **Display**: Cinzel - Brand name and hero headings
+- **Headings**: Playfair Display - Section headers and subheadings  
+- **Body**: Libre Baskerville - Readable body text
+- **UI**: Inter - Interface elements and navigation
+- **Buttons**: Cormorant Garamond - Call-to-action elements
+
+### **Mobile-First Approach**
+All components are designed mobile-first with progressive enhancement:
+
+```css
+/* Mobile-first responsive design */
+.mobile-touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe area support for modern devices */
+.safe-area-bottom { 
+  padding-bottom: env(safe-area-inset-bottom); 
+}
+```
+
+---
+
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+- Node.js 18+ and yarn/npm
+- Medusa backend instance
+- Environment variables configured
+
+### **Installation**
+
+1. **Clone and Setup**
+```bash
+git clone https://github.com/your-org/nxl-store-front-2.0.git
+cd nxl-store-front-2.0
+yarn install
+```
+
+2. **Environment Configuration**
+```bash
 mv .env.template .env.local
 ```
 
-### Install dependencies
+Configure your environment variables:
+```env
+# Medusa Backend
+MEDUSA_BACKEND_URL=https://your-medusa-backend.com
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=your_publishable_key
 
-Use Yarn to install all dependencies.
+# Region & Locale
+NEXT_PUBLIC_DEFAULT_REGION=us
+NEXT_PUBLIC_DEFAULT_LOCALE=en
 
-```shell
-yarn
+# Payment Providers
+NEXT_PUBLIC_STRIPE_KEY=your_stripe_publishable_key
+
+# Revalidation
+REVALIDATE_SECRET=your_secret_key
 ```
 
-### Start developing
-
-You are now ready to start up your project.
-
-```shell
+3. **Development Server**
+```bash
 yarn dev
 ```
 
-### Open the code and start customizing
+Your luxury storefront is now running at **http://localhost:8000**! 🎉
 
-Your site is now running at http://localhost:8000!
+---
 
-# Brand Design System
+## 🌐 **Internationalization**
 
-The Next X Level store features a custom luxury design system:
+### **Supported Regions & Languages**
 
-- **Color Palette**:
-  - Black (`#0E0E0E`) - Primary background
-  - Navy (`#1A2436`) - Secondary background and accents
-  - Green (`#1C2B22`) - Tertiary accents
-  - Gold (`#C6A94C`) - Primary brand accent
-  - Ivory (`#F0ECE6`) - Primary text color
+| Region | Language | URL Structure | Currency |
+|--------|----------|---------------|----------|
+| 🇨🇦 Canada | English | `/ca/en/` | CAD |
+| 🇨🇦 Canada | Français | `/ca/fr/` | CAD |
+| 🇺🇸 United States | English | `/us/en/` | USD |
 
-- **Typography**:
-  - Display: Cinzel - Used for brand name and primary headings
-  - Serif: Playfair Display - Used for subheadings
-  - Body: Libre Baskerville - Used for body text
-  - Button: Cormorant Garamond - Used for buttons and calls-to-action
-
-- **UI Components**:
-  - Custom button styles with subtle shimmer effects
-  - Elegant card designs with gold accents
-  - Luxury form elements with gold focus states
-  - Premium image hover effects
-
-# Internationalization
-
-The Next X Level store comes with built-in support for multiple languages and regions:
-
-- **Supported Languages**: 
-  - English (en)
-  - French (fr)
-
-- **URL Structure**:
-  - `/{countryCode}/{locale}/...`
-  - Examples: 
-    - `/ca/en/` (Canada region, English language)
-    - `/ca/fr/` (Canada region, French language)
-    - `/us/en/` (US region, English language)
-
-- **How it works**:
-  - The middleware automatically detects and redirects users based on their browser language and location
-  - Users can manually switch languages using the language selector in the navigation or footer
-  - Translations are managed through JSON dictionaries in `src/lib/i18n/dictionaries/`
-
-- **Adding a new language**:
-  1. Add a new dictionary file in `src/lib/i18n/dictionaries/`
-  2. Add the locale code to the `locales` array in `src/lib/i18n/config.ts`
-  3. Update the language selector component to include the new language
-
-# Payment integrations
-
-By default this store supports the following payment integrations:
-
-- [Stripe](https://stripe.com/)
-
-To enable the integrations you need to add the following to your `.env.local` file:
-
-```shell
-NEXT_PUBLIC_STRIPE_KEY=<your-stripe-public-key>
+### **URL Architecture**
+```
+/{countryCode}/{locale}/{path}
 ```
 
-You'll also need to setup the integrations in your Medusa server. See the [Medusa documentation](https://docs.medusajs.com) for more information on how to configure [Stripe](https://docs.medusajs.com/resources/commerce-modules/payment/payment-provider/stripe#main).
+Examples:
+- `/ca/en/` - Canadian English homepage
+- `/ca/fr/products/polo-premium` - French product page
+- `/us/en/store` - US English store
 
-# Resources
+### **Adding New Languages**
 
-## Learn more about Medusa
+1. **Create Dictionary**
+```bash
+cp src/lib/i18n/dictionaries/en.json src/lib/i18n/dictionaries/es.json
+```
 
-- [Website](https://www.medusajs.com/)
-- [GitHub](https://github.com/medusajs)
-- [Documentation](https://docs.medusajs.com/)
+2. **Update Configuration**
+```typescript
+// src/lib/i18n/config.ts
+export const i18nConfig = {
+  defaultLocale: 'en',
+  locales: ['en', 'fr', 'es'], // Add new locale
+} as const;
+```
 
-## Learn more about Next.js
+3. **Translate Content**
+Update the new dictionary with translations following the established structure.
 
-- [Website](https://nextjs.org/)
-- [GitHub](https://github.com/vercel/next.js)
-- [Documentation](https://nextjs.org/docs)
+---
+
+## 📱 **Mobile-First Architecture**
+
+### **Performance Optimizations**
+
+- **Image Optimization**: Next.js Image with WebP/AVIF support
+- **Code Splitting**: Automatic route-based splitting
+- **Prefetching**: Intelligent link prefetching
+- **Caching**: Optimized API caching strategies
+- **Bundle Analysis**: Built-in bundle analyzer
+
+### **Mobile UX Enhancements**
+
+- **Bottom Navigation**: Native app-like navigation
+- **Touch Gestures**: Swipe and tap optimizations
+- **Loading States**: Skeleton screens and progressive loading
+- **Error Boundaries**: Graceful error handling
+- **Offline Support**: Service worker implementation
+
+### **Accessibility Features**
+
+- **Screen Reader Support**: Complete ARIA implementation
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Focus Management**: Logical focus flow
+- **Color Contrast**: WCAG AA compliant colors
+- **Motion Preferences**: Respects `prefers-reduced-motion`
+
+---
+
+## 🛠️ **Development Guidelines**
+
+### **Component Architecture**
+
+```
+src/modules/
+├── common/           # Shared components
+├── layout/           # Header, footer, navigation
+├── products/         # Product-related components
+├── cart/            # Shopping cart functionality
+├── checkout/        # Checkout process
+├── account/         # User account management
+└── home/            # Homepage sections
+```
+
+### **Styling Conventions**
+
+```typescript
+// Use mobile-first responsive classes
+<button className="mobile-touch-target nxl-btn-primary">
+  Add to Cart
+</button>
+
+// Apply luxury design tokens
+<div className="nxl-card shadow-luxury">
+  <h3 className="nxl-heading">Premium Product</h3>
+</div>
+```
+
+### **Performance Best Practices**
+
+- Use `next/image` for all images
+- Implement proper loading states
+- Optimize bundle size with dynamic imports
+- Use React Server Components when possible
+- Implement proper error boundaries
+
+---
+
+## 💳 **Payment Integration**
+
+### **Supported Payment Methods**
+
+- **Stripe** - Credit cards, digital wallets
+- **PayPal** - PayPal accounts and guest checkout
+- **Apple Pay** - iOS Safari integration
+- **Google Pay** - Android Chrome integration
+
+### **Setup Instructions**
+
+1. **Stripe Configuration**
+```env
+NEXT_PUBLIC_STRIPE_KEY=pk_test_...
+```
+
+2. **Medusa Backend Setup**
+Configure payment providers in your Medusa instance following the [official documentation](https://docs.medusajs.com/resources/commerce-modules/payment).
+
+---
+
+## 🚀 **Deployment**
+
+### **Vercel Deployment** (Recommended)
+
+1. **Connect Repository**
+   - Import project to Vercel
+   - Configure environment variables
+
+2. **Build Settings**
+```bash
+# Build Command
+yarn build
+
+# Install Command  
+yarn install
+
+# Output Directory
+.next
+```
+
+3. **Environment Variables**
+Configure all production environment variables in Vercel dashboard.
+
+### **Custom Deployment**
+
+```bash
+# Production Build
+yarn build
+
+# Start Production Server
+yarn start
+```
+
+---
+
+## 📊 **Analytics & Monitoring**
+
+### **Performance Monitoring**
+- **Core Web Vitals** tracking
+- **Real User Monitoring** (RUM)
+- **Error tracking** with detailed stack traces
+- **Performance budgets** enforcement
+
+### **E-commerce Analytics**
+- **Conversion tracking**
+- **Product performance** metrics
+- **User journey** analysis
+- **A/B testing** framework
+
+---
+
+## 🤝 **Contributing**
+
+We welcome contributions that enhance the luxury shopping experience!
+
+### **Development Setup**
+1. Fork the repository
+2. Create a feature branch
+3. Follow our coding standards
+4. Test on mobile devices
+5. Submit a pull request
+
+### **Code Standards**
+- **TypeScript** for type safety
+- **ESLint** for code quality
+- **Prettier** for formatting
+- **Mobile-first** CSS approach
+- **Accessibility** compliance
+
+---
+
+## 📖 **Documentation**
+
+- [Internationalization Guide](./INTERNATIONALIZATION_GUIDE.md)
+- [Style Guide](./STYLE_GUIDE.md)
+- [Component Library](./docs/components.md)
+- [API Documentation](./docs/api.md)
+
+---
+
+## 🆘 **Support**
+
+### **Community**
+- [Discord](https://discord.gg/xpCwq3Kfn8) - Real-time community support
+- [GitHub Issues](https://github.com/your-org/nxl-store-front-2.0/issues) - Bug reports and feature requests
+- [Discussions](https://github.com/your-org/nxl-store-front-2.0/discussions) - Community conversations
+
+### **Resources**
+- [Medusa Documentation](https://docs.medusajs.com/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+
+---
+
+## 📄 **License**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  <strong>Next X Level</strong><br/>
+  <em>Take your look—and your lifestyle—to the Next Level.</em><br/>
+  <br/>
+  <sub>Built with ❤️ in Canada 🇨🇦</sub>
+</p> 

@@ -19,6 +19,23 @@ module.exports = {
         display: "display opacity",
         visibility: "visibility",
         padding: "padding-top padding-right padding-bottom padding-left",
+        transform: "transform",
+        colors: "color background-color border-color text-decoration-color fill stroke",
+      },
+      transitionDuration: {
+        '50': '50ms',
+        '150': '150ms',
+        '200': '200ms',
+        '250': '250ms',
+        '400': '400ms',
+        '500': '500ms',
+        '700': '700ms',
+        '1000': '1000ms',
+      },
+      transitionTimingFunction: {
+        'luxury': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'bounce-in': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+        'ease-out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
       },
       colors: {
         grey: {
@@ -64,18 +81,41 @@ module.exports = {
       },
       maxWidth: {
         "8xl": "100rem",
+        "mobile": "420px",
+        "tablet": "768px",
+      },
+      minHeight: {
+        'touch': '44px',
+        'mobile-input': '48px',
+      },
+      minWidth: {
+        'touch': '44px',
+        'mobile-button': '88px',
       },
       screens: {
         "2xsmall": "320px",
-        xsmall: "512px",
-        small: "1024px",
-        medium: "1280px",
-        large: "1440px",
-        xlarge: "1680px",
+        xsmall: "412px",
+        small: "768px",
+        medium: "1024px",
+        large: "1280px",
+        xlarge: "1440px",
         "2xlarge": "1920px",
+        "mobile-s": "320px",
+        "mobile-m": "375px",
+        "mobile-l": "414px",
+        "mobile-xl": "480px",
+        "touch": { "raw": "(hover: none) and (pointer: coarse)" },
+        "no-touch": { "raw": "(hover: hover) and (pointer: fine)" },
+        "portrait": { "raw": "(orientation: portrait)" },
+        "landscape": { "raw": "(orientation: landscape)" },
       },
       fontSize: {
         "3xl": "2rem",
+        "mobile-xs": ["0.75rem", { lineHeight: "1rem" }],
+        "mobile-sm": ["0.875rem", { lineHeight: "1.25rem" }],
+        "mobile-base": ["1rem", { lineHeight: "1.5rem" }],
+        "mobile-lg": ["1.125rem", { lineHeight: "1.75rem" }],
+        "mobile-xl": ["1.25rem", { lineHeight: "1.75rem" }],
       },
       fontFamily: {
         sans: "var(--font-sans)",
@@ -93,6 +133,15 @@ module.exports = {
         '2xl': "var(--space-2xl)",
         '3xl': "var(--space-3xl)",
         '4xl': "var(--space-4xl)",
+        'mobile-xs': "0.25rem",
+        'mobile-sm': "0.5rem",
+        'mobile-md': "0.75rem",
+        'mobile-lg': "1rem",
+        'mobile-xl': "1.25rem",
+        'mobile-2xl': "1.5rem",
+        'touch-sm': "2.75rem",
+        'touch-md': "3rem",
+        'touch-lg': "3.5rem",
       },
       zIndex: {
         'dropdown': "var(--z-dropdown)",
@@ -106,6 +155,18 @@ module.exports = {
       },
       boxShadow: {
         'luxury': "var(--shadow-luxury)",
+        'luxury-lg': "0 35px 60px -12px rgba(212, 182, 96, 0.15), 0 15px 35px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 182, 96, 0.1)",
+        'mobile': "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        'mobile-lg': "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        'touch': "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+      },
+      backdropBlur: {
+        'mobile': '8px',
+        'luxury': '12px',
+      },
+      scale: {
+        '98': '0.98',
+        '102': '1.02',
       },
       keyframes: {
         ring: {
@@ -193,6 +254,22 @@ module.exports = {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(0)" },
         },
+        "mobile-bounce": {
+          "0%, 20%, 53%, 80%, 100%": { transform: "translate3d(0,0,0)" },
+          "40%, 43%": { transform: "translate3d(0,-8px,0)" },
+          "70%": { transform: "translate3d(0,-4px,0)" },
+          "90%": { transform: "translate3d(0,-2px,0)" },
+        },
+        "mobile-pulse": {
+          "0%": { transform: "scale(1)", opacity: "1" },
+          "50%": { transform: "scale(1.05)", opacity: "0.7" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "touch-feedback": {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(0.95)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
@@ -212,8 +289,68 @@ module.exports = {
         "line-slide-2": "line-slide-2 12s linear infinite",
         "line-slide-3": "line-slide-3 10s linear infinite",
         "line-slide-vertical": "line-slide-vertical 15s linear infinite",
+        "mobile-bounce": "mobile-bounce 0.6s ease-in-out",
+        "mobile-pulse": "mobile-pulse 2s ease-in-out infinite",
+        "touch-feedback": "touch-feedback 0.15s ease-out",
+      },
+      gridTemplateColumns: {
+        'mobile': 'repeat(2, minmax(0, 1fr))',
+        'mobile-3': 'repeat(3, minmax(0, 1fr))',
+        'tablet': 'repeat(3, minmax(0, 1fr))',
+        'desktop': 'repeat(4, minmax(0, 1fr))',
+      },
+      aspectRatio: {
+        'mobile-card': '3 / 4',
+        'mobile-hero': '4 / 3',
+        'mobile-banner': '16 / 9',
+        'product': '3 / 4',
       },
     },
   },
-  plugins: [require("tailwindcss-radix")()],
+  plugins: [
+    require("tailwindcss-radix")(),
+    function ({ addUtilities, theme }) {
+      const newUtilities = {
+        '.mobile-tap-highlight-none': {
+          '-webkit-tap-highlight-color': 'transparent',
+        },
+        '.mobile-scroll-smooth': {
+          '-webkit-overflow-scrolling': 'touch',
+          'scroll-behavior': 'smooth',
+        },
+        '.mobile-select-none': {
+          '-webkit-user-select': 'none',
+          '-moz-user-select': 'none',
+          'user-select': 'none',
+        },
+        '.safe-top': {
+          'padding-top': 'env(safe-area-inset-top)',
+        },
+        '.safe-bottom': {
+          'padding-bottom': 'env(safe-area-inset-bottom)',
+        },
+        '.safe-left': {
+          'padding-left': 'env(safe-area-inset-left)',
+        },
+        '.safe-right': {
+          'padding-right': 'env(safe-area-inset-right)',
+        },
+        '.touch-target': {
+          'min-height': '44px',
+          'min-width': '44px',
+          'display': 'flex',
+          'align-items': 'center',
+          'justify-content': 'center',
+        },
+        '.touch-target-lg': {
+          'min-height': '48px',
+          'min-width': '48px',
+          'display': 'flex',
+          'align-items': 'center',
+          'justify-content': 'center',
+        },
+      }
+      addUtilities(newUtilities)
+    },
+  ],
 }

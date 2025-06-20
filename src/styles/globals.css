@@ -42,6 +42,67 @@
 }
 
 @layer utilities {
+  /* Mobile-first optimizations */
+
+  /* Enhanced touch targets for mobile */
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    @apply flex items-center justify-center;
+  }
+
+  /* Improved mobile text sizing with better scaling */
+  .mobile-text-xs {
+    @apply text-xs leading-4;
+  }
+
+  .mobile-text-sm {
+    @apply text-sm leading-5;
+  }
+
+  .mobile-text-base {
+    @apply text-base leading-6;
+  }
+
+  .mobile-text-lg {
+    @apply text-lg leading-7;
+  }
+
+  /* Mobile-specific spacing utilities */
+  .mobile-px {
+    @apply px-4 sm:px-6;
+  }
+
+  .mobile-py {
+    @apply py-3 sm:py-4;
+  }
+
+  .mobile-gap {
+    @apply gap-3 sm:gap-4;
+  }
+
+  /* Enhanced mobile focus states with larger hit areas */
+  .mobile-focus {
+    @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-muted focus:ring-offset-2 focus:ring-offset-nxl-black rounded-lg transition-all duration-200;
+  }
+
+  /* Safe area utilities for modern mobile devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -52,17 +113,19 @@
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
-  /* Elegant focus states */
-  input:focus ~ label,
-  input:not(:placeholder-shown) ~ label {
+  /* Elegant focus states with better mobile visibility */
+  input:focus~label,
+  input:not(:placeholder-shown)~label {
     @apply -translate-y-2 text-xsmall-regular text-nxl-gold;
   }
 
-  input:focus ~ label {
+  input:focus~label {
     @apply left-0;
   }
 
@@ -84,6 +147,7 @@
 
   /* Accessibility improvements */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -94,26 +158,34 @@
     }
   }
 
-  /* High contrast mode */
+  /* High contrast mode enhancements */
   @media (prefers-contrast: high) {
     .nxl-btn-primary {
-      @apply border-2 border-nxl-gold;
+      @apply border-2 border-nxl-gold shadow-lg;
     }
-    
+
     .nxl-btn-secondary {
-      @apply border-2 border-nxl-gold bg-nxl-black-soft;
+      @apply border-2 border-nxl-gold bg-nxl-black-soft shadow-lg;
+    }
+
+    /* Ensure text remains visible in high contrast */
+    .text-nxl-ivory {
+      @apply text-white;
+    }
+
+    .text-nxl-gold {
+      @apply text-yellow-400;
     }
   }
 
-  /* Focus indicators for keyboard navigation */
+  /* Enhanced focus indicators for keyboard navigation and mobile accessibility */
   .focus-visible:focus {
-    @apply outline-none ring-2 ring-nxl-gold ring-offset-2 ring-offset-nxl-black;
+    @apply outline-none ring-4 ring-nxl-gold ring-offset-4 ring-offset-nxl-black;
   }
 
   /* Skip link for accessibility */
   .skip-link {
-    @apply absolute left-4 top-4 z-tooltip bg-nxl-gold text-nxl-black px-4 py-2 rounded-md 
-           transform -translate-y-16 focus:translate-y-0 transition-transform;
+    @apply absolute left-4 top-4 z-tooltip bg-nxl-gold text-nxl-black px-6 py-3 rounded-md transform -translate-y-20 focus:translate-y-0 transition-transform font-medium mobile-touch-target;
   }
 
   input[type="search"]::-webkit-search-decoration,
@@ -122,45 +194,52 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
-  
-  /* Luxury focus outlines */
+
+  /* Enhanced focus utilities for better mobile experience */
   .focus-gold {
-    @apply focus:outline-none focus:ring-2 focus:ring-nxl-gold focus:ring-opacity-50 focus:border-nxl-gold;
+    @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-light focus:ring-offset-2 focus:ring-offset-nxl-black focus:border-nxl-gold transition-all duration-200;
   }
-  
-  /* Image hover effects */
+
+  /* Enhanced image hover effects with mobile considerations */
   .zoom-on-hover {
     @apply transition-transform duration-700 hover:scale-105;
   }
-  
-  /* Line clamp utilities */
+
+  /* Mobile-specific zoom (reduced for touch devices) */
+  @media (hover: none) {
+    .zoom-on-hover {
+      @apply active:scale-102 transition-transform duration-300;
+    }
+  }
+
+  /* Enhanced line clamp utilities */
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
-  
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  
+
   .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
-  
-  /* Button shimmer animation */
+
+  /* Enhanced button shimmer animation with mobile optimization */
   .shimmer {
     position: relative;
     overflow: hidden;
   }
-  
+
   .shimmer::after {
     content: '';
     position: absolute;
@@ -168,134 +247,151 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-      to bottom right,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%);
     transform: rotate(30deg);
     transition: transform 0.5s ease-out;
     pointer-events: none;
   }
-  
+
   .shimmer:hover::after {
     transform: rotate(30deg) translate(100%, 100%);
   }
-  
-  /* Luxury shadow effects */
-  .shadow-luxury {
-    box-shadow: 0 25px 50px -12px rgba(212, 182, 96, 0.1), 
-                0 10px 25px -5px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(212, 182, 96, 0.05);
+
+  /* Mobile-specific shimmer for touch devices */
+  @media (hover: none) {
+    .shimmer:active::after {
+      transform: rotate(30deg) translate(100%, 100%);
+    }
   }
-  
+
+  /* Enhanced luxury shadow effects */
+  .shadow-luxury {
+    box-shadow: 0 25px 50px -12px rgba(212, 182, 96, 0.1),
+      0 10px 25px -5px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(212, 182, 96, 0.05);
+  }
+
   .shadow-luxury-lg {
-    box-shadow: 0 35px 60px -12px rgba(212, 182, 96, 0.15), 
-                0 15px 35px -5px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(212, 182, 96, 0.1);
+    box-shadow: 0 35px 60px -12px rgba(212, 182, 96, 0.15),
+      0 15px 35px -5px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(212, 182, 96, 0.1);
+  }
+
+  /* Mobile-optimized shadows */
+  @media (max-width: 768px) {
+    .shadow-luxury {
+      box-shadow: 0 15px 30px -8px rgba(212, 182, 96, 0.08),
+        0 5px 15px -3px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(212, 182, 96, 0.03);
+    }
   }
 }
 
 @layer components {
+
+  /* Enhanced content container with better mobile padding */
   .content-container {
-    @apply max-w-[1440px] w-full mx-auto px-6;
+    @apply max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Luxury button styling */
+  /* Mobile-first container with safe area support */
+  .mobile-container {
+    @apply max-w-[1440px] w-full mx-auto mobile-px safe-area-left safe-area-right;
+  }
+
+  /* Enhanced luxury button styling with better mobile touch targets */
   .nxl-btn-primary {
-    @apply px-6 py-3 bg-nxl-gold text-nxl-black border border-nxl-gold font-button uppercase tracking-wider 
-           hover:bg-nxl-gold-light transition-all duration-300 shimmer text-base;
+    @apply mobile-touch-target px-6 py-4 bg-nxl-gold text-nxl-black border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-light active:bg-nxl-gold-dark transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .nxl-btn-secondary {
-    @apply px-6 py-3 bg-transparent text-nxl-gold border border-nxl-gold font-button uppercase tracking-wider 
-           hover:bg-nxl-gold-muted transition-all duration-300 shimmer text-base;
+    @apply mobile-touch-target px-6 py-4 bg-transparent text-nxl-gold border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-muted active:bg-nxl-gold-muted transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  
+
   .nxl-btn-dark {
-    @apply px-6 py-3 bg-nxl-black text-nxl-ivory border border-nxl-black font-button uppercase tracking-wider 
-           hover:bg-nxl-navy transition-all duration-300 shimmer text-base;
+    @apply mobile-touch-target px-6 py-4 bg-nxl-black text-nxl-ivory border border-nxl-black font-button uppercase tracking-wider hover:bg-nxl-navy active:bg-nxl-black-soft transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  
-  /* Custom form input styling */
+
+  /* Enhanced form input styling with better mobile support */
   .nxl-input {
-    @apply bg-nxl-black border border-nxl-gold border-opacity-30 text-nxl-ivory p-3 font-body focus-gold
-           placeholder:text-nxl-ivory placeholder:opacity-50 placeholder:font-body;
+    @apply bg-nxl-black border border-nxl-gold-muted text-nxl-ivory p-4 font-body focus-gold mobile-touch-target placeholder:text-nxl-ivory-muted placeholder:font-body rounded-lg transition-all duration-200;
   }
-  
-  /* Luxury card styling */
+
+  /* Enhanced luxury card styling with better mobile interactions */
   .nxl-card {
-    @apply bg-nxl-black border border-nxl-gold border-opacity-20 p-6 transition-all duration-300 hover:border-opacity-40;
+    @apply bg-nxl-black-soft backdrop-blur-sm border border-nxl-gold-muted p-6 rounded-lg transition-all duration-300 hover:border-nxl-gold-light hover:shadow-luxury active:scale-98;
   }
-  
-  /* Text styles */
+
+  /* Enhanced mobile-first text styles with better scaling */
   .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
+    @apply text-[10px] leading-4 font-normal sm:text-xs sm:leading-5;
   }
 
   .text-small-regular {
-    @apply text-xs leading-5 font-normal;
+    @apply text-xs leading-5 font-normal sm:text-sm sm:leading-6;
   }
 
   .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
+    @apply text-xs leading-5 font-semibold sm:text-sm sm:leading-6;
   }
 
   .text-base-regular {
-    @apply text-sm leading-6 font-normal;
+    @apply text-sm leading-6 font-normal sm:text-base sm:leading-7;
   }
 
   .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
+    @apply text-sm leading-6 font-semibold sm:text-base sm:leading-7;
   }
 
   .text-large-regular {
-    @apply text-base leading-6 font-normal;
+    @apply text-base leading-6 font-normal sm:text-lg sm:leading-8;
   }
 
   .text-large-semi {
-    @apply text-base leading-6 font-semibold;
+    @apply text-base leading-6 font-semibold sm:text-lg sm:leading-8;
   }
 
   .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
+    @apply text-xl leading-7 font-normal sm:text-2xl sm:leading-9;
   }
 
   .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
+    @apply text-xl leading-7 font-semibold sm:text-2xl sm:leading-9;
   }
 
   .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
+    @apply text-2xl leading-8 font-normal sm:text-3xl sm:leading-10;
   }
 
   .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
+    @apply text-2xl leading-8 font-semibold sm:text-3xl sm:leading-10;
   }
 
   .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
+    @apply text-3xl leading-9 font-normal sm:text-4xl sm:leading-10;
   }
 
   .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
+    @apply text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10;
   }
-  
-  /* NXL Typography - Additional classes for the luxury fonts */
+
+  /* Enhanced NXL Typography with better mobile scaling */
   .nxl-display {
-    @apply font-display uppercase tracking-wider text-nxl-gold;
+    @apply font-display uppercase tracking-wider text-nxl-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
-  
+
   .nxl-heading {
-    @apply font-serif text-nxl-ivory;
+    @apply font-serif text-nxl-ivory text-xl sm:text-2xl md:text-3xl lg:text-4xl;
   }
-  
+
   .nxl-body {
-    @apply font-body text-nxl-ivory opacity-90;
+    @apply font-body text-nxl-ivory-muted text-sm sm:text-base md:text-lg leading-relaxed;
   }
-  
+
   .nxl-button {
-    @apply font-button uppercase tracking-wider;
+    @apply font-button uppercase tracking-wider mobile-touch-target;
   }
 }
