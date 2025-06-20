@@ -34,29 +34,35 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
       value={paymentProviderId}
       disabled={disabled}
       className={clx(
-        "flex flex-col gap-y-2 text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+        "flex flex-col gap-y-3 text-small-regular cursor-pointer py-4 px-6 border rounded-xl transition-all duration-300 mobile-tap-feedback touch-target",
         {
-          "border-ui-border-interactive":
+          "border-nxl-gold bg-nxl-gold/5 shadow-md":
             selectedPaymentOptionId === paymentProviderId,
+          "border-nxl-gold/30 bg-nxl-black/40 hover:border-nxl-gold/50 hover:bg-nxl-gold/5":
+            selectedPaymentOptionId !== paymentProviderId,
+          "opacity-50 cursor-not-allowed": disabled,
         }
       )}
     >
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-4">
-          <Radio checked={selectedPaymentOptionId === paymentProviderId} />
-          <Text className="text-base-regular">
+          <Radio
+            checked={selectedPaymentOptionId === paymentProviderId}
+            className="text-nxl-gold"
+          />
+          <Text className="text-base-regular text-nxl-ivory font-medium">
             {paymentInfoMap[paymentProviderId]?.title || paymentProviderId}
           </Text>
           {isManual(paymentProviderId) && isDevelopment && (
             <PaymentTest className="hidden small:block" />
           )}
         </div>
-        <span className="justify-self-end text-ui-fg-base">
+        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-nxl-gold/10 border border-nxl-gold/30">
           {paymentInfoMap[paymentProviderId]?.icon}
-        </span>
+        </div>
       </div>
       {isManual(paymentProviderId) && isDevelopment && (
-        <PaymentTest className="small:hidden text-[10px]" />
+        <PaymentTest className="small:hidden text-[10px] ml-8" />
       )}
       {children}
     </RadioGroupOption>
@@ -85,14 +91,27 @@ export const StripeCardContainer = ({
       style: {
         base: {
           fontFamily: "Inter, sans-serif",
-          color: "#424270",
+          fontSize: "16px",
+          color: "#F8F6F1",
+          backgroundColor: "transparent",
           "::placeholder": {
-            color: "rgb(107 114 128)",
+            color: "rgba(248, 246, 241, 0.6)",
           },
+          iconColor: "#D4B660",
+        },
+        invalid: {
+          color: "#EF4444",
+          iconColor: "#EF4444",
+        },
+        complete: {
+          color: "#10B981",
+          iconColor: "#10B981",
         },
       },
       classes: {
-        base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover transition-all duration-300 ease-in-out",
+        base: "block w-full h-12 px-4 py-3 bg-nxl-black/60 border border-nxl-gold/30 rounded-lg placeholder:text-nxl-ivory/60 focus:outline-none focus:ring-4 focus:ring-nxl-gold/20 focus:border-nxl-gold transition-all duration-300",
+        invalid: "border-red-500",
+        complete: "border-green-500",
       },
     }
   }, [])
@@ -107,19 +126,43 @@ export const StripeCardContainer = ({
       {selectedPaymentOptionId === paymentProviderId &&
         (stripeReady ? (
           <div className="my-4 transition-all duration-150 ease-in-out">
-            <Text className="txt-medium-plus text-ui-fg-base mb-1">
-              Enter your card details:
-            </Text>
-            <CardElement
-              options={useOptions as StripeCardElementOptions}
-              onChange={(e) => {
-                setCardBrand(
-                  e.brand && e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
-                )
-                setError(e.error?.message || null)
-                setCardComplete(e.complete)
-              }}
-            />
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-4 h-4 rounded-full bg-nxl-gold/20 flex items-center justify-center">
+                <svg className="w-2 h-2 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <Text className="txt-medium-plus text-nxl-gold mb-1 font-medium">
+                Enter your card details
+              </Text>
+            </div>
+            <div className="relative">
+              <CardElement
+                options={useOptions as StripeCardElementOptions}
+                onChange={(e) => {
+                  setCardBrand(
+                    e.brand && e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
+                  )
+                  setError(e.error?.message || null)
+                  setCardComplete(e.complete)
+                }}
+              />
+              <div className="absolute inset-0 pointer-events-none rounded-lg ring-1 ring-nxl-gold/20" />
+            </div>
+            <div className="flex items-center gap-4 mt-3 text-xs text-nxl-ivory/60">
+              <span className="flex items-center gap-1">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Secure & encrypted
+              </span>
+              <span className="flex items-center gap-1">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Never stored
+              </span>
+            </div>
           </div>
         ) : (
           <SkeletonCardDetails />

@@ -29,7 +29,7 @@ function getFreeShippingProgress(cartTotal: number) {
   const freeShippingThreshold = 10000 // $100 in cents
   const progress = Math.min((cartTotal / freeShippingThreshold) * 100, 100)
   const remaining = Math.max(freeShippingThreshold - cartTotal, 0)
-  
+
   return {
     progress,
     remaining,
@@ -71,7 +71,7 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
             </Text>
           </div>
           <div className="w-full bg-nxl-black/60 rounded-full h-2.5 mb-2 overflow-hidden">
-            <div 
+            <div
               className="bg-gradient-to-r from-nxl-gold to-nxl-gold/80 h-2.5 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${shippingProgress.progress}%` }}
             />
@@ -98,9 +98,9 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
       )}
 
       <DiscountCode cart={cart} />
-      
+
       <Divider />
-      
+
       <CartTotals totals={cart} />
 
       {/* Enhanced Security badges */}
@@ -120,19 +120,43 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
         </div>
       </div>
 
+      {/* Enhanced Checkout Button */}
       <LocalizedClientLink
         href={"/checkout?step=" + step}
         data-testid="checkout-button"
       >
-        <Button className="w-full h-12 bg-nxl-gold text-nxl-black border border-nxl-gold hover:bg-nxl-gold/90 transition-all duration-300 font-semibold text-base rounded-lg shadow-lg hover:shadow-xl">
-          <div className="flex items-center justify-center gap-2">
+        <Button className="w-full h-14 bg-nxl-gold text-nxl-black border border-nxl-gold hover:bg-nxl-gold/90 transition-all duration-300 font-bold text-lg rounded-xl shadow-luxury hover:shadow-luxury-lg transform hover:-translate-y-0.5">
+          <div className="flex items-center justify-center gap-3">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
             <span>{dictionary.cart.secureCheckout}</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </div>
         </Button>
       </LocalizedClientLink>
+
+      {/* Mobile: Quick Actions */}
+      <div className="lg:hidden space-y-3">
+        <button className="w-full py-3 px-4 bg-nxl-black/60 border border-nxl-gold/30 text-nxl-ivory rounded-lg font-medium hover:bg-nxl-gold/10 transition-all duration-300 touch-target">
+          <div className="flex items-center justify-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span>Save for Later</span>
+          </div>
+        </button>
+        <button className="w-full py-3 px-4 bg-nxl-black/60 border border-nxl-gold/30 text-nxl-ivory rounded-lg font-medium hover:bg-nxl-gold/10 transition-all duration-300 touch-target">
+          <div className="flex items-center justify-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+            </svg>
+            <span>Share Cart</span>
+          </div>
+        </button>
+      </div>
 
       {/* Additional info */}
       <div className="text-center">

@@ -40,7 +40,14 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return (
+        <Button
+          disabled
+          className="w-full h-14 bg-nxl-gold/50 text-nxl-black/50 border border-nxl-gold/50 font-bold text-lg rounded-xl cursor-not-allowed"
+        >
+          Select a payment method
+        </Button>
+      )
   }
 }
 
@@ -140,8 +147,19 @@ const StripePaymentButton = ({
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
+        className="w-full h-14 bg-nxl-gold hover:bg-nxl-gold/90 text-nxl-black font-bold text-lg rounded-xl transition-all duration-300 shadow-luxury hover:shadow-luxury-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
       >
-        Place order
+        <div className="flex items-center justify-center gap-3">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Complete Order</span>
+          {!submitting && (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </div>
       </Button>
       <ErrorMessage
         error={errorMessage}
@@ -151,7 +169,13 @@ const StripePaymentButton = ({
   )
 }
 
-const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
+const ManualTestPaymentButton = ({
+  notReady,
+  "data-testid": dataTestId
+}: {
+  notReady: boolean
+  "data-testid"?: string
+}) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -167,7 +191,6 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
 
   const handlePayment = () => {
     setSubmitting(true)
-
     onPaymentCompleted()
   }
 
@@ -178,9 +201,20 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        data-testid="submit-order-button"
+        data-testid={dataTestId}
+        className="w-full h-14 bg-nxl-gold hover:bg-nxl-gold/90 text-nxl-black font-bold text-lg rounded-xl transition-all duration-300 shadow-luxury hover:shadow-luxury-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
       >
-        Place order
+        <div className="flex items-center justify-center gap-3">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Complete Order</span>
+          {!submitting && (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          )}
+        </div>
       </Button>
       <ErrorMessage
         error={errorMessage}
