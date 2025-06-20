@@ -33,7 +33,7 @@ export default async function ProductRail({
   })
 
   // Filter products by collection since collection_id queryParam has TypeScript issues
-  const pricedProducts = allProducts.filter(product => 
+  const pricedProducts = allProducts.filter(product =>
     product.collection_id === collection.id
   )
 
@@ -53,7 +53,7 @@ export default async function ProductRail({
             <Text className="font-serif text-sm uppercase tracking-widest text-nxl-gold mb-2">{featuredCollectionText}</Text>
             <Text className="font-serif text-3xl sm:text-4xl text-nxl-ivory">{collection.title}</Text>
           </div>
-          <InteractiveLink 
+          <InteractiveLink
             href={`/collections/${collection.handle}`}
             className="font-button text-nxl-gold hover:text-nxl-gold/80 uppercase tracking-wider mt-4 sm:mt-0"
           >

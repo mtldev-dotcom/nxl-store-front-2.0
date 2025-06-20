@@ -288,6 +288,54 @@
         0 0 0 1px rgba(212, 182, 96, 0.03);
     }
   }
+
+  /* Enhanced mobile-specific interactions */
+  @media (hover: hover) {
+    .hover-enhanced:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
+    }
+  }
+
+  /* Mobile tap feedback improvements */
+  @media (hover: none) {
+    .mobile-tap-feedback:active {
+      transform: scale(0.98);
+      background-color: rgba(212, 182, 96, 0.05);
+    }
+  }
+
+  /* Enhanced product card shadows for modern look */
+  .product-card-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .product-card-shadow-hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Improved mobile touch feedback for product cards */
+  @media (hover: none) and (pointer: coarse) {
+    .product-card-mobile-tap:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-out;
+    }
+  }
+
+  /* Enhanced button interactions for product cards */
+  .product-card-button {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .product-card-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-card-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  }
 }
 
 @layer components {
@@ -393,5 +441,210 @@
 
   .nxl-button {
     @apply font-button uppercase tracking-wider mobile-touch-target;
+  }
+
+  /* Enhanced product card animations with mobile optimization */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  /* Improved text contrast utilities for better mobile readability */
+  .text-contrast-high {
+    color: var(--color-nxl-ivory);
+    opacity: 1;
+  }
+
+  .text-contrast-medium {
+    color: var(--color-nxl-ivory);
+    opacity: 0.85;
+  }
+
+  .text-contrast-low {
+    color: var(--color-nxl-ivory);
+    opacity: 0.65;
+  }
+
+  /* Enhanced mobile-specific interactions */
+  @media (hover: hover) {
+    .hover-enhanced:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
+    }
+  }
+
+  /* Mobile tap feedback improvements */
+  @media (hover: none) {
+    .mobile-tap-feedback:active {
+      transform: scale(0.98);
+      background-color: rgba(212, 182, 96, 0.05);
+    }
+  }
+
+  /* Product card specific enhancements */
+  .product-card-enhanced {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .product-card-enhanced:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  @media (max-width: 768px) {
+    .product-card-enhanced:active {
+      @apply transform scale-98;
+    }
+  }
+
+  /* Enhanced visibility utilities for debugging and better mobile experience */
+  .text-visible-high {
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+  }
+
+  .text-visible-medium {
+    color: #F8F6F1 !important;
+    opacity: 0.9 !important;
+  }
+
+  .text-visible-accent {
+    color: #D4B660 !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure buttons are always visible on mobile */
+  @media (max-width: 640px) {
+    .mobile-always-visible {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+
+  /* Enhanced image loading states */
+  .image-loading-enhanced {
+    background: linear-gradient(135deg,
+        var(--color-nxl-navy) 0%,
+        var(--color-nxl-black) 50%,
+        var(--color-nxl-navy) 100%);
+    background-size: 200% 200%;
+    animation: loading-shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes loading-shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Enhanced product card shadows for modern look */
+  .product-card-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .product-card-shadow-hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Improved mobile touch feedback for product cards */
+  @media (hover: none) and (pointer: coarse) {
+    .product-card-mobile-tap:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-out;
+    }
+  }
+
+  /* Better product card grid spacing */
+  .product-grid-enhanced {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    .product-grid-enhanced {
+      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-grid-enhanced {
+      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .product-grid-enhanced {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .product-grid-enhanced {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  /* Enhanced button interactions for product cards */
+  .product-card-button {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .product-card-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .product-card-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Force image visibility fixes */
+  img[data-nimg="fill"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    z-index: 1 !important;
+  }
+
+  /* Ensure product image containers have proper stacking */
+  .product-image-container {
+    position: relative !important;
+    overflow: hidden !important;
+    background: #f5f5f5 !important;
+  }
+
+  /* Debug styles for image visibility */
+  .image-debug {
+    background: red !important;
+    min-height: 200px !important;
+    border: 2px solid blue !important;
   }
 }

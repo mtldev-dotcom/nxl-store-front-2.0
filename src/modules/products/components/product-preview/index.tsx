@@ -6,7 +6,6 @@ import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 import { getTranslatedProduct, StoreProductWithTranslations } from "@lib/util/translations"
 import { Suspense } from "react"
-import Image from "next/image"
 
 export default async function ProductPreview({
   product,
@@ -26,6 +25,13 @@ export default async function ProductPreview({
     product,
   })
 
+  // Enhanced stock calculations
+  const totalStock = product.variants?.reduce((total, variant) =>
+    total + (variant.inventory_quantity || 0), 0) || 0
+  const hasStock = totalStock > 0
+  const isLowStock = totalStock > 0 && totalStock <= 5
+  const stockLevel = totalStock
+
   // Calculate discount percentage if on sale
   const discountPercentage = cheapestPrice && cheapestPrice.price_type === "sale" ?
     parseInt(cheapestPrice.percentage_diff) : 0
@@ -33,20 +39,29 @@ export default async function ProductPreview({
   const isOnSale = cheapestPrice?.price_type === "sale"
   const isNewProduct = new Date(product.created_at || '').getTime() > Date.now() - (30 * 24 * 60 * 60 * 1000) // 30 days
 
+  // Enhanced stock status helper
+  const getStockStatus = () => {
+    if (!hasStock) return { color: 'text-red-600', bg: 'bg-red-500', label: locale === 'fr' ? 'Rupture' : 'Out of Stock' }
+    if (isLowStock) return { color: 'text-orange-600', bg: 'bg-orange-500', label: locale === 'fr' ? 'Stock faible' : 'Low Stock' }
+    return { color: 'text-green-600', bg: 'bg-green-500', label: locale === 'fr' ? 'En stock' : 'In Stock' }
+  }
+
+  const stockStatus = getStockStatus()
+
   return (
     <article
-      className="group relative bg-nxl-black/40 backdrop-blur-sm border border-nxl-gold/10 rounded-lg overflow-hidden hover:border-nxl-gold/30 transition-all duration-500 hover:shadow-luxury active:scale-98"
+      className="group relative bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-nxl-gold/50 transition-all duration-300 hover:shadow-luxury mobile-tap-feedback focus-within:ring-2 focus-within:ring-nxl-gold focus-within:ring-offset-2"
       data-testid="product-wrapper"
     >
-      {/* Product Image Container with enhanced mobile optimization */}
-      <div className="relative overflow-hidden aspect-[3/4]">
+      {/* Product Image Container with improved aspect ratio and loading */}
+      <div className="relative overflow-hidden aspect-[4/5] bg-gray-50">
         <LocalizedClientLink
           href={`/products/${product.handle}`}
           className="block w-full h-full"
           aria-label={`View ${translatedProduct.title} product details`}
         >
           <Suspense fallback={
-            <div className="w-full h-full bg-nxl-navy/20 animate-pulse flex items-center justify-center">
+            <div className="w-full h-full bg-gray-100 animate-pulse flex items-center justify-center">
               <div className="w-8 h-8 border-2 border-nxl-gold border-t-transparent rounded-full animate-spin" />
             </div>
           }>
@@ -55,113 +70,92 @@ export default async function ProductPreview({
               images={product.images}
               size="full"
               isFeatured={isFeatured}
-              className="group-hover:scale-105 group-active:scale-102 transition-transform duration-700 ease-out w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </Suspense>
         </LocalizedClientLink>
 
-        {/* Enhanced Badge System */}
+        {/* Enhanced Badge System with better positioning and contrast */}
         <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
-          {/* Sale Badge - Priority */}
+          {/* Sale Badge - Highest priority */}
           {isOnSale && discountPercentage > 0 && (
-            <span className="bg-nxl-gold text-nxl-black px-3 py-1 text-xs font-button uppercase tracking-wider rounded-full shadow-lg border border-nxl-black/20">
-              -{discountPercentage}%
+            <span className="bg-red-500 text-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full shadow-lg">
+              -{discountPercentage}% OFF
             </span>
           )}
 
-          {/* New Badge - Secondary */}
+          {/* New Badge - Secondary priority (only if not on sale) */}
           {!isOnSale && isNewProduct && (
-            <span className="bg-nxl-navy/90 text-nxl-ivory px-3 py-1 text-xs font-button uppercase tracking-wider rounded-full border border-nxl-gold/30 backdrop-blur-sm">
+            <span className="bg-nxl-gold text-nxl-black px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full shadow-lg">
               {locale === 'fr' ? 'Nouveau' : 'New'}
             </span>
           )}
+
+          {/* Low Stock Warning Badge - Third priority */}
+          {!isOnSale && !isNewProduct && isLowStock && (
+            <span className="bg-orange-500 text-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full shadow-lg animate-pulse">
+              {locale === 'fr' ? 'Stock Faible' : 'Low Stock'}
+            </span>
+          )}
         </div>
 
-        {/* Quick action buttons for mobile */}
-        <div className="absolute top-3 right-3 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {/* Wishlist/Favorite button placeholder */}
-          <button
-            className="w-10 h-10 bg-nxl-black/80 backdrop-blur-sm border border-nxl-gold/30 rounded-full flex items-center justify-center text-nxl-ivory hover:text-nxl-gold transition-colors duration-200 mobile-touch-target"
-            aria-label={`Add ${translatedProduct.title} to wishlist`}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-          </button>
-        </div>
+        {/* Enhanced Stock status overlay for out-of-stock items */}
 
-        {/* Enhanced Luxury Shimmer Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-nxl-gold/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
 
-        {/* Mobile-specific overlay for better tap feedback */}
-        <div className="absolute inset-0 bg-nxl-gold/0 group-active:bg-nxl-gold/5 transition-colors duration-150 pointer-events-none lg:hidden" />
+        {/* Wishlist button - desktop hover, always visible on mobile */}
+        <button
+          className="absolute top-3 right-3 z-10 w-10 h-10 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-white transition-all duration-200 opacity-0 group-hover:opacity-100 md:opacity-100 shadow-lg"
+          aria-label={`Add ${translatedProduct.title} to wishlist`}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </button>
+
+        {/* Quick view button - desktop only */}
+        <button className="absolute bottom-3 right-3 z-10 bg-nxl-black text-white px-3 py-2 text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-nxl-gold hover:text-nxl-black hidden md:block">
+          {locale === 'fr' ? 'Aperçu rapide' : 'Quick View'}
+        </button>
       </div>
 
-      {/* Enhanced Product Info with better mobile spacing */}
-      <div className="p-4 sm:p-5 space-y-3">
-        {/* Product Category */}
+      {/* Enhanced Product Information with improved spacing and hierarchy */}
+      <div className="p-4 space-y-3">
+        {/* Brand/Category */}
         {product.type?.value && (
-          <Text className="text-xs uppercase tracking-wider text-nxl-gold/60 font-button">
+          <Text className="text-xs uppercase tracking-wider text-gray-500 font-medium">
             {product.type.value}
           </Text>
         )}
 
-        {/* Product Title with improved mobile typography */}
-        <LocalizedClientLink href={`/products/${product.handle}`}>
+        {/* Product Title with better typography */}
+        <LocalizedClientLink
+          href={`/products/${product.handle}`}
+          className="block"
+        >
           <h3
-            className="text-nxl-ivory font-sans text-base sm:text-lg font-medium group-hover:text-nxl-gold transition-colors duration-300 line-clamp-2 leading-tight"
+            className="text-gray-900 font-medium text-base leading-tight line-clamp-2 group-hover:text-nxl-gold transition-colors duration-200 min-h-[2.5rem] flex items-start"
             data-testid="product-title"
           >
             {translatedProduct.title}
           </h3>
         </LocalizedClientLink>
 
-        {/* Enhanced Pricing Section */}
-        <div className="flex items-center justify-between pt-2">
-          <div className="flex flex-col gap-1">
+        {/* Enhanced Rating Stars with better styling */}
+
+
+        {/* Enhanced Pricing Section with improved layout */}
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col">
             {cheapestPrice && (
               <PreviewPrice price={cheapestPrice} />
             )}
-
-            {/* Enhanced currency display for international users */}
-            {region && (
-              <Text className="text-xs text-nxl-ivory/50 font-body">
-                {locale === 'fr' ? 'Livraison' : 'Shipping'}: {region.name}
-              </Text>
-            )}
           </div>
 
-          {/* Enhanced Stock Status */}
-          <div className="flex items-center gap-1.5 text-right">
-            <div className="w-2 h-2 bg-nxl-green rounded-full animate-pulse" />
-            <Text className="text-xs text-nxl-green font-medium">
-              {locale === 'fr' ? 'En stock' : 'In Stock'}
-            </Text>
-          </div>
+          {/* Enhanced Stock indicator with more details */}
+
         </div>
 
-        {/* Enhanced Quick Add to Cart (Mobile-friendly) */}
-        <div className="pt-3 border-t border-nxl-gold/10">
-          <button
-            className="w-full nxl-btn-secondary py-2 px-4 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            aria-label={`Quick add ${translatedProduct.title} to cart`}
-          >
-            {locale === 'fr' ? 'Ajouter au panier' : 'Add to Cart'}
-          </button>
-        </div>
-
-        {/* Enhanced animated underline */}
-        <div className="h-px w-0 bg-gradient-to-r from-nxl-gold to-nxl-gold/50 group-hover:w-full transition-all duration-500 ease-out" />
       </div>
-
-      {/* Enhanced Hover Effects */}
-      <div className="absolute inset-0 bg-nxl-gold/0 group-hover:bg-nxl-gold/5 transition-colors duration-300 pointer-events-none rounded-lg" />
-
-      {/* Enhanced Corner Accent */}
-      <div className="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-r-[40px] border-t-transparent border-r-nxl-gold/0 group-hover:border-r-nxl-gold/20 transition-all duration-500" />
-
-      {/* Focus indicator for keyboard navigation */}
-      <div className="absolute inset-0 rounded-lg ring-0 ring-nxl-gold ring-offset-2 ring-offset-nxl-black focus-within:ring-2 transition-all duration-200 pointer-events-none" />
     </article>
   )
 }

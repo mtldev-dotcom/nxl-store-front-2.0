@@ -40,11 +40,11 @@ const ProductCardSkeleton = () => (
 // Product Card Component
 const ProductCard = ({ product, region }: { product: any, region: HttpTypes.StoreRegion }) => {
   const price = getProductPrice({ product })
-  
+
   if (!price) return null
 
   const hasDiscount = price.cheapestPrice?.calculated_price_number !== price.cheapestPrice?.original_price_number
-  const discountPercentage = hasDiscount 
+  const discountPercentage = hasDiscount
     ? Math.round((1 - (price.cheapestPrice?.calculated_price_number || 0) / (price.cheapestPrice?.original_price_number || 1)) * 100)
     : 0
 
@@ -67,7 +67,7 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
           {product.thumbnail ? (
             <Image
               src={product.thumbnail}
-              alt={`${product.title} - Premium golf apparel`}
+              alt={`${product.title} - Premium next level apparel`}
               fill
               className="object-cover object-center transition-all duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -80,7 +80,7 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
               </svg>
             </div>
           )}
-          
+
           {/* Gradient overlay on hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-nxl-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
@@ -91,14 +91,14 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
           <h4 className="font-serif text-nxl-ivory text-lg leading-tight group-hover:text-nxl-gold transition-colors duration-300">
             {product.title}
           </h4>
-          
+
           {/* Product type/category */}
           {product.type?.value && (
             <p className="text-xs font-body text-nxl-ivory/60 uppercase tracking-wider">
               {product.type.value}
             </p>
           )}
-          
+
           {/* Price section */}
           <div className="flex items-baseline gap-2">
             <span className="font-button text-nxl-gold text-lg">
@@ -109,7 +109,7 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
                 maximumFractionDigits: 2,
               })}
             </span>
-            
+
             {hasDiscount && (
               <span className="line-through text-nxl-ivory/40 text-sm">
                 {convertToLocale({
@@ -161,13 +161,13 @@ export default async function ProductRail({
       <section className="space-y-6" aria-labelledby={`collection-${collection.id}`}>
         {/* Header with enhanced styling */}
         <header className="flex items-center justify-between border-b border-nxl-gold/20 pb-4">
-          <h3 
+          <h3
             id={`collection-${collection.id}`}
             className="font-display text-2xl md:text-3xl text-nxl-gold uppercase tracking-wider"
           >
             {collection.title}
           </h3>
-          
+
           <LocalizedClientLink
             href={`/collections/${collection.handle}`}
             className="group flex items-center gap-2 text-sm font-button uppercase text-nxl-ivory hover:text-nxl-gold transition-all duration-300"
@@ -193,10 +193,10 @@ export default async function ProductRail({
             ))
           }>
             {products.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                region={region} 
+              <ProductCard
+                key={product.id}
+                product={product}
+                region={region}
               />
             ))}
           </Suspense>
