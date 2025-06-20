@@ -41,15 +41,22 @@ export default function ProductActions({
   const [addedToCart, setAddedToCart] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showMiniCart, setShowMiniCart] = useState(false)
-  const [isWishlisted, setIsWishlisted] = useState(false)
   const countryCode = useParams().countryCode as string
   const { translate } = useTranslation()
   const { cart, refreshCart } = useCart()
 
-  // If there is only 1 variant, preselect the options
+  // Preselect the first available variant by default
   useEffect(() => {
-    if (product.variants?.length === 1) {
-      const variantOptions = optionsAsKeymap(product.variants[0].options)
+    if (product.variants && product.variants.length > 0) {
+      // Find the first in-stock variant, or fall back to the first variant
+      const firstAvailableVariant = product.variants.find(variant => {
+        // Check if variant is in stock
+        if (!variant.manage_inventory) return true // No inventory management means always available
+        if (variant.allow_backorder) return true // Backorders allowed
+        return (variant.inventory_quantity || 0) > 0 // Has inventory
+      }) || product.variants[0] // Fallback to first variant if none are in stock
+
+      const variantOptions = optionsAsKeymap(firstAvailableVariant.options)
       setOptions(variantOptions ?? {})
     }
   }, [product.variants])
@@ -142,28 +149,51 @@ export default function ProductActions({
     }
   }
 
-  // Handle wishlist toggle
-  const handleWishlistToggle = () => {
-    setIsWishlisted(!isWishlisted)
-    // TODO: Implement actual wishlist functionality
-  }
 
-  // Handle social sharing
+
+  // Handle social sharing with improved functionality
   const handleShare = async () => {
-    if (navigator.share) {
+    const shareData = {
+      title: product.title || translate("product", "defaultProductTitle", "Next X Level Product"),
+      text: product.description || translate("product", "shareText", "Check out this amazing product from Next X Level"),
+      url: window.location.href,
+    }
+
+    // Try native sharing first (mobile devices)
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
       try {
-        await navigator.share({
-          title: product.title,
-          text: product.description || `Check out ${product.title} from Next X Level`,
-          url: window.location.href,
-        })
+        await navigator.share(shareData)
+        return
       } catch (err) {
-        console.log('Share was cancelled or failed')
+        if ((err as Error).name !== 'AbortError') {
+          console.log('Native share failed:', err)
+        }
+        // Fall through to clipboard fallback
       }
-    } else {
-      // Fallback to copy URL
+    }
+
+    // Fallback to clipboard copy
+    try {
       await navigator.clipboard.writeText(window.location.href)
-      // TODO: Show toast notification
+      // Show success feedback (you can replace this with a toast notification)
+      const button = document.querySelector('[data-share-button]') as HTMLElement
+      if (button) {
+        const originalText = button.textContent
+        button.textContent = translate("product", "linkCopied", "Link Copied!")
+        setTimeout(() => {
+          button.textContent = originalText
+        }, 2000)
+      }
+    } catch (err) {
+      console.error('Failed to copy link:', err)
+      // Final fallback - open browser share menu
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData)
+        } catch (shareErr) {
+          console.error('All share methods failed:', shareErr)
+        }
+      }
     }
   }
 
@@ -201,7 +231,7 @@ export default function ProductActions({
     if (inventory > 0 && inventory <= 5) {
       return (
         <div className="text-sm text-nxl-gold/80 font-body">
-          {translate("product", "lowStock", `Only ${inventory} left in stock`)}
+          {translate("product", "lowStock", "Only few left in stock").replace('{count}', inventory.toString())}
         </div>
       )
     }
@@ -259,7 +289,7 @@ export default function ProductActions({
               <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-xs font-body text-nxl-ivory/70 uppercase tracking-wider">Authentic • Premium Quality</span>
+              <span className="text-xs font-body text-nxl-ivory/70 uppercase tracking-wider">{translate("product", "authenticQuality", "Authentic • Premium Quality")}</span>
             </div>
           </div>
         </div>
@@ -287,39 +317,20 @@ export default function ProductActions({
             {getButtonText()}
           </Button>
 
-          {/* Enhanced Action Buttons Grid */}
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              onClick={handleWishlistToggle}
-              variant="secondary"
-              className={`h-12 text-sm transition-all duration-300 ${isWishlisted
-                ? 'bg-nxl-gold text-nxl-black border-nxl-gold'
-                : 'nxl-btn-secondary hover:shadow-md'
-                }`}
-              disabled={!selectedVariant}
-            >
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill={isWishlisted ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-                <span>{isWishlisted ? translate("product", "wishlisted", "Saved") : translate("product", "addToWishlist", "Save")}</span>
-              </div>
-            </Button>
-
-            <Button
-              onClick={handleShare}
-              variant="secondary"
-              className="nxl-btn-secondary h-12 text-sm hover:shadow-md transition-all duration-300"
-              disabled={!selectedVariant}
-            >
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
-                </svg>
-                <span>{translate("product", "shareProduct", "Share")}</span>
-              </div>
-            </Button>
-          </div>
+          {/* Enhanced Share Button */}
+          <Button
+            onClick={handleShare}
+            variant="secondary"
+            className="nxl-btn-secondary w-full h-12 text-sm hover:shadow-md transition-all duration-300"
+            data-share-button
+          >
+            <div className="flex items-center justify-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+              </svg>
+              <span>{translate("product", "shareProduct", "Share")}</span>
+            </div>
+          </Button>
         </div>
 
         {/* Enhanced Product Features with Visual Improvements */}

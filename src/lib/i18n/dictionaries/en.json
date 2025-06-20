@@ -19,7 +19,8 @@
     "account": "Account",
     "search": "Search",
     "language": "Language",
-    "country": "Country"
+    "country": "Country",
+    "close": "Close"
   },
   "hero": {
     "title": "Next X Level",
@@ -126,7 +127,7 @@
     "outOfStock": "Out of Stock",
     "inStock": "In Stock",
     "backorderAvailable": "Available on backorder",
-    "lowStock": "Only few left in stock",
+    "lowStock": "Only {count} left in stock",
     "addToWishlist": "Add to Wishlist",
     "shareProduct": "Share",
     "freeShipping": "Free shipping on orders over $100",
@@ -183,7 +184,15 @@
     "closeFullscreen": "Close Fullscreen",
     "imageOf": "Image of",
     "viewFullscreen": "View Fullscreen",
-    "swipeForMore": "Swipe for more images"
+    "swipeForMore": "Swipe for more images",
+    "from": "From",
+    "original": "Original",
+    "linkCopied": "Link Copied!",
+    "shareText": "Check out this amazing product from Next X Level",
+    "authenticQuality": "Authentic • Premium Quality",
+    "noImages": "No images available",
+    "defaultProductTitle": "Next X Level Product",
+    "selectOption": "Select {option}"
   },
   "cart": {
     "title": "Shopping Cart",

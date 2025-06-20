@@ -1,6 +1,9 @@
+"use client"
+
 import { HttpTypes } from "@medusajs/types"
 import { clx } from "@medusajs/ui"
 import React from "react"
+import { useTranslation } from "@lib/context/translation-context"
 
 type OptionSelectProps = {
   option: HttpTypes.StoreProductOption
@@ -19,11 +22,14 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
   "data-testid": dataTestId,
   disabled,
 }) => {
+  const { translate } = useTranslation()
   const filteredOptions = (option.values ?? []).map((v) => v.value)
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-sm text-nxl-gold font-semibold">Select {title}</span>
+      <span className="text-sm text-nxl-gold font-semibold">
+        {translate("product", "selectOption", "Select {option}").replace("{option}", title)}
+      </span>
       <div
         className="flex flex-wrap justify-between gap-2"
         data-testid={dataTestId}
