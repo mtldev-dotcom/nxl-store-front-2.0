@@ -1,6 +1,7 @@
 @import "./base/_theme.css";
 @import "./base/_variables.css";
 @import "./components/_cart-enhancements.css";
+@import "./components/_checkout-enhancements.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

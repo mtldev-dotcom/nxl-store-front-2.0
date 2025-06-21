@@ -336,51 +336,84 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     if (!formData) {
       throw new Error("No form data found when setting addresses")
     }
-    const cartId = getCartId()
+    const cartId = await getCartId()
     if (!cartId) {
       throw new Error("No existing cart found when setting addresses")
     }
 
+    // Helper function to get form value as string (never null)
+    const getFormValue = (key: string): string => {
+      const value = formData.get(key)
+      return value ? String(value).trim() : ""
+    }
+
     const data = {
       shipping_address: {
-        first_name: formData.get("shipping_address.first_name"),
-        last_name: formData.get("shipping_address.last_name"),
-        address_1: formData.get("shipping_address.address_1"),
+        first_name: getFormValue("shipping_address.first_name"),
+        last_name: getFormValue("shipping_address.last_name"),
+        address_1: getFormValue("shipping_address.address_1"),
         address_2: "",
-        company: formData.get("shipping_address.company"),
-        postal_code: formData.get("shipping_address.postal_code"),
-        city: formData.get("shipping_address.city"),
-        country_code: formData.get("shipping_address.country_code"),
-        province: formData.get("shipping_address.province"),
-        phone: formData.get("shipping_address.phone"),
+        company: getFormValue("shipping_address.company"),
+        postal_code: getFormValue("shipping_address.postal_code"),
+        city: getFormValue("shipping_address.city"),
+        country_code: getFormValue("shipping_address.country_code"),
+        province: getFormValue("shipping_address.province"),
+        phone: getFormValue("shipping_address.phone"),
       },
-      email: formData.get("email"),
+      email: getFormValue("email"),
     } as any
 
-    const sameAsBilling = formData.get("same_as_billing")
-    if (sameAsBilling === "on") data.billing_address = data.shipping_address
+    // Validate required fields
+    const requiredShippingFields = [
+      'first_name', 'last_name', 'address_1', 'postal_code', 'city', 'country_code'
+    ]
 
-    if (sameAsBilling !== "on")
+    const missingFields = requiredShippingFields.filter(field =>
+      !data.shipping_address[field] || data.shipping_address[field].length === 0
+    )
+
+    if (missingFields.length > 0) {
+      throw new Error(`Missing required shipping address fields: ${missingFields.join(', ')}`)
+    }
+
+    if (!data.email || data.email.length === 0) {
+      throw new Error("Email is required")
+    }
+
+    const sameAsBilling = formData.get("same_as_billing")
+    if (sameAsBilling === "on") {
+      data.billing_address = { ...data.shipping_address }
+    } else {
       data.billing_address = {
-        first_name: formData.get("billing_address.first_name"),
-        last_name: formData.get("billing_address.last_name"),
-        address_1: formData.get("billing_address.address_1"),
+        first_name: getFormValue("billing_address.first_name"),
+        last_name: getFormValue("billing_address.last_name"),
+        address_1: getFormValue("billing_address.address_1"),
         address_2: "",
-        company: formData.get("billing_address.company"),
-        postal_code: formData.get("billing_address.postal_code"),
-        city: formData.get("billing_address.city"),
-        country_code: formData.get("billing_address.country_code"),
-        province: formData.get("billing_address.province"),
-        phone: formData.get("billing_address.phone"),
+        company: getFormValue("billing_address.company"),
+        postal_code: getFormValue("billing_address.postal_code"),
+        city: getFormValue("billing_address.city"),
+        country_code: getFormValue("billing_address.country_code"),
+        province: getFormValue("billing_address.province"),
+        phone: getFormValue("billing_address.phone"),
       }
+
+      // Validate required billing fields when not same as shipping
+      const missingBillingFields = requiredShippingFields.filter(field =>
+        !data.billing_address[field] || data.billing_address[field].length === 0
+      )
+
+      if (missingBillingFields.length > 0) {
+        throw new Error(`Missing required billing address fields: ${missingBillingFields.join(', ')}`)
+      }
+    }
+
     await updateCart(data)
   } catch (e: any) {
     return e.message
   }
 
-  redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
-  )
+  const countryCode = formData.get("shipping_address.country_code")
+  redirect(`/${countryCode}/checkout?step=delivery`)
 }
 
 /**
