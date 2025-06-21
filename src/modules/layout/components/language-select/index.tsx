@@ -58,8 +58,8 @@ const LanguageSelect = () => {
                 role="option"
                 aria-selected={localeOption === locale}
                 className={`w-full px-6 py-2.5 text-left text-sm hover:bg-nxl-navy/70 hover:text-nxl-gold transition-colors duration-200 font-medium
-                  ${localeOption === locale 
-                    ? "bg-nxl-navy/40 text-nxl-gold" 
+                  ${localeOption === locale
+                    ? "bg-nxl-navy/40 text-nxl-gold"
                     : "text-nxl-ivory/95"
                   }
                 `}

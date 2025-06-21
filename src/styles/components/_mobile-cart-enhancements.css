@@ -1,5 +1,70 @@
 /* Mobile Cart Enhancements */
 
+/* Mobile Cart Button Touch Target */
+.mobile-cart-button {
+    min-width: 44px;
+    min-height: 44px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: rgba(212, 175, 55, 0.1);
+    touch-action: manipulation;
+}
+
+.mobile-cart-button:active {
+    transform: scale(0.95);
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.mobile-cart-button:focus-visible {
+    outline: 2px solid rgba(212, 175, 55, 0.5);
+    outline-offset: 2px;
+}
+
+/* Enhanced Touch Target for Cart Icon */
+.mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(212, 175, 55, 0.1);
+    touch-action: manipulation;
+}
+
+.mobile-touch-target::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 44px;
+    min-width: 44px;
+    background: transparent;
+    border-radius: inherit;
+}
+
+/* Cart Button Active State Animation */
+.cart-button-pressed {
+    animation: cart-button-press 0.15s ease-out;
+}
+
+@keyframes cart-button-press {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+        background-color: rgba(212, 175, 55, 0.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Mobile Cart Item Cards */
 .mobile-cart-item {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(20, 20, 20, 0.8) 100%);
@@ -314,6 +379,13 @@
     }
 }
 
+/* Enhanced Mobile Cart Modal Backdrop */
+.mobile-cart-modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.75);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 640px) {
     .mobile-cart-item {
@@ -338,6 +410,16 @@
         min-width: 40px;
         height: 36px;
         font-size: 14px;
+    }
+
+    .mobile-touch-target {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    .mobile-cart-button {
+        min-width: 48px;
+        min-height: 48px;
     }
 }
 
@@ -370,6 +452,14 @@
     .mobile-checkout-button {
         border: 2px solid #ffffff;
     }
+
+    .mobile-cart-button {
+        border: 2px solid #d4af37;
+    }
+
+    .mobile-touch-target {
+        outline: 1px solid rgba(212, 175, 55, 0.5);
+    }
 }
 
 /* Reduced Motion */
@@ -379,8 +469,11 @@
     .mobile-quantity-button,
     .mobile-checkout-button,
     .mobile-quick-action,
-    .mobile-delete-button {
+    .mobile-delete-button,
+    .mobile-cart-button,
+    .cart-button-pressed {
         transition: none;
+        animation: none;
     }
 
     .progress-shimmer,
@@ -389,4 +482,63 @@
     .mobile-spin {
         animation: none;
     }
+
+    .mobile-cart-button:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Safe Area Support for Mobile Devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .mobile-cart-modal {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Enhanced Focus States for Accessibility */
+.mobile-cart-button:focus-visible {
+    outline: 2px solid rgba(212, 175, 55, 0.8);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+/* Touch feedback optimization for iOS Safari */
+@media (-webkit-min-device-pixel-ratio: 2) {
+    .mobile-touch-target {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* Cart Dropdown Visibility Fix */
+[data-testid="nav-cart-dropdown"] {
+    z-index: 99999 !important;
+    position: absolute !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure cart dropdown appears above all content */
+[data-testid="nav-cart-dropdown"]:not([data-headlessui-state*="closed"]) {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Hide cart dropdown on mobile screens, show on desktop */
+@media (max-width: 639px) {
+    [data-testid="nav-cart-dropdown"] {
+        display: none !important;
+    }
+}
+
+@media (min-width: 640px) {
+    [data-testid="nav-cart-dropdown"] {
+        display: block !important;
+    }
+}
+
+/* Ensure cart dropdown container has proper stacking context */
+.cart-dropdown-container {
+    position: relative !important;
+    z-index: 99999 !important;
 }
