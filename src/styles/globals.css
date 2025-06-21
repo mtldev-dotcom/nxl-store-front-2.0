@@ -3,6 +3,7 @@
 @import "./components/_cart-enhancements.css";
 @import "./components/_checkout-enhancements.css";
 @import "./components/_mobile-checkout-enhancements.css";
+@import "./components/_mobile-cart-enhancements.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
