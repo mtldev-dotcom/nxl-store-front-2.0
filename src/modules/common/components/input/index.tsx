@@ -1,5 +1,5 @@
 import { Label } from "@medusajs/ui"
-import React, { useEffect, useImperativeHandle, useState } from "react"
+import React, { useEffect, useImperativeHandle, useState, useId } from "react"
 
 import Eye from "@modules/common/icons/eye"
 import EyeOff from "@modules/common/icons/eye-off"
@@ -16,10 +16,14 @@ type InputProps = Omit<
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type, name, label, touched, required, topLabel, ...props }, ref) => {
+  ({ type, name, label, touched, required, topLabel, id, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState(type)
+
+    // Generate a unique ID for this input instance, fallback to provided ID or name
+    const uniqueId = useId()
+    const inputId = id || `${name}-${uniqueId}` || uniqueId
 
     useEffect(() => {
       if (type === "password" && showPassword) {
@@ -42,6 +46,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={inputType}
             name={name}
+            id={inputId}
             placeholder=" "
             required={required}
             className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-nxl-black/40 border rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-nxl-gold focus:ring-opacity-50 focus:border-nxl-gold border-nxl-gold/30 hover:bg-nxl-black/50 text-black placeholder:text-black transition-all duration-300"
@@ -49,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={inputRef}
           />
           <label
-            htmlFor={name}
+            htmlFor={inputId}
             onClick={() => inputRef.current?.focus()}
             className="flex items-center justify-center mx-3 px-1 transition-all absolute duration-300 top-3 -z-1 origin-0 text-gray-700 pointer-events-none"
           >

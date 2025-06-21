@@ -35,6 +35,10 @@ const Addresses = ({
       : true
   )
 
+  const handleToggleSameAsBilling = () => {
+    toggleSameAsBilling()
+  }
+
   const handleEdit = () => {
     router.push(pathname + "?step=address")
   }
@@ -45,11 +49,10 @@ const Addresses = ({
     <div className="bg-nxl-black/80 backdrop-blur-sm border border-nxl-gold/30 rounded-xl p-6 shadow-xl">
       <div className="flex flex-row items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-            !isOpen && cart?.shipping_address 
-              ? 'bg-green-500 text-white' 
-              : 'bg-nxl-gold/20 text-nxl-gold border border-nxl-gold/30'
-          }`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${!isOpen && cart?.shipping_address
+            ? 'bg-green-500 text-white'
+            : 'bg-nxl-gold/20 text-nxl-gold border border-nxl-gold/30'
+            }`}>
             {!isOpen && cart?.shipping_address ? (
               <CheckCircleSolid className="w-5 h-5" />
             ) : (
@@ -72,17 +75,21 @@ const Addresses = ({
             >
               {translate("checkout", "edit")}
             </button>
-            
+
           </Text>
         )}
       </div>
       {isOpen ? (
         <form action={formAction}>
+          {/* Hidden fields for proper redirect URL construction */}
+          <input type="hidden" name="current_country_code" value={pathname.split('/')[1]} />
+          <input type="hidden" name="current_locale" value={pathname.split('/')[2]} />
+
           <div className="pb-8">
             <ShippingAddress
               customer={customer}
               checked={sameAsBilling}
-              onChange={toggleSameAsBilling}
+              onChange={handleToggleSameAsBilling}
               cart={cart}
             />
 

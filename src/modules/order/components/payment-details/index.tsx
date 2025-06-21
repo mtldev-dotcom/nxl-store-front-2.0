@@ -40,23 +40,23 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                 <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
                   {paymentInfoMap[payment.provider_id].icon}
                 </Container>
-                  <Text data-testid="payment-amount">
+                <Text data-testid="payment-amount">
                   {isStripe(payment.provider_id) && payment.data?.card_last4
                     ? `**** **** **** ${payment.data.card_last4}`
                     : `${convertToLocale({
-                        amount: payment.amount,
-                        currency_code: order.currency_code,
-                      })} paid at ${new Intl.DateTimeFormat(
-                        i18nConfig.defaultLocale,
-                        {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        }
-                      ).format(new Date(payment.created_at ?? ""))}`}
-                  </Text>
+                      amount: payment.amount,
+                      currency_code: order.currency_code,
+                    })} paid at ${new Intl.DateTimeFormat(
+                      i18nConfig.defaultLocale,
+                      {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    ).format(new Date(payment.created_at ?? ""))}`}
+                </Text>
               </div>
             </div>
           </div>

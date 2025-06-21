@@ -167,6 +167,7 @@ const ShippingAddress = ({
           data-testid="shipping-city-input"
         />
         <CountrySelect
+          label={(dictionary as any).checkout?.form?.country || 'Country'}
           name="shipping_address.country_code"
           autoComplete="country"
           region={cart?.region}

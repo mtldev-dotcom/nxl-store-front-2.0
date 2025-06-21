@@ -381,6 +381,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     }
 
     const sameAsBilling = formData.get("same_as_billing")
+
     if (sameAsBilling === "on") {
       data.billing_address = { ...data.shipping_address }
     } else {
@@ -412,8 +413,15 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     return e.message
   }
 
-  const countryCode = formData.get("shipping_address.country_code")
-  redirect(`/${countryCode}/checkout?step=delivery`)
+  // Get the current country code and locale from the form for proper redirect
+  const currentCountryCode = formData.get("current_country_code") as string
+  const currentLocale = formData.get("current_locale") as string
+
+  // Fallback to shipping address country code if current country code is not available
+  const redirectCountryCode = currentCountryCode || formData.get("shipping_address.country_code") as string
+  const redirectLocale = currentLocale || "en" // Default to English if no locale provided
+
+  redirect(`/${redirectCountryCode}/${redirectLocale}/checkout?step=delivery`)
 }
 
 /**
@@ -449,7 +457,10 @@ export async function placeOrder(cartId?: string) {
     revalidateTag(orderCacheTag)
 
     removeCartId()
-    redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
+    // Fix: Include locale in redirect URL to match proper routing structure
+    // TODO: Get actual locale from context/parameter instead of hardcoding
+    const locale = "en" // Default to English for now
+    redirect(`/${countryCode}/${locale}/order/${cartRes?.order.id}/confirmed`)
   }
 
   return cartRes.cart

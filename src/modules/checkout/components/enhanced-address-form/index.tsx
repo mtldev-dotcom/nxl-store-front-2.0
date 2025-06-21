@@ -224,6 +224,7 @@ const EnhancedAddressForm = ({ cart, customer }: EnhancedAddressFormProps) => {
                             </div>
                             <div>
                                 <CountrySelect
+                                    label="Country"
                                     name="shipping_country_code"
                                     region={cart?.region}
                                     value={formData.shipping_country_code}
