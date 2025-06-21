@@ -58,23 +58,23 @@ function QuantitySelector({ item }: { item: any }) {
   return (
     <div className="flex items-center gap-2 bg-nxl-black/60 rounded-lg border border-nxl-gold/20">
       <button
-        className="p-1 text-nxl-ivory hover:text-nxl-gold transition-colors touch-target disabled:opacity-50"
+        className="p-2 text-nxl-ivory hover:text-nxl-gold transition-colors mobile-touch-target disabled:opacity-50 hover:bg-nxl-gold/10 rounded-lg"
         onClick={() => updateQuantity(quantity - 1)}
         disabled={isUpdating || quantity <= 1}
       >
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
         </svg>
       </button>
-      <span className="text-sm font-medium text-nxl-ivory min-w-[24px] text-center">
+      <span className="text-sm font-medium text-nxl-ivory min-w-[32px] text-center px-2">
         {isUpdating ? '...' : quantity}
       </span>
       <button
-        className="p-1 text-nxl-ivory hover:text-nxl-gold transition-colors touch-target disabled:opacity-50"
+        className="p-2 text-nxl-ivory hover:text-nxl-gold transition-colors mobile-touch-target disabled:opacity-50 hover:bg-nxl-gold/10 rounded-lg"
         onClick={() => updateQuantity(quantity + 1)}
         disabled={isUpdating}
       >
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12m6-6H6" />
         </svg>
       </button>
@@ -151,7 +151,7 @@ export default function MobileCartModal({
       {/* Enhanced Modal */}
       <div className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ease-out ${isClosing ? 'translate-y-full' : 'translate-y-0'
         }`}>
-        <div className="w-full bg-gradient-to-b from-nxl-black to-nxl-navy rounded-t-2xl max-h-[85vh] min-h-[60vh] flex flex-col shadow-2xl border-t border-nxl-gold/30">
+        <div className="w-full mobile-form-container rounded-t-2xl max-h-[85vh] min-h-[60vh] flex flex-col shadow-2xl border-t border-nxl-gold/30">
 
           {/* Enhanced Header */}
           <div className="flex items-center justify-between p-6 border-b border-nxl-gold/20">
@@ -352,7 +352,7 @@ export default function MobileCartModal({
                   <div className="space-y-3">
                     <LocalizedClientLink href="/checkout" passHref>
                       <Button
-                        className="w-full h-12 bg-nxl-gold hover:bg-nxl-gold/90 text-nxl-black font-bold text-base rounded-xl transition-all duration-300 shadow-luxury hover:shadow-luxury-lg transform hover:-translate-y-0.5"
+                        className="w-full mobile-button-enhanced primary font-bold text-base rounded-xl mobile-touch-target"
                         size="large"
                         onClick={handleClose}
                         data-testid="quick-checkout-button"
