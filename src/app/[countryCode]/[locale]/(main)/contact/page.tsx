@@ -63,7 +63,7 @@ function getDictValue(obj: any, path: string[], fallback: string): string {
         return fallback;
       }
     }
-    
+
     return typeof current === 'string' ? current : fallback;
   } catch (e) {
     return fallback;
@@ -80,13 +80,13 @@ function getDictValue(obj: any, path: string[], fallback: string): string {
  */
 export default async function Contact(props: {
   params:
-    | Promise<{ countryCode: string; locale: Locale }>
-    | { countryCode: string; locale: Locale }
+  | Promise<{ countryCode: string; locale: Locale }>
+  | { countryCode: string; locale: Locale }
 }) {
   // 1. Await dynamic route params (country and locale)
   const params = await props.params
   const { locale } = params
-  
+
   // 2. Load localized text dictionary
   const dictionary = await getDictionary(locale)
 
@@ -95,15 +95,14 @@ export default async function Contact(props: {
       {/* Hero Section with large image and title overlay */}
       <section className="relative h-[50vh] min-h-[400px] bg-nxl-black">
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <Image
+            src="/contact-hero.png"
+            alt="Next X Level contact hero background - get in touch with our team"
+            fill
+            priority
             className="w-full h-full object-cover object-center opacity-70"
-          >
-            <source src="/golf-background.mp4" type="video/mp4" />
-          </video>
+            sizes="100vw"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-nxl-black via-nxl-black/40 to-transparent"></div>
         </div>
         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -126,7 +125,7 @@ export default async function Contact(props: {
               <h2 className="font-display text-3xl md:text-4xl text-nxl-gold uppercase tracking-wider mb-10">
                 {getDictValue(dictionary, ['contact', 'info', 'title'], "Get In Touch")}
               </h2>
-              
+
               <div className="space-y-12">
                 {/* Phone */}
                 <div className="flex items-start space-x-6">
@@ -147,7 +146,7 @@ export default async function Contact(props: {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Email */}
                 <div className="flex items-start space-x-6">
                   <div className="p-4 rounded-full bg-nxl-gold/10 border border-nxl-gold/30 mt-1">
@@ -167,7 +166,7 @@ export default async function Contact(props: {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Address */}
                 <div className="flex items-start space-x-6">
                   <div className="p-4 rounded-full bg-nxl-gold/10 border border-nxl-gold/30 mt-1">
@@ -190,7 +189,7 @@ export default async function Contact(props: {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Social Media */}
                 <div>
                   <h3 className="font-serif text-xl text-nxl-gold mb-4">
@@ -203,21 +202,21 @@ export default async function Contact(props: {
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                       </svg>
                     </a>
-                    
+
                     {/* Facebook */}
                     <a href="https://facebook.com" className="p-3 rounded-full bg-nxl-gold/10 border border-nxl-gold/30 hover:bg-nxl-gold/20 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-nxl-gold">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                       </svg>
                     </a>
-                    
+
                     {/* Twitter/X */}
                     <a href="https://twitter.com" className="p-3 rounded-full bg-nxl-gold/10 border border-nxl-gold/30 hover:bg-nxl-gold/20 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-nxl-gold">
                         <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
                       </svg>
                     </a>
-                    
+
                     {/* LinkedIn */}
                     <a href="https://linkedin.com" className="p-3 rounded-full bg-nxl-gold/10 border border-nxl-gold/30 hover:bg-nxl-gold/20 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-nxl-gold">
@@ -228,7 +227,7 @@ export default async function Contact(props: {
                 </div>
               </div>
             </div>
-            
+
             {/* Contact Form */}
             <ContactForm locale={locale} />
           </div>
@@ -241,7 +240,7 @@ export default async function Contact(props: {
           <h2 className="font-display text-3xl md:text-4xl text-nxl-gold uppercase tracking-wider text-center mb-16">
             {getDictValue(dictionary, ['contact', 'location', 'title'], "Visit Our Showroom")}
           </h2>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Map Placeholder - In a real app, integrate with Google Maps or similar */}
             <div className="h-[400px] bg-nxl-forest/30 border border-nxl-gold/20 rounded-sm relative overflow-hidden">
@@ -251,7 +250,7 @@ export default async function Contact(props: {
                 </span>
               </div>
             </div>
-            
+
             <div className="space-y-8">
               <div>
                 <p className="font-body text-nxl-ivory text-lg mb-4">
@@ -261,7 +260,7 @@ export default async function Contact(props: {
                   {getDictValue(dictionary, ['contact', 'location', 'appointment'], "Please call ahead to schedule a personal shopping appointment for the best experience.")}
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="bg-nxl-black/50 p-6 rounded-sm border border-nxl-gold/20">
                   <h3 className="font-serif text-xl text-nxl-gold mb-3">Toronto</h3>
@@ -269,7 +268,7 @@ export default async function Contact(props: {
                   <p className="font-body text-nxl-ivory">Toronto, ON M5V 2K7</p>
                   <p className="font-body text-nxl-ivory">Canada</p>
                 </div>
-                
+
                 <div className="bg-nxl-black/50 p-6 rounded-sm border border-nxl-gold/20">
                   <h3 className="font-serif text-xl text-nxl-gold mb-3">Vancouver</h3>
                   <p className="font-body text-nxl-ivory">456 Golf View Terrace</p>
@@ -288,7 +287,7 @@ export default async function Contact(props: {
           <h2 className="font-display text-3xl md:text-4xl text-nxl-gold uppercase tracking-wider text-center mb-16">
             {getDictValue(dictionary, ['contact', 'faq', 'title'], "Frequently Asked Questions")}
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* FAQ 1 */}
             <div className="bg-nxl-navy/30 p-6 rounded-sm border border-nxl-gold/20">
@@ -296,40 +295,40 @@ export default async function Contact(props: {
                 {getDictValue(dictionary, ['contact', 'faq', 'shipping', 'question'], "What are your shipping rates?")}
               </h3>
               <p className="font-body text-nxl-ivory">
-                {getDictValue(dictionary, ['contact', 'faq', 'shipping', 'answer'], 
+                {getDictValue(dictionary, ['contact', 'faq', 'shipping', 'answer'],
                   "We offer free shipping on all Canadian orders over $150. For orders under $150, a flat shipping fee of $12 applies. International shipping rates vary by destination.")}
               </p>
             </div>
-            
+
             {/* FAQ 2 */}
             <div className="bg-nxl-navy/30 p-6 rounded-sm border border-nxl-gold/20">
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'tracking', 'question'], "How can I track my order?")}
               </h3>
               <p className="font-body text-nxl-ivory">
-                {getDictValue(dictionary, ['contact', 'faq', 'tracking', 'answer'], 
+                {getDictValue(dictionary, ['contact', 'faq', 'tracking', 'answer'],
                   "Once your order ships, you'll receive a confirmation email with tracking information. You can also log into your account to see order status at any time.")}
               </p>
             </div>
-            
+
             {/* FAQ 3 */}
             <div className="bg-nxl-navy/30 p-6 rounded-sm border border-nxl-gold/20">
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'returns', 'question'], "What is your return policy?")}
               </h3>
               <p className="font-body text-nxl-ivory">
-                {getDictValue(dictionary, ['contact', 'faq', 'returns', 'answer'], 
+                {getDictValue(dictionary, ['contact', 'faq', 'returns', 'answer'],
                   "We accept returns within 30 days of purchase for unworn items with original tags attached. Returns are processed within 5-7 business days after receipt.")}
               </p>
             </div>
-            
+
             {/* FAQ 4 */}
             <div className="bg-nxl-navy/30 p-6 rounded-sm border border-nxl-gold/20">
               <h3 className="font-serif text-xl text-nxl-gold mb-3">
                 {getDictValue(dictionary, ['contact', 'faq', 'wholesale', 'question'], "Do you offer wholesale opportunities?")}
               </h3>
               <p className="font-body text-nxl-ivory">
-                {getDictValue(dictionary, ['contact', 'faq', 'wholesale', 'answer'], 
+                {getDictValue(dictionary, ['contact', 'faq', 'wholesale', 'answer'],
                   "Yes, we work with professional golf shops and select retailers. Please contact our wholesale department at wholesale@nextxlevel.com for more information.")}
               </p>
             </div>

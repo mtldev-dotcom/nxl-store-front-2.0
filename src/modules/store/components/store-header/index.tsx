@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { getDictionary } from "@lib/i18n/get-dictionary"
 import { Locale } from "@lib/i18n/config"
 
@@ -39,17 +40,16 @@ const StoreHeader = ({ locale = "en" }: StoreHeaderProps) => {
 
   return (
     <section className="relative h-[40vh] min-h-[300px] bg-nxl-black overflow-hidden">
-      {/* Background Video */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <Image
+          src="/store-hero.png"
+          alt="Next X Level store hero background - premium golf apparel collection"
+          fill
+          priority
           className="w-full h-full object-cover object-center opacity-50"
-        >
-          <source src="/golf-background.mp4" type="video/mp4" />
-        </video>
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-nxl-black/80 via-nxl-black/60 to-nxl-black/40"></div>
       </div>
 
@@ -61,12 +61,12 @@ const StoreHeader = ({ locale = "en" }: StoreHeaderProps) => {
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white drop-shadow-lg uppercase tracking-wider">
               {dictionary.store?.title || "Our Store"}
             </h1>
-            
+
             {/* Subtitle */}
             <p className="font-serif text-lg md:text-xl text-white/95 drop-shadow-md max-w-2xl mx-auto leading-relaxed">
               {dictionary.store?.subtitle || "Premium Canadian apparel that elevates your everyday style"}
             </p>
-            
+
             {/* Decorative Elements */}
             <div className="flex items-center justify-center space-x-4 pt-4">
               <div className="h-px w-16 bg-nxl-gold drop-shadow-sm"></div>
@@ -78,16 +78,16 @@ const StoreHeader = ({ locale = "en" }: StoreHeaderProps) => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-300 z-20 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30 opacity-90">
         <div className="flex flex-col items-center space-y-2">
           <span className="font-body text-white/90 drop-shadow-md text-xs uppercase tracking-wider">
             {dictionary.store?.explore || "Explore"}
           </span>
           <div className="w-px h-6 bg-nxl-gold animate-pulse drop-shadow-sm"></div>
-          <svg 
-            className="w-3 h-3 text-nxl-gold animate-bounce drop-shadow-sm" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            className="w-3 h-3 text-nxl-gold animate-bounce drop-shadow-sm"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
