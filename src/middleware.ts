@@ -73,12 +73,12 @@ function getLocaleFromRequest(request: NextRequest): string {
   const pathSegments = request.nextUrl.pathname.split("/")
   if (pathSegments.length > 2) {
     const urlLocale = pathSegments[2]?.toLowerCase()
-    
+
     if (i18nConfig.locales.includes(urlLocale as any)) {
       return urlLocale
     }
   }
-  
+
   // Get locale from Accept-Language header
   const acceptLanguage = request.headers.get("accept-language")
   if (acceptLanguage) {
@@ -87,15 +87,15 @@ function getLocaleFromRequest(request: NextRequest): string {
       .map(locale => locale.split(";")[0].trim().substring(0, 2).toLowerCase())
 
     // Find the first locale that matches our supported locales
-    const matchedLocale = requestedLocales.find(locale => 
+    const matchedLocale = requestedLocales.find(locale =>
       i18nConfig.locales.includes(locale as any)
     )
-    
+
     if (matchedLocale) {
       return matchedLocale
     }
   }
-  
+
   // Fall back to default locale
   return DEFAULT_LOCALE
 }
@@ -173,6 +173,25 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // Coming Soon Mode - Redirect to coming soon page if enabled
+  const isComingSoonMode = process.env.COMING_SOON_MODE === 'true'
+
+  if (isComingSoonMode) {
+    const pathname = request.nextUrl.pathname
+    const isAlreadyOnComingSoon = pathname.includes('/coming-soon')
+    const isApiRoute = pathname.startsWith('/api')
+
+    // Don't redirect if already on coming soon page or API routes
+    if (!isAlreadyOnComingSoon && !isApiRoute) {
+      // Ensure we have proper country code and locale for coming soon redirect
+      const finalCountryCode = countryCode || DEFAULT_REGION
+      const finalLocale = locale || DEFAULT_LOCALE
+
+      const comingSoonUrl = `${request.nextUrl.origin}/${finalCountryCode}/${finalLocale}/coming-soon`
+      return NextResponse.redirect(comingSoonUrl, 307)
+    }
+  }
+
   // Handle the case where country code exists but locale is missing
   if (urlHasCountryCode && !urlHasLocale) {
     const redirectPath = pathSegments.slice(1).join("/")
@@ -184,13 +203,13 @@ export async function middleware(request: NextRequest) {
 
   // If no country code is set, we redirect to the relevant region with locale
   if (!urlHasCountryCode && countryCode) {
-    const redirectPath = request.nextUrl.pathname === "/" 
-      ? "" 
+    const redirectPath = request.nextUrl.pathname === "/"
+      ? ""
       : request.nextUrl.pathname
-    
+
     redirectUrl = `${request.nextUrl.origin}/${countryCode}/${locale}${redirectPath}`
     redirectUrl += request.nextUrl.search ? request.nextUrl.search : ""
-    
+
     response = NextResponse.redirect(redirectUrl, 307)
   }
 

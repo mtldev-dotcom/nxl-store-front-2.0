@@ -73,8 +73,8 @@ export async function generateMetadata({
  */
 export default async function Home(props: {
   params:
-    | Promise<{ countryCode: string; locale: Locale }>
-    | { countryCode: string; locale: Locale }
+  | Promise<{ countryCode: string; locale: Locale }>
+  | { countryCode: string; locale: Locale }
 }) {
 
   // 1. Await dynamic route params (country and locale)
@@ -84,7 +84,7 @@ export default async function Home(props: {
   const dictionary = await getDictionary(locale)
   // 3. Fetch region for pricing/localization context
   const region = await getRegion(countryCode)
- 
+
   // 4. Fetch collections for featured products section
   //    - listCollections returns `{ collections: Collection[] }` containing all collections.
   //    - We request only minimal fields (`id`, `handle`, `title`) to reduce payload size.
@@ -98,8 +98,8 @@ export default async function Home(props: {
   //    • Your backend collection title is "Fearures", but handle must be exactly "features".
   //    • Confirm in Medusa admin that the handle (not title) reads "features" (lowercase).
   //    • Querying by handle avoids including empty or unrelated collections.
-  //    • Uncomment `queryParams` below to restrict fetch to that handle.
-  const { collections } = await listCollections({
+  //    • listCollections returns StoreCollection[] directly, no destructuring needed.
+  const collections = await listCollections({
     handle: "features",       // Fetch only the 'features' collection
     fields: "id,handle,title", // Include minimal fields to reduce payload
   })
@@ -127,7 +127,7 @@ export default async function Home(props: {
       <section className="py-16 lg:py-24 bg-nxl-black" aria-labelledby="featured-products-heading">
         <div className="content-container">
           <header className="text-center mb-16">
-            <h2 
+            <h2
               id="featured-products-heading"
               className="font-display text-3xl md:text-4xl lg:text-5xl text-nxl-gold uppercase tracking-wider mb-4"
             >
@@ -137,13 +137,13 @@ export default async function Home(props: {
               {dictionary.general.featuredProductsDescription}
             </p>
           </header>
-          
+
           <div className="space-y-16">
             {collections && collections.length > 0 ? (
-              <FeaturedProducts 
-                collections={collections} 
-                region={region} 
-                locale={locale} 
+              <FeaturedProducts
+                collections={collections}
+                region={region}
+                locale={locale}
                 countryCode={countryCode}
                 dictionary={dictionary}
               />

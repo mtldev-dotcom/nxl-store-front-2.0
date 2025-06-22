@@ -22,6 +22,49 @@
     "country": "Country",
     "close": "Close"
   },
+  "comingSoon": {
+    "title": "Coming Soon",
+    "subtitle": "Luxury Streetwear. Elevated Performance.",
+    "description": "We're crafting the next generation of premium athletic streetwear. From chalet to city, our collection elevates your style and performance.",
+    "launchDate": "June 25, 2025 at 12:00 PM",
+    "officialLaunchIn": "Official Launch In",
+    "joinWaitlist": "Join the Waitlist",
+    "waitlistDescription": "Be the first to experience Next X Level. Get exclusive early access and launch day offers.",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "joinExclusiveWaitlist": "Join the Exclusive Waitlist",
+    "privacyNote": "We respect your privacy and will never spam you.",
+    "welcomeTitle": "Welcome to the Club!",
+    "welcomeMessage": "You're officially on the Next X Level waitlist. We'll notify you with exclusive early access.",
+    "benefits": {
+      "premiumMaterials": {
+        "title": "Premium Materials",
+        "description": "Japanese cotton blends and technical fabrics for ultimate comfort and durability."
+      },
+      "performanceFirst": {
+        "title": "Performance First", 
+        "description": "Moisture-wicking, four-way stretch, and odor control technology in every piece."
+      },
+      "canadianCrafted": {
+        "title": "Canadian Crafted",
+        "description": "Ethically manufactured in Canada with sustainable practices and transparent supply chain."
+      }
+    },
+    "trustSignals": {
+      "sslSecured": "SSL Secured",
+      "privacyProtected": "Privacy Protected", 
+      "noSpamGuarantee": "No Spam Guarantee"
+    },
+    "socialProof": "Join thousands of style enthusiasts waiting for the launch. Be the first to experience Next X Level quality.",
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours", 
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "timezone": "Eastern Standard Time (EST)",
+      "launchEvent": "Mark your calendar! Our exclusive launch event begins at noon with special early-bird pricing for waitlist members."
+    }
+  },
   "hero": {
     "title": "Next X Level",
     "subtitle": "Take your style—and your lifestyle—to the Next Level.",

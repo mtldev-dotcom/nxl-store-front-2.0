@@ -22,6 +22,49 @@
     "country": "Pays",
     "close": "Fermer"
   },
+  "comingSoon": {
+    "title": "Bientôt Disponible",
+    "subtitle": "Streetwear de Luxe. Performance Élevée.",
+    "description": "Nous créons la prochaine génération de streetwear athlétique premium. Du chalet à la ville, notre collection élève votre style et vos performances.",
+    "launchDate": "25 juin 2025 à 12h00",
+    "officialLaunchIn": "Lancement Officiel Dans",
+    "joinWaitlist": "Rejoindre la Liste d'Attente",
+    "waitlistDescription": "Soyez le premier à découvrir Next X Level. Obtenez un accès exclusif en avant-première et des offres de lancement.",
+    "fullName": "Nom Complet",
+    "emailAddress": "Adresse E-mail",
+    "joinExclusiveWaitlist": "Rejoindre la Liste d'Attente Exclusive",
+    "privacyNote": "Nous respectons votre vie privée et ne vous enverrons jamais de spam.",
+    "welcomeTitle": "Bienvenue dans le Club !",
+    "welcomeMessage": "Vous êtes officiellement sur la liste d'attente Next X Level. Nous vous avertirons avec un accès exclusif en avant-première.",
+    "benefits": {
+      "premiumMaterials": {
+        "title": "Matériaux Premium",
+        "description": "Mélanges de coton japonais et tissus techniques pour un confort et une durabilité ultimes."
+      },
+      "performanceFirst": {
+        "title": "Performance Avant Tout",
+        "description": "Technologie évacuant l'humidité, étirement dans quatre directions et contrôle des odeurs dans chaque pièce."
+      },
+      "canadianCrafted": {
+        "title": "Fabriqué au Canada",
+        "description": "Fabriqué éthiquement au Canada avec des pratiques durables et une chaîne d'approvisionnement transparente."
+      }
+    },
+    "trustSignals": {
+      "sslSecured": "Sécurisé SSL",
+      "privacyProtected": "Vie Privée Protégée",
+      "noSpamGuarantee": "Garantie Sans Spam"
+    },
+    "socialProof": "Rejoignez des milliers d'amateurs de style qui attendent le lancement. Soyez le premier à découvrir la qualité Next X Level.",
+    "countdown": {
+      "days": "Jours",
+      "hours": "Heures",
+      "minutes": "Minutes", 
+      "seconds": "Secondes",
+      "timezone": "Heure Standard de l'Est (EST)",
+      "launchEvent": "Notez la date ! Notre événement de lancement exclusif commence à midi avec des prix spéciaux pour les membres de la liste d'attente."
+    }
+  },
   "hero": {
     "title": "Next X Level",
     "subtitle": "Passez au niveau supérieur",
