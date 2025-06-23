@@ -194,6 +194,36 @@ const Payment = ({
                 </Text>
               </div>
 
+              {/* Show warning if only manual payment is available */}
+              {availablePaymentMethods.length === 1 &&
+                availablePaymentMethods[0].id === 'pp_system_default' &&
+                process.env.NODE_ENV === 'development' && (
+                  <div className="mb-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
+                    <div className="flex items-start gap-3">
+                      <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-semibold text-yellow-400 mb-2">
+                          ⚠️ Only Manual Payment Available
+                        </h3>
+                        <div className="text-xs text-yellow-200/80 space-y-1">
+                          <p>Your backend only has manual payment configured.</p>
+                          <p>To enable Stripe payments:</p>
+                          <ol className="list-decimal list-inside mt-2 space-y-1 text-yellow-200/70">
+                            <li>Install @medusajs/medusa-payment-stripe on backend</li>
+                            <li>Configure Stripe in medusa-config.js</li>
+                            <li>Add payment providers to your region</li>
+                          </ol>
+                          <p className="mt-2 font-medium">See STRIPE_BACKEND_SETUP.md for detailed instructions.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               <RadioGroup
                 value={selectedPaymentMethod}
                 onChange={(value: string) => setPaymentMethod(value)}
