@@ -6,6 +6,7 @@
  * Features:
  * - Internationalization support with French and English translations
  * - Collection title translation using Tolgee system
+ * - Product data translation (titles, descriptions, variants)
  * - Optimized product fetching with collection-specific queries
  * - Enhanced hover animations and visual feedback
  * - Improved accessibility with proper ARIA labels
@@ -19,7 +20,7 @@ import { listProducts } from "@lib/data/products"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { convertToLocale } from "@lib/util/money"
 import { getDictionary } from "@lib/i18n/get-dictionary"
-import { getTranslatedCollection } from "@lib/util/translations"
+import { getTranslatedCollection, getTranslatedProduct, StoreProductWithTranslations } from "@lib/util/translations"
 import { Locale } from "@lib/i18n/config"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
@@ -46,13 +47,18 @@ const ProductCardSkeleton = () => (
 const ProductCard = ({
   product,
   region,
-  dictionary
+  dictionary,
+  locale
 }: {
   product: any,
   region: HttpTypes.StoreRegion,
-  dictionary: any
+  dictionary: any,
+  locale: Locale
 }) => {
-  const price = getProductPrice({ product })
+  // Get translated product data
+  const translatedProduct = getTranslatedProduct(product as StoreProductWithTranslations, locale)
+
+  const price = getProductPrice({ product: translatedProduct })
 
   if (!price) return null
 
@@ -64,9 +70,9 @@ const ProductCard = ({
   return (
     <article className="group relative">
       <LocalizedClientLink
-        href={`/products/${product.handle}`}
+        href={`/products/${translatedProduct.handle}`}
         className="block"
-        aria-label={dictionary?.product?.viewProductDetails?.replace('{title}', product.title) || `View ${product.title} details`}
+        aria-label={dictionary?.product?.viewProductDetails?.replace('{title}', translatedProduct.title) || `View ${translatedProduct.title} details`}
       >
         {/* Sale badge */}
         {hasDiscount && (
@@ -77,10 +83,10 @@ const ProductCard = ({
 
         {/* Image container with enhanced hover effects */}
         <div className="relative h-80 mb-4 overflow-hidden rounded-lg bg-nxl-navy/10">
-          {product.thumbnail ? (
+          {translatedProduct.thumbnail ? (
             <Image
-              src={product.thumbnail}
-              alt={`${product.title} - ${dictionary?.product?.premiumApparelAlt || 'Premium next level apparel'}`}
+              src={translatedProduct.thumbnail}
+              alt={`${translatedProduct.title} - ${dictionary?.product?.premiumApparelAlt || 'Premium next level apparel'}`}
               fill
               className="object-cover object-center transition-all duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -102,38 +108,64 @@ const ProductCard = ({
         <div className="space-y-2">
           {/* Product title */}
           <h4 className="font-serif text-nxl-ivory text-lg leading-tight group-hover:text-nxl-gold transition-colors duration-300">
-            {product.title}
+            {translatedProduct.title}
           </h4>
 
-          {/* Product type/category */}
-          {product.type?.value && (
-            <p className="text-xs font-body text-nxl-ivory/60 uppercase tracking-wider">
-              {product.type.value}
+          {/* Product subtitle if available */}
+          {/* {translatedProduct.subtitle && (
+            <p className="text-xs font-body text-nxl-ivory italic">
+              {translatedProduct.subtitle}
             </p>
-          )}
+          )} */}
+
+          {/* Product type/category */}
+          {/* {translatedProduct.type?.value && (
+            <p className="text-xs font-body text-nxl-ivory/90 uppercase tracking-wider">
+              {translatedProduct.type.value}
+            </p>
+          )} */}
 
           {/* Price section */}
           <div className="flex items-baseline gap-2">
-            <span className="font-button text-nxl-gold text-lg">
-              {convertToLocale({
-                amount: price.cheapestPrice?.calculated_price_number || 0,
-                currency_code: region.currency_code,
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </span>
-
-            {hasDiscount && (
-              <span className="line-through text-nxl-ivory/40 text-sm">
-                {convertToLocale({
-                  amount: price.cheapestPrice?.original_price_number || 0,
-                  currency_code: region.currency_code,
+            <div className="flex items-baseline gap-1">
+              <span className="font-sans text-nxl-gold text-lg">
+                {new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: region.currency_code,
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
-                })}
+                }).format(price.cheapestPrice?.calculated_price_number || 0).replace(/^[A-Z]{2}/, '')}
               </span>
+              <span className="text-xs text-nxl-ivory/70 uppercase">
+                ({region.currency_code})
+              </span>
+            </div>
+
+            {hasDiscount && (
+              <div className="flex items-baseline gap-1">
+                <span className="line-through text-nxl-ivory/70 text-sm">
+                  {new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: region.currency_code,
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(price.cheapestPrice?.original_price_number || 0).replace(/^[A-Z]{2}/, '')}
+                </span>
+                <span className="text-xs text-nxl-ivory/70 uppercase">
+                  ({region.currency_code})
+                </span>
+              </div>
             )}
           </div>
+
+          {/* Product description preview (first 80 characters) */}
+          {/* {translatedProduct.description && (
+            <p className="text-xs font-body text-nxl-ivory line-clamp-2 mt-2">
+              {translatedProduct.description.length > 80 
+                ? `${translatedProduct.description.substring(0, 80)}...` 
+                : translatedProduct.description}
+            </p>
+          )} */}
         </div>
 
         {/* Hover indicator */}
@@ -177,13 +209,16 @@ export default async function ProductRail({
   const displayTitle = getCollectionTitle(translatedCollection.title)
 
   try {
-    // Fetch products and filter by collection
+    // Build translation fields for products based on locale
+    const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+
+    // Fetch products and filter by collection with translation support
     const response = await listProducts({
       countryCode,
       locale,
       queryParams: {
         limit: 50, // Fetch enough to filter by collection
-        fields: "id,title,handle,thumbnail,images,variants,type,collection_id", // Minimal fields
+        fields: `id,title,subtitle,description,handle,thumbnail,images,variants,type,collection_id${translationsField}`, // Include translation fields
       },
     })
 
@@ -238,6 +273,7 @@ export default async function ProductRail({
                 product={product}
                 region={region}
                 dictionary={dictionary}
+                locale={locale}
               />
             ))}
           </Suspense>

@@ -88,26 +88,25 @@ export default async function Home(props: {
   // 4. Fetch collections for featured products section
   //    - listCollections returns `{ collections: Collection[] }` containing all collections.
   //    - We request only minimal fields (`id`, `handle`, `title`) to reduce payload size.
-  //    - The FeaturedProducts component expects the 'features' collection handle.
-  //      Ensure your backend has a collection with handle "features" (case-sensitive).
+  //    - The FeaturedProducts component expects the 'picks' collection handle.
+  //      Ensure your backend has a collection with handle "picks" (case-sensitive).
   //    - If you want to fetch only that collection directly, enable:
-  //        listCollections({ queryParams: { handle: "features" } })
+  //        listCollections({ queryParams: { handle: "picks" } })
   //      which returns only the matching collection.
-  //    - If `collections` is empty or missing "features", no featured products will render.
-  // 4. Fetch only the 'features' collection for featured products
-  //    • Your backend collection title is "Fearures", but handle must be exactly "features".
-  //    • Confirm in Medusa admin that the handle (not title) reads "features" (lowercase).
+  //    - If `collections` is empty or missing "picks", no featured products will render.
+  // 4. Fetch only the 'picks' collection for featured products
+  //    • Your backend collection title is "Our picks", but handle must be exactly "picks".
+  //    • Confirm in Medusa admin that the handle (not title) reads "picks" (lowercase).
   //    • Querying by handle avoids including empty or unrelated collections.
   //    • listCollections returns StoreCollection[] directly, no destructuring needed.
+
   // Build translation fields based on locale
   const translationsField = locale ? `,+translations.${locale}` : ""
 
   const collections = await listCollections({
-    handle: "favorites",       // Fetch only the 'favorites' collection
+    handle: "picks",       // Fetch only the 'picks' collection
     fields: `id,handle,title${translationsField}`, // Include translation fields for collection titles
   })
-
-
 
   // Guard against missing region data - we need this for product pricing
   if (!region) {
