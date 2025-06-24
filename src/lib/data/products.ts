@@ -59,7 +59,7 @@ export const listProducts = async ({
   }
 
   // Build translation fields based on locale
-  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale},+options.translations.${locale},+options.values.translations.${locale}` : ""
 
   // Clean and validate query parameters
   const cleanQueryParams: any = { ...queryParams }

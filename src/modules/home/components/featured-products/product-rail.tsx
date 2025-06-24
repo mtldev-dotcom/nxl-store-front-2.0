@@ -24,6 +24,7 @@ import { getTranslatedCollection, getTranslatedProduct, StoreProductWithTranslat
 import { Locale } from "@lib/i18n/config"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
+import { formatPrice, formatPriceWithSmallCurrency } from "@lib/util/money"
 
 type ProductRailProps = {
   collection: HttpTypes.StoreCollection
@@ -127,32 +128,38 @@ const ProductCard = ({
 
           {/* Price section */}
           <div className="flex items-baseline gap-2">
-            <div className="flex items-baseline gap-1">
+            <div className="inline-flex items-baseline gap-1">
               <span className="font-sans text-nxl-gold text-lg">
-                {new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: region.currency_code,
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                }).format(price.cheapestPrice?.calculated_price_number || 0).replace(/^[A-Z]{2}/, '')}
-              </span>
-              <span className="text-xs text-nxl-ivory/70 uppercase">
-                ({region.currency_code})
+                {(() => {
+                  const formatted = formatPriceWithSmallCurrency({
+                    amount: price.cheapestPrice?.calculated_price_number || 0,
+                    currency_code: region.currency_code,
+                  })
+                  return (
+                    <>
+                      <span>{formatted.price}</span>
+                      <span className="text-xs text-nxl-ivory/60 ml-1">({formatted.currency})</span>
+                    </>
+                  )
+                })()}
               </span>
             </div>
 
             {hasDiscount && (
-              <div className="flex items-baseline gap-1">
+              <div className="inline-flex items-baseline gap-1">
                 <span className="line-through text-nxl-ivory/70 text-sm">
-                  {new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: region.currency_code,
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  }).format(price.cheapestPrice?.original_price_number || 0).replace(/^[A-Z]{2}/, '')}
-                </span>
-                <span className="text-xs text-nxl-ivory/70 uppercase">
-                  ({region.currency_code})
+                  {(() => {
+                    const formatted = formatPriceWithSmallCurrency({
+                      amount: price.cheapestPrice?.original_price_number || 0,
+                      currency_code: region.currency_code,
+                    })
+                    return (
+                      <>
+                        <span>{formatted.price}</span>
+                        <span className="text-xs text-nxl-ivory/60 ml-1">({formatted.currency})</span>
+                      </>
+                    )
+                  })()}
                 </span>
               </div>
             )}
@@ -210,7 +217,7 @@ export default async function ProductRail({
 
   try {
     // Build translation fields for products based on locale
-    const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+    const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale},+options.translations.${locale},+options.values.translations.${locale}` : ""
 
     // Fetch products and filter by collection with translation support
     const response = await listProducts({

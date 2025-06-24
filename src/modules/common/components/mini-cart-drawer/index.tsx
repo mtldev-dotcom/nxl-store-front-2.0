@@ -6,7 +6,7 @@ import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import { useRouter } from "next/navigation"
 import LocalizedClientLink from "../localized-client-link"
-import { convertToLocale } from "@lib/util/money"
+import { formatPriceWithSmallCurrency } from "@lib/util/money"
 import { useTranslation } from "@lib/context/translation-context"
 
 interface MiniCartDrawerProps {
@@ -44,7 +44,7 @@ const MiniCartDrawer = ({
     onClose()
   }
 
-  const subtotal = cart?.subtotal ? convertToLocale({
+  const subtotalFormatted = cart?.subtotal ? formatPriceWithSmallCurrency({
     amount: cart.subtotal,
     currency_code: cart.region?.currency_code || 'USD'
   }) : null
@@ -115,8 +115,8 @@ const MiniCartDrawer = ({
                               <div className="flex gap-3">
                                 <div className="w-16 h-16 bg-nxl-navy/20 rounded-lg border border-nxl-gold/20 flex items-center justify-center">
                                   {item.thumbnail ? (
-                                    <img 
-                                      src={item.thumbnail} 
+                                    <img
+                                      src={item.thumbnail}
                                       alt={item.title}
                                       className="w-full h-full object-cover rounded-lg"
                                     />
@@ -137,11 +137,19 @@ const MiniCartDrawer = ({
                                     <span className="text-xs text-nxl-ivory/70">
                                       {translate("cart", "quantity", "Qty")}: {item.quantity}
                                     </span>
-                                    <span className="text-sm font-medium text-nxl-gold">
-                                      {convertToLocale({
-                                        amount: item.subtotal || 0,
-                                        currency_code: cart.region?.currency_code || 'USD'
-                                      })}
+                                    <span className="text-sm font-medium text-nxl-gold inline-flex items-baseline gap-1">
+                                      {(() => {
+                                        const formatted = formatPriceWithSmallCurrency({
+                                          amount: item.subtotal || 0,
+                                          currency_code: cart.region?.currency_code || 'USD'
+                                        })
+                                        return (
+                                          <>
+                                            <span>{formatted.price}</span>
+                                            <span className="text-xs text-nxl-ivory/60">({formatted.currency})</span>
+                                          </>
+                                        )
+                                      })()}
                                     </span>
                                   </div>
                                 </div>
@@ -175,7 +183,16 @@ const MiniCartDrawer = ({
                         {/* Subtotal */}
                         <div className="flex justify-between items-center">
                           <span className="text-base font-medium text-nxl-ivory">{translate("cart", "subtotal", "Subtotal")}:</span>
-                          <span className="text-lg font-bold text-nxl-gold">{subtotal}</span>
+                          <span className="text-lg font-bold text-nxl-gold inline-flex items-baseline gap-1">
+                            {subtotalFormatted ? (
+                              <>
+                                <span>{subtotalFormatted.price}</span>
+                                <span className="text-xs text-nxl-ivory/60">({subtotalFormatted.currency})</span>
+                              </>
+                            ) : (
+                              "$0.00"
+                            )}
+                          </span>
                         </div>
 
                         {/* Shipping Notice */}
@@ -211,7 +228,7 @@ const MiniCartDrawer = ({
                               </span>
                             </div>
                             <div className="w-full bg-nxl-navy/30 rounded-full h-2">
-                              <div 
+                              <div
                                 className="bg-gradient-to-r from-nxl-gold to-nxl-gold/80 h-2 rounded-full transition-all duration-500"
                                 style={{ width: `${Math.min((cart.subtotal / 100) * 100, 100)}%` }}
                               ></div>

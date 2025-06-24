@@ -19,7 +19,7 @@ export default async function ProductRail({
   dictionary?: Record<string, any>
 }) {
   // Build translation fields based on locale
-  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale}` : ""
+  const translationsField = locale ? `,+translations.${locale},+variants.translations.${locale},+options.translations.${locale},+options.values.translations.${locale}` : ""
 
   const {
     response: { products: allProducts },

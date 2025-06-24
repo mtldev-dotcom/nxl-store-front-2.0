@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { HttpTypes } from "@medusajs/types"
-import { convertToLocale } from "@lib/util/money"
+import { convertToLocale, formatPrice } from "@lib/util/money"
 import { useTranslation } from "@lib/context/translation-context"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
@@ -61,7 +61,7 @@ const SmartCartSummary = ({
     }, [cart, shippingEstimate])
 
     // Format currency
-    const formatCurrency = (amount: number) => convertToLocale({
+    const formatCurrency = (amount: number) => formatPrice({
         amount,
         currency_code: cart.region?.currency_code || 'USD'
     })

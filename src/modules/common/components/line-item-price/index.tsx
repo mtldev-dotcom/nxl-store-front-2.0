@@ -1,5 +1,5 @@
 import { getPercentageDiff } from "@lib/util/get-precentage-diff"
-import { convertToLocale } from "@lib/util/money"
+import { formatPriceWithSmallCurrency } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import { clx } from "@medusajs/ui"
 
@@ -19,6 +19,17 @@ const LineItemPrice = ({
   const currentPrice = total
   const hasReducedPrice = currentPrice < originalPrice
 
+  // Format prices using the new function
+  const formattedCurrentPrice = formatPriceWithSmallCurrency({
+    amount: currentPrice,
+    currency_code: currencyCode,
+  })
+
+  const formattedOriginalPrice = formatPriceWithSmallCurrency({
+    amount: originalPrice,
+    currency_code: currencyCode,
+  })
+
   return (
     <div className="flex flex-col gap-x-2 text-nxl-ivory/80 items-end">
       <div className="text-left">
@@ -29,13 +40,11 @@ const LineItemPrice = ({
                 <span className="text-nxl-ivory/70">Original: </span>
               )}
               <span
-                className="line-through text-nxl-ivory/70"
+                className="line-through text-nxl-ivory/70 inline-flex items-baseline gap-1"
                 data-testid="product-original-price"
               >
-                {convertToLocale({
-                  amount: originalPrice,
-                  currency_code: currencyCode,
-                })}
+                <span>{formattedOriginalPrice.price}</span>
+                <span className="text-xs text-nxl-ivory/60">({formattedOriginalPrice.currency})</span>
               </span>
             </p>
             {style === "default" && (
@@ -46,13 +55,11 @@ const LineItemPrice = ({
           </>
         )}
         <span
-          className="text-nxl-gold text-base-regular"
+          className="text-nxl-gold text-base-regular inline-flex items-baseline gap-1"
           data-testid="product-price"
         >
-          {convertToLocale({
-            amount: currentPrice,
-            currency_code: currencyCode,
-          })}
+          <span>{formattedCurrentPrice.price}</span>
+          <span className="text-xs text-nxl-ivory/60">({formattedCurrentPrice.currency})</span>
         </span>
       </div>
     </div>

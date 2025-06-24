@@ -261,7 +261,7 @@ export default function ProductActions({
               <div className="text-sm font-button uppercase tracking-wider text-nxl-gold border-b border-nxl-gold/20 pb-2">
                 {translate("product", "selectOptions", "Select Options")}
               </div>
-              <SizeGuide productType={getProductType()} />
+              {/* <SizeGuide productType={getProductType()} /> */}
             </div>
             {(product.options || []).map((option) => (
               <div key={option.id} className="space-y-2">
@@ -375,7 +375,7 @@ export default function ProductActions({
           {/* Customer Support CTA */}
           <div className="mt-6 p-4 bg-gradient-to-r from-nxl-gold/10 to-transparent border border-nxl-gold/20 rounded-lg">
             <h5 className="text-sm font-button uppercase tracking-wider text-nxl-gold mb-2">{translate("product", "needHelp", "Need Help?")}</h5>
-            <p className="text-xs text-nxl-ivory/80 font-body mb-3">{translate("product", "expertHelp", "Need expert help with sizing, care, or product questions?")}</p>
+            <p className="text-xs text-nxl-ivory font-body mb-3">{translate("product", "expertHelp", "Need expert help with sizing, care, or product questions?")}</p>
             <button className="text-xs font-button uppercase tracking-wider text-nxl-gold hover:text-nxl-gold-light transition-colors underline underline-offset-2">
               {translate("product", "contactExperts", "Contact Our Experts")}
             </button>
