@@ -235,7 +235,13 @@
     "authenticQuality": "Authentic • Premium Quality",
     "noImages": "No images available",
     "defaultProductTitle": "Next X Level Product",
-    "selectOption": "Select {option}"
+    "selectOption": "Select {option}",
+    "salePercentage": "% Off",
+    "viewProductDetails": "View {title} details",
+    "premiumApparelAlt": "Premium next level apparel",
+    "loadingProducts": "Loading products...",
+    "errorLoadingProducts": "Unable to load products at this time. Please try again later.",
+    "viewAllInCollection": "View all products in {title} collection"
   },
   "cart": {
     "title": "Shopping Cart",

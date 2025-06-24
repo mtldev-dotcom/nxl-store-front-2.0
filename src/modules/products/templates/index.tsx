@@ -116,9 +116,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
                 </div>
 
                 {/* Enhanced Product Details Card */}
-                <div className="bg-gradient-to-br from-nxl-navy/30 via-nxl-navy/20 to-transparent border border-nxl-gold/10 rounded-2xl p-8 backdrop-blur-sm">
+                {/* <div className="bg-gradient-to-br from-nxl-navy/30 via-nxl-navy/20 to-transparent border border-nxl-gold/10 rounded-2xl p-8 backdrop-blur-sm">
                   <ProductTabs product={product} />
-                </div>
+                </div> */}
 
                 {/* Trust Signals Card */}
                 <div className="bg-gradient-to-r from-nxl-black/50 to-nxl-navy/30 border border-nxl-gold/10 rounded-2xl p-6 backdrop-blur-sm">
@@ -160,9 +160,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = async ({
             <div className="lg:w-1/3 xl:w-1/5">
               <div className="sticky top-24 space-y-6">
                 {/* Enhanced CTA Card */}
-                <div className="bg-gradient-to-br from-nxl-black via-nxl-black to-nxl-navy/20 border border-nxl-gold/20 rounded-2xl p-6 shadow-luxury backdrop-blur-sm">
+                {/* <div className="bg-gradient-to-br from-nxl-black via-nxl-black to-nxl-navy/20 border border-nxl-gold/20 rounded-2xl p-6 shadow-luxury backdrop-blur-sm">
                   <ProductOnboardingCta />
-                </div>
+=                </div> */}
 
                 {/* Enhanced Actions Card */}
                 <div className="bg-gradient-to-br from-nxl-black via-nxl-black to-nxl-navy/20 border border-nxl-gold/20 rounded-2xl p-6 shadow-luxury backdrop-blur-sm">

@@ -7,15 +7,18 @@
  * Props:
  *   - collections: Array of StoreCollection objects (each defines a group of products).
  *   - region:      StoreRegion object for pricing and localization context.
+ *   - locale:      Current locale for translations
+ *   - countryCode: Country code for region-specific content
  *
  * Flow:
  *   1. Iterate over each collection in the `collections` array.
  *   2. For each collection, render a <li> element with a unique key.
  *   3. Inside each <li>, render ProductRail, passing the collection and region props.
- *   4. ProductRail handles displaying the product items for that collection.
+ *   4. ProductRail handles displaying the product items for that collection and fetches its own translations.
  */
 
 import { HttpTypes } from "@medusajs/types"
+import { Locale } from "@lib/i18n/config"
 import ProductRail from "@modules/home/components/featured-products/product-rail"
 
 export default async function FeaturedProducts({
@@ -23,27 +26,21 @@ export default async function FeaturedProducts({
   region,
   locale,
   countryCode,
-  dictionary,
 }: {
   collections: HttpTypes.StoreCollection[]
   region: HttpTypes.StoreRegion
-  locale?: string
+  locale: Locale
   countryCode: string
-  dictionary?: Record<string, any>
 }) {
   // Map each collection to a list item containing its product rail
-  return collections.map((collection) => {
-    const ProductRailComponent = ProductRail as any
-    return (
-      <li key={collection.id}>
-        <ProductRailComponent 
-          collection={collection} 
-          region={region} 
-          countryCode={countryCode}
-          locale={locale}
-          dictionary={dictionary}
-        />
-      </li>
-    )
-  })
+  return collections.map((collection) => (
+    <li key={collection.id}>
+      <ProductRail
+        collection={collection}
+        region={region}
+        countryCode={countryCode}
+        locale={locale}
+      />
+    </li>
+  ))
 }

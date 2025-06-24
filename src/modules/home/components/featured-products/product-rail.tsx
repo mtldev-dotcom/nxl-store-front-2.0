@@ -4,6 +4,8 @@
  * Enhanced version with better performance, accessibility, and UX
  * 
  * Features:
+ * - Internationalization support with French and English translations
+ * - Collection title translation using Tolgee system
  * - Optimized product fetching with collection-specific queries
  * - Enhanced hover animations and visual feedback
  * - Improved accessibility with proper ARIA labels
@@ -16,6 +18,9 @@ import { HttpTypes } from "@medusajs/types"
 import { listProducts } from "@lib/data/products"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { convertToLocale } from "@lib/util/money"
+import { getDictionary } from "@lib/i18n/get-dictionary"
+import { getTranslatedCollection } from "@lib/util/translations"
+import { Locale } from "@lib/i18n/config"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
 
@@ -23,7 +28,7 @@ type ProductRailProps = {
   collection: HttpTypes.StoreCollection
   region: HttpTypes.StoreRegion
   countryCode: string
-  locale?: string
+  locale: Locale
 }
 
 // Loading skeleton component
@@ -37,8 +42,16 @@ const ProductCardSkeleton = () => (
   </div>
 )
 
-// Product Card Component
-const ProductCard = ({ product, region }: { product: any, region: HttpTypes.StoreRegion }) => {
+// Product Card Component with translations
+const ProductCard = ({
+  product,
+  region,
+  dictionary
+}: {
+  product: any,
+  region: HttpTypes.StoreRegion,
+  dictionary: any
+}) => {
   const price = getProductPrice({ product })
 
   if (!price) return null
@@ -53,12 +66,12 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
       <LocalizedClientLink
         href={`/products/${product.handle}`}
         className="block"
-        aria-label={`View ${product.title} details`}
+        aria-label={dictionary?.product?.viewProductDetails?.replace('{title}', product.title) || `View ${product.title} details`}
       >
         {/* Sale badge */}
         {hasDiscount && (
           <div className="absolute top-3 left-3 z-10 bg-status-error text-white px-2 py-1 text-xs font-button uppercase rounded-sm">
-            {discountPercentage}% Off
+            {discountPercentage}{dictionary?.product?.salePercentage || '% Off'}
           </div>
         )}
 
@@ -67,7 +80,7 @@ const ProductCard = ({ product, region }: { product: any, region: HttpTypes.Stor
           {product.thumbnail ? (
             <Image
               src={product.thumbnail}
-              alt={`${product.title} - Premium next level apparel`}
+              alt={`${product.title} - ${dictionary?.product?.premiumApparelAlt || 'Premium next level apparel'}`}
               fill
               className="object-cover object-center transition-all duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -136,6 +149,33 @@ export default async function ProductRail({
   countryCode,
   locale,
 }: ProductRailProps) {
+  // Get translations for the current locale
+  const dictionary = await getDictionary(locale)
+
+  // Get translated collection data with fallback mapping
+  const translatedCollection = getTranslatedCollection(collection, locale)
+
+  // Fallback translation mapping for common collection titles
+  const getCollectionTitle = (title: string): string => {
+    if (locale === 'fr') {
+      const frenchTitles: Record<string, string> = {
+        'OUR FAVORITES': 'NOS FAVORIS',
+        'Our Favorites': 'Nos Favoris',
+        'FAVORITES': 'FAVORIS',
+        'Favorites': 'Favoris',
+        'FEATURED': 'VEDETTE',
+        'Featured': 'Vedette',
+        'NEW ARRIVALS': 'NOUVEAUTÉS',
+        'New Arrivals': 'Nouveautés'
+      }
+      return frenchTitles[title] || title
+    }
+    return title
+  }
+
+  // Use translated title with fallback
+  const displayTitle = getCollectionTitle(translatedCollection.title)
+
   try {
     // Fetch products and filter by collection
     const response = await listProducts({
@@ -159,21 +199,21 @@ export default async function ProductRail({
 
     return (
       <section className="space-y-6" aria-labelledby={`collection-${collection.id}`}>
-        {/* Header with enhanced styling */}
+        {/* Header with enhanced styling and translated collection title */}
         <header className="flex items-center justify-between border-b border-nxl-gold/20 pb-4">
           <h3
             id={`collection-${collection.id}`}
             className="font-display text-2xl md:text-3xl text-nxl-gold uppercase tracking-wider"
           >
-            {collection.title}
+            {displayTitle}
           </h3>
 
           <LocalizedClientLink
             href={`/collections/${collection.handle}`}
             className="group flex items-center gap-2 text-sm font-button uppercase text-nxl-ivory hover:text-nxl-gold transition-all duration-300"
-            aria-label={`View all products in ${collection.title} collection`}
+            aria-label={dictionary?.product?.viewAllInCollection?.replace('{title}', displayTitle) || `View all products in ${displayTitle} collection`}
           >
-            <span>View Collection</span>
+            <span>{dictionary?.general?.viewCollection || 'View Collection'}</span>
             <svg
               className="w-4 h-4 transition-transform group-hover:translate-x-1"
               fill="none"
@@ -197,6 +237,7 @@ export default async function ProductRail({
                 key={product.id}
                 product={product}
                 region={region}
+                dictionary={dictionary}
               />
             ))}
           </Suspense>
@@ -204,11 +245,11 @@ export default async function ProductRail({
       </section>
     )
   } catch (error) {
-    console.error(`Error loading products for collection ${collection.title}:`, error)
+    console.error(`Error loading products for collection ${displayTitle}:`, error)
     return (
       <div className="text-center py-8">
         <p className="text-nxl-ivory/60 font-body">
-          Unable to load products at this time. Please try again later.
+          {dictionary?.product?.errorLoadingProducts || 'Unable to load products at this time. Please try again later.'}
         </p>
       </div>
     )

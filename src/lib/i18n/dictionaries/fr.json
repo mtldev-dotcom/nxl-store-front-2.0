@@ -238,7 +238,13 @@
     "authenticQuality": "Authentique • Qualité Premium",
     "noImages": "Aucune image disponible",
     "defaultProductTitle": "Produit Next X Level",
-    "selectOption": "Sélectionner {option}"
+    "selectOption": "Sélectionner {option}",
+    "salePercentage": "% de Réduction",
+    "viewProductDetails": "Voir les détails de {title}",
+    "premiumApparelAlt": "Vêtements next level premium",
+    "loadingProducts": "Chargement des produits...",
+    "errorLoadingProducts": "Impossible de charger les produits pour le moment. Veuillez réessayer plus tard.",
+    "viewAllInCollection": "Voir tous les produits de la collection {title}"
   },
   "cart": {
     "title": "Panier d'Achat",

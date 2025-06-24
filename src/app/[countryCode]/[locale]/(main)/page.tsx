@@ -99,9 +99,12 @@ export default async function Home(props: {
   //    • Confirm in Medusa admin that the handle (not title) reads "features" (lowercase).
   //    • Querying by handle avoids including empty or unrelated collections.
   //    • listCollections returns StoreCollection[] directly, no destructuring needed.
+  // Build translation fields based on locale
+  const translationsField = locale ? `,+translations.${locale}` : ""
+
   const collections = await listCollections({
-    handle: "features",       // Fetch only the 'features' collection
-    fields: "id,handle,title", // Include minimal fields to reduce payload
+    handle: "favorites",       // Fetch only the 'favorites' collection
+    fields: `id,handle,title${translationsField}`, // Include translation fields for collection titles
   })
 
 
@@ -145,7 +148,6 @@ export default async function Home(props: {
                 region={region}
                 locale={locale}
                 countryCode={countryCode}
-                dictionary={dictionary}
               />
             ) : (
               <div className="text-center py-16">
