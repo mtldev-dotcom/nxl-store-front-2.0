@@ -12,7 +12,7 @@ interface CategoriesShowcaseProps {
 const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useIntersection(ref, "0px 0px -20% 0px")
-  
+
   // Enhanced content with better defaults
   const categoriesText = dictionary?.categories || {
     title: "Shop by Category",
@@ -22,7 +22,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
       description: "Classic style meets modern functionality—ideal for any casual or semi-formal occasion"
     },
     hoodies: {
-      name: "Hoodies", 
+      name: "Hoodies",
       description: "Cozy and refined, perfect for cooler days by the fire or active moments on the go"
     },
     joggers: {
@@ -35,7 +35,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
     },
     shopNow: "Shop Now"
   }
-  
+
   // Enhanced categories with better styling and links
   const categories = [
     {
@@ -73,7 +73,7 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
   ]
 
   return (
-    <section 
+    <section
       ref={ref}
       className="py-16 lg:py-24 bg-gradient-to-b from-nxl-navy to-nxl-black relative overflow-hidden"
       aria-labelledby="categories-heading"
@@ -85,12 +85,11 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
 
       <div className="content-container relative z-10">
         {/* Enhanced Header */}
-        <header 
-          className={`text-center mb-16 transition-all duration-1000 ${
-            inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
+        <header
+          className={`text-center mb-16 transition-all duration-1000 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}
         >
-          <h2 
+          <h2
             id="categories-heading"
             className="font-display text-3xl md:text-4xl lg:text-5xl text-nxl-gold uppercase tracking-wider mb-6"
           >
@@ -106,14 +105,13 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
         {/* Enhanced Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {categories.map((category, index) => (
-            <article 
+            <article
               key={category.key}
-              className={`transition-all duration-1000 ${
-                inView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-              }`}
+              className={`transition-all duration-1000 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+                }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <LocalizedClientLink 
+              <LocalizedClientLink
                 href={category.slug}
                 className="group block"
                 aria-label={`Shop ${category.name} - ${category.description}`}
@@ -128,13 +126,13 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
                       className="object-cover object-center transition-all duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
-                    
+
                     {/* Gradient overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-t ${category.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                    
+
                     {/* Hover overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-nxl-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     {/* Category badge */}
                     <div className="absolute top-4 left-4 bg-nxl-gold/90 text-nxl-black px-3 py-1 rounded-full font-button text-xs uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0">
                       Premium
@@ -144,24 +142,24 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
                   {/* Content Section */}
                   <div className="p-6 space-y-4">
                     <header className="space-y-2">
-                      <h3 className="font-display text-xl text-nxl-gold uppercase tracking-wider group-hover:text-nxl-gold-light transition-colors duration-300">
+                      <h3 className="font-display text-xl text-nxl-ivory uppercase tracking-wider group-hover:text-nxl-gold-light transition-colors duration-300">
                         {category.name}
                       </h3>
-                      <p className="font-body text-white text-sm leading-relaxed">
+                      {/* <p className="font-body text-white text-sm leading-relaxed">
                         {category.description}
-                      </p>
+                      </p> */}
                     </header>
-                    
+
                     {/* CTA with enhanced animation */}
                     <div className="flex items-center justify-between pt-4 border-t border-nxl-gold/20">
                       <span className="font-button text-nxl-gold text-sm uppercase tracking-wider group-hover:text-nxl-gold-light transition-colors duration-300">
                         {categoriesText.shopNow}
                       </span>
                       <div className="flex items-center text-nxl-gold group-hover:translate-x-2 transition-transform duration-300">
-                        <svg 
-                          className="w-5 h-5" 
-                          fill="none" 
-                          stroke="currentColor" 
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -179,10 +177,9 @@ const CategoriesShowcase = ({ dictionary }: CategoriesShowcaseProps) => {
         </div>
 
         {/* Call to action */}
-        <div 
-          className={`text-center mt-16 transition-all duration-1000 delay-700 ${
-            inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
+        <div
+          className={`text-center mt-16 transition-all duration-1000 delay-700 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}
         >
           <LocalizedClientLink href="/store">
             <button className="nxl-btn-secondary group">
