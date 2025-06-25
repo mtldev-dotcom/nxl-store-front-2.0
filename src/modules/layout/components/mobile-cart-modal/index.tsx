@@ -1,7 +1,18 @@
+/**
+ * Enhanced MobileCartModal Component
+ * ----------------------------------
+ * Premium mobile cart experience with:
+ * - Smooth gesture-based interactions
+ * - Enhanced animations and micro-interactions
+ * - Optimized touch targets and accessibility
+ * - Progressive loading and performance optimization
+ * - Advanced cart management features
+ */
+
 "use client"
 
-import { useEffect, useState } from "react"
-import { convertToLocale } from "@lib/util/money"
+import { useEffect, useState, useCallback } from "react"
+import { formatPriceWithSmallCurrency } from "@lib/util/money"
 import { updateLineItem } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
@@ -313,14 +324,22 @@ export default function MobileCartModal({
                       </p>
                     </div>
                     <span
-                      className="text-2xl font-bold text-nxl-gold"
+                      className="text-2xl font-bold text-nxl-gold inline-flex items-baseline gap-1"
                       data-testid="cart-subtotal"
                       data-value={subtotal}
                     >
-                      {convertToLocale({
-                        amount: subtotal,
-                        currency_code: cartState.currency_code,
-                      })}
+                      {(() => {
+                        const formattedSubtotal = formatPriceWithSmallCurrency({
+                          amount: subtotal,
+                          currency_code: cartState.currency_code,
+                        })
+                        return (
+                          <>
+                            <span>{formattedSubtotal.price}</span>
+                            <span className="text-xs text-nxl-ivory/60">({formattedSubtotal.currency})</span>
+                          </>
+                        )
+                      })()}
                     </span>
                   </div>
 
@@ -350,7 +369,7 @@ export default function MobileCartModal({
 
                   {/* Action Buttons */}
                   <div className="space-y-3">
-                    <LocalizedClientLink href="/checkout" passHref>
+                    <LocalizedClientLink href="/checkout?step=address" passHref>
                       <Button
                         className="w-full mobile-button-enhanced primary font-bold text-base rounded-xl mobile-touch-target"
                         size="large"

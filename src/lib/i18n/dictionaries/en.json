@@ -319,7 +319,11 @@
       "removing": "Removing...",
       "addingToCart": "Adding to cart..."
     },
-    "update": "Update Cart"
+    "update": "Update Cart",
+    "shippingEstimate": "Estimated shipping",
+    "shippingCalculated": "Calculated at checkout",
+    "free": "Free",
+    "estimatedDelivery": "Estimated delivery: 3-5 business days"
   },
   "footer": {
     "customerService": "Customer Service",
@@ -374,6 +378,11 @@
     "continueToPayment": "Continue to Payment",
     "continueToReview": "Continue to Review",
     "placeOrder": "Place Order",
+    "selectPaymentMethod": "Select Payment Method",
+    "paymentMethodDescription": "Choose how you'd like to pay for your order",
+    "paymentSecurityMessage": "Your payment information is encrypted and protected with industry-standard security",
+    "cardReady": "card ready",
+    "anotherStepWillAppear": "Payment details will be confirmed on the next step",
     "processing": "Processing...",
     "orderSummary": "Order Summary",
     "inYourCart": "In Your Cart",

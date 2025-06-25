@@ -132,7 +132,7 @@ const Payment = ({
               }
             )}
           >
-            {translate("checkout", "payment")}
+            {translate("checkout", "steps.payment")}
           </Heading>
         </div>
         {!isOpen && paymentReady && (
@@ -157,7 +157,7 @@ const Payment = ({
             </div>
             <div>
               <h3 className="text-sm font-semibold text-green-400 mb-1">
-                {translate("checkout", "securePayment")}
+                {translate("checkout", "payment.securePayment")}
               </h3>
               <p className="text-xs text-nxl-ivory/80 leading-relaxed">
                 {translate("checkout", "paymentSecurityMessage")}
@@ -256,13 +256,13 @@ const Payment = ({
           {paidByGiftcard && (
             <div className="flex flex-col w-full">
               <Text className="txt-medium-plus text-nxl-gold mb-1 font-semibold">
-                {translate("checkout", "paymentMethod")}
+                {translate("checkout", "payment.paymentMethod")}
               </Text>
               <Text
                 className="txt-medium text-nxl-ivory/80"
                 data-testid="payment-method-summary"
               >
-                {translate("checkout", "giftCard")}
+                {translate("checkout", "payment.giftCard")}
               </Text>
             </div>
           )}
@@ -286,8 +286,8 @@ const Payment = ({
             <div className="flex items-center justify-center gap-2">
               <span>
                 {!activeSession && isStripeFunc(selectedPaymentMethod)
-                  ? translate("checkout", "enterCardDetails")
-                  : translate("checkout", "continueToReview")}
+                  ? translate("checkout", "payment.enterCardDetails")
+                  : translate("checkout", "payment.continueToReview")}
               </span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -301,7 +301,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-nxl-gold mb-1 font-semibold">
-                  {translate("checkout", "paymentMethod")}
+                  {translate("checkout", "payment.paymentMethod")}
                 </Text>
                 <Text
                   className="txt-medium text-nxl-ivory/80"
@@ -313,7 +313,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-2/3">
                 <Text className="txt-medium-plus text-nxl-gold mb-1 font-semibold">
-                  {translate("checkout", "paymentDetails")}
+                  {translate("checkout", "payment.paymentDetails")}
                 </Text>
                 <div
                   className="flex gap-2 txt-medium text-nxl-ivory/80 items-center"
@@ -335,13 +335,13 @@ const Payment = ({
           ) : paidByGiftcard ? (
             <div className="flex flex-col w-1/3">
               <Text className="txt-medium-plus text-nxl-gold mb-1 font-semibold">
-                {translate("checkout", "paymentMethod")}
+                {translate("checkout", "payment.paymentMethod")}
               </Text>
               <Text
                 className="txt-medium text-nxl-ivory/80"
                 data-testid="payment-method-summary"
               >
-                {translate("checkout", "giftCard")}
+                {translate("checkout", "payment.giftCard")}
               </Text>
             </div>
           ) : null}

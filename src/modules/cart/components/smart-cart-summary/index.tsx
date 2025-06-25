@@ -216,7 +216,7 @@ const SmartCartSummary = ({
 
             {/* Checkout Button */}
             <LocalizedClientLink
-                href="/checkout"
+                href="/checkout?step=address"
                 className="block w-full bg-gradient-to-r from-nxl-gold to-nxl-gold/90 hover:from-nxl-gold/90 hover:to-nxl-gold text-nxl-black font-semibold py-4 px-6 rounded-lg text-center transition-all duration-300 hover:shadow-lg hover:shadow-nxl-gold/25 hover:-translate-y-0.5"
             >
                 <div className="flex items-center justify-center gap-2">

@@ -322,7 +322,12 @@
       "updating": "Mise à jour...",
       "removing": "Suppression...",
       "addingToCart": "Ajout au panier..."
-    }
+    },
+    "update": "Mettre à Jour le Panier",
+    "shippingEstimate": "Livraison estimée",
+    "shippingCalculated": "Calculé à la caisse",
+    "free": "Gratuit",
+    "estimatedDelivery": "Livraison estimée: 3-5 jours ouvrables"
   },
   "footer": {
     "customerService": "Service Client",
@@ -377,6 +382,11 @@
     "continueToPayment": "Continuer vers le Paiement",
     "continueToReview": "Continuer vers la Révision",
     "placeOrder": "Passer Votre Commande",
+    "selectPaymentMethod": "Sélectionner le Mode de Paiement",
+    "paymentMethodDescription": "Choisissez comment vous souhaitez payer votre commande",
+    "paymentSecurityMessage": "Vos informations de paiement sont chiffrées et protégées avec une sécurité de niveau industriel",
+    "cardReady": "carte prête",
+    "anotherStepWillAppear": "Les détails de paiement seront confirmés à l'étape suivante",
     "processingOrder": "Traitement de Votre Commande...",
     "orderSummary": "Récapitulatif de la Commande",
     "inYourCart": "Dans Votre Panier",

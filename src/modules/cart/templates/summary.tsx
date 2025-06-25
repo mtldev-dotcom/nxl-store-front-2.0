@@ -7,6 +7,8 @@ import Divider from "@modules/common/components/divider"
 import DiscountCode from "@modules/checkout/components/discount-code"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
+import { getShippingEstimateFromCart, formatShippingEstimate, type ShippingEstimate } from "@lib/util/shipping"
+import { useEffect, useState } from "react"
 
 type SummaryProps = {
   cart: HttpTypes.StoreCart & {
@@ -38,10 +40,21 @@ function getFreeShippingProgress(cartTotal: number) {
 }
 
 const Summary = ({ cart, dictionary }: SummaryProps) => {
+  const [shippingEstimate, setShippingEstimate] = useState<ShippingEstimate | null>(null)
+
   const step = getCheckoutStep(cart)
   const cartTotal = cart?.total || 0
   const itemCount = cart?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0
   const shippingProgress = getFreeShippingProgress(cartTotal)
+
+  // Calculate shipping estimate when cart changes
+  useEffect(() => {
+    const estimate = getShippingEstimateFromCart(cart, dictionary)
+    setShippingEstimate(estimate)
+  }, [cart?.id, cart?.items?.length, cart?.subtotal, cart?.region_id, dictionary])
+
+  // Format shipping estimate
+  const shippingDisplay = formatShippingEstimate(shippingEstimate, dictionary)
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -98,6 +111,36 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
       )}
 
       <DiscountCode cart={cart} />
+
+      {/* Shipping Estimation */}
+      <div className="bg-nxl-black/40 border border-nxl-gold/25 rounded-lg p-4 transition-all duration-300 hover:border-nxl-gold/40">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-nxl-gold/20 border border-nxl-gold/30 flex items-center justify-center">
+              <svg className="w-4 h-4 text-nxl-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7m16 0L12 11 4 7" />
+              </svg>
+            </div>
+            <div>
+              <Text className="text-sm font-semibold text-nxl-ivory">
+                {shippingDisplay.text}
+              </Text>
+              {shippingDisplay.deliveryTime && (
+                <Text className="text-xs text-nxl-ivory/60 mt-1">
+                  {shippingDisplay.deliveryTime}
+                </Text>
+              )}
+            </div>
+          </div>
+          <div className="text-right">
+            <Text className="text-sm font-bold text-nxl-gold">
+              {shippingDisplay.priceDisplay || (
+                <span className="text-nxl-ivory/60 text-xs">TBD</span>
+              )}
+            </Text>
+          </div>
+        </div>
+      </div>
 
       <Divider />
 

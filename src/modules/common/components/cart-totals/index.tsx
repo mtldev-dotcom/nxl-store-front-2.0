@@ -19,8 +19,12 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     shipping_subtotal,
   } = totals
 
+  // Use item_total for correct subtotal (items only, no shipping)
+  // @ts-ignore - item_total exists on cart but not in types
+  const itemTotal = totals.item_total ?? subtotal ?? 0
+
   // Format all prices using the new function
-  const formattedSubtotal = formatPriceWithSmallCurrency({ amount: subtotal ?? 0, currency_code })
+  const formattedSubtotal = formatPriceWithSmallCurrency({ amount: itemTotal, currency_code })
   const formattedDiscount = formatPriceWithSmallCurrency({ amount: discount_total ?? 0, currency_code })
   const formattedShipping = formatPriceWithSmallCurrency({ amount: shipping_subtotal ?? 0, currency_code })
   const formattedTax = formatPriceWithSmallCurrency({ amount: tax_total ?? 0, currency_code })
@@ -34,7 +38,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
           <span className="flex gap-x-1 items-center">
             Subtotal (excl. shipping and taxes)
           </span>
-          <span data-testid="cart-subtotal" data-value={subtotal || 0} className="text-nxl-ivory inline-flex items-baseline gap-1">
+          <span data-testid="cart-subtotal" data-value={itemTotal || 0} className="text-nxl-ivory inline-flex items-baseline gap-1">
             <span>{formattedSubtotal.price}</span>
             <span className="text-xs text-nxl-ivory/60">({formattedSubtotal.currency})</span>
           </span>
