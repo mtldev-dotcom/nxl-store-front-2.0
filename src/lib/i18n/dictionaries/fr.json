@@ -257,6 +257,7 @@
     "subtotal": "Sous-total",
     "subtotalExclusive": "Sous-total (excl. livraison et taxes)",
     "shipping": "Livraison",
+    "discount": "Remise",
     "shippingFree": "Gratuite",
     "tax": "Taxe",
     "taxes": "Taxes",
@@ -326,6 +327,7 @@
     "update": "Mettre à Jour le Panier",
     "shippingEstimate": "Livraison estimée",
     "shippingCalculated": "Calculé à la caisse",
+    "shippingCalculatedAtCheckout": "Les frais de livraison seront calculés à la caisse",
     "free": "Gratuit",
     "estimatedDelivery": "Livraison estimée: 3-5 jours ouvrables"
   },

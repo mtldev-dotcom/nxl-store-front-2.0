@@ -254,6 +254,7 @@
     "subtotal": "Subtotal",
     "subtotalExclusive": "Subtotal (excl. shipping and taxes)",
     "shipping": "Shipping",
+    "discount": "Discount",
     "shippingFree": "Free",
     "tax": "Tax",
     "taxes": "Taxes",
@@ -322,6 +323,7 @@
     "update": "Update Cart",
     "shippingEstimate": "Estimated shipping",
     "shippingCalculated": "Calculated at checkout",
+    "shippingCalculatedAtCheckout": "Shipping will be calculated at checkout",
     "free": "Free",
     "estimatedDelivery": "Estimated delivery: 3-5 business days"
   },
