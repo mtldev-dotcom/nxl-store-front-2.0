@@ -287,15 +287,25 @@
     border-radius: 12px;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-delete-button:hover {
     color: #ef4444;
     background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.05);
 }
 
 .mobile-delete-button:active {
     transform: scale(0.95);
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.mobile-delete-button:focus-visible {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
 }
 
 /* Mobile Loading States */
@@ -541,4 +551,303 @@
 .cart-dropdown-container {
     position: relative !important;
     z-index: 99999 !important;
+}
+
+/* Enhanced Cart Item Interactions */
+.cart-item-enhanced {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-item-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(212, 175, 55, 0.05),
+            transparent);
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-item-enhanced:hover::before {
+    left: 100%;
+}
+
+.cart-item-enhanced:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 2px 6px rgba(212, 175, 55, 0.1);
+}
+
+/* Mobile Touch Targets */
+.mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Enhanced Button Feedback */
+.mobile-touch-target:active {
+    transform: scale(0.96);
+}
+
+/* Quantity Control Enhancements */
+.mobile-quantity-control {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-quantity-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-quantity-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.mobile-quantity-button:active::after {
+    width: 100px;
+    height: 100px;
+}
+
+/* Remove Item Animation */
+@keyframes remove-item {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translateX(-10px) scale(0.98);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.9);
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.removing-item {
+    animation: remove-item 0.4s ease-in-out forwards;
+    pointer-events: none;
+}
+
+/* Error State Animations */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+.cart-error-shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Success Feedback */
+@keyframes success-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+.cart-success-pulse {
+    animation: success-pulse 0.6s ease-out;
+}
+
+/* Loading States */
+.mobile-loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    z-index: 10;
+}
+
+.mobile-loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-top: 2px solid #d4af37;
+    border-radius: 50%;
+    animation: mobile-spin 1s linear infinite;
+}
+
+@keyframes mobile-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Enhanced Focus States */
+.cart-button-focus:focus-visible {
+    outline: 2px solid rgba(212, 175, 55, 0.8);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+/* Haptic Feedback Simulation */
+.haptic-feedback:active {
+    animation: haptic-vibrate 0.1s ease-in-out;
+}
+
+@keyframes haptic-vibrate {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-1px);
+    }
+
+    75% {
+        transform: translateX(1px);
+    }
+}
+
+/* Improved Mini Cart Drawer */
+.mini-cart-item {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.mini-cart-item:hover {
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateX(2px);
+}
+
+.mini-cart-item-removing {
+    background: rgba(239, 68, 68, 0.1);
+    animation: fade-out-slide 0.3s ease-in-out forwards;
+}
+
+@keyframes fade-out-slide {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+        max-height: 100px;
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 640px) {
+    .cart-item-enhanced {
+        padding: 12px;
+    }
+
+    .mobile-touch-target {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    .mobile-delete-button {
+        min-width: 48px;
+        min-height: 48px;
+        padding: 12px;
+    }
+
+    .mobile-quantity-control {
+        min-height: 48px;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .mobile-delete-button {
+        border: 2px solid currentColor;
+    }
+
+    .cart-item-enhanced {
+        border: 2px solid rgba(212, 175, 55, 0.5);
+    }
+
+    .mobile-touch-target:focus-visible {
+        outline-width: 3px;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+    .cart-item-enhanced,
+    .mobile-delete-button,
+    .mobile-touch-target,
+    .mobile-quantity-button {
+        transition: none;
+        animation: none;
+    }
+
+    .cart-item-enhanced::before {
+        display: none;
+    }
+
+    .mobile-loading-spinner {
+        animation: none;
+        border: 2px solid #d4af37;
+    }
 }

@@ -409,7 +409,6 @@ export default function ProductActions({
       <MiniCartDrawer
         isOpen={showMiniCart}
         onClose={() => setShowMiniCart(false)}
-        cart={cart}
         countryCode={countryCode}
       />
     </>

@@ -244,7 +244,24 @@
     "premiumApparelAlt": "Vêtements next level premium",
     "loadingProducts": "Chargement des produits...",
     "errorLoadingProducts": "Impossible de charger les produits pour le moment. Veuillez réessayer plus tard.",
-    "viewAllInCollection": "Voir tous les produits de la collection {title}"
+    "viewAllInCollection": "Voir tous les produits de la collection {title}",
+    "removeItem": "Retirer l'article",
+    "deleteError": "Échec de la suppression de l'article",
+    "itemRemoved": "Article retiré du panier",
+    "quantity": "Quantité",
+    "quantityShort": "Qté",
+    "unitPrice": "Prix Unitaire",
+    "totalPrice": "Total",
+    "maxQuantity": "Max",
+    "productDetails": "Détails du Produit",
+    "productOptions": "Options",
+    "removing": "Suppression en cours...",
+    "updateError": "Échec de la mise à jour de la quantité",
+    "decreaseQuantity": "Diminuer la quantité",
+    "increaseQuantity": "Augmenter la quantité",
+    "close": "Fermer",
+    "freeShippingAt": "Livraison gratuite à partir de",
+    "away": "restant"
   },
   "cart": {
     "title": "Panier d'Achat",
@@ -400,7 +417,7 @@
     "step": "Étape",
     "of": "sur",
     "delivery": {
-      "title": "Options de Livraison",
+      "title": "Livraison",
       "subtitle": "Choisissez comment vous souhaitez recevoir votre commande",
       "shippingMethod": "Méthode d'Expédition",
       "howDeliverOrder": "Comment souhaitez-vous que votre commande soit livrée?",
@@ -411,7 +428,9 @@
       "estimatedDelivery": "Livraison Estimée",
       "freeShipping": "Livraison Gratuite",
       "standardShipping": "Livraison Standard",
-      "expressShipping": "Livraison Express"
+      "expressShipping": "Livraison Express",
+      "shippingSelected": "Méthode de livraison sélectionnée",
+      "shippingUpdated": "Coût de livraison mis à jour"
     },
     "payment": {
       "title": "Informations de Paiement",

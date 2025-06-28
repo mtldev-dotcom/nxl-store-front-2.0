@@ -325,7 +325,22 @@
     "shippingCalculated": "Calculated at checkout",
     "shippingCalculatedAtCheckout": "Shipping will be calculated at checkout",
     "free": "Free",
-    "estimatedDelivery": "Estimated delivery: 3-5 business days"
+    "estimatedDelivery": "Estimated delivery: 3-5 business days",
+    "removeItem": "Remove item",
+    "deleteError": "Failed to remove item",
+    "itemRemoved": "Item removed from cart",
+    "quantityShort": "Qty",
+    "totalPrice": "Total",
+    "maxQuantity": "Max",
+    "productDetails": "Product Details",
+    "productOptions": "Options",
+    "removing": "Removing item...",
+    "updateError": "Failed to update quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "close": "Close",
+    "freeShippingAt": "Free shipping at",
+    "away": "away"
   },
   "footer": {
     "customerService": "Customer Service",
@@ -396,7 +411,7 @@
     "step": "Step",
     "of": "of",
     "delivery": {
-      "title": "Delivery Options",
+      "title": "Delivery",
       "subtitle": "Choose how you'd like to receive your order",
       "shippingMethod": "Shipping Method",
       "howDeliverOrder": "How would you like your order delivered?",
@@ -407,7 +422,9 @@
       "estimatedDelivery": "Estimated Delivery",
       "freeShipping": "Free Shipping",
       "standardShipping": "Standard Shipping",
-      "expressShipping": "Express Shipping"
+      "expressShipping": "Express Shipping",
+      "shippingSelected": "Shipping method selected",
+      "shippingUpdated": "Shipping cost updated"
     },
     "payment": {
       "title": "Payment Information",
