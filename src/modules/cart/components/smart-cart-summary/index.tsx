@@ -21,13 +21,11 @@ const SmartCartSummary = ({
 }: SmartCartSummaryProps) => {
     const { translate } = useTranslation()
     const [isExpanded, setIsExpanded] = useState(false)
-    const [shippingEstimate, setShippingEstimate] = useState<number>(0)
     const [savingsAmount, setSavingsAmount] = useState<number>(0)
 
     // Calculate various pricing metrics
     const pricingData = useMemo(() => {
         const subtotal = cart.subtotal || 0
-        const shipping = shippingEstimate
         const tax = cart.tax_total || 0
         const discount = cart.discount_total || 0
         const giftCardTotal = cart.gift_card_total || 0
@@ -45,7 +43,6 @@ const SmartCartSummary = ({
 
         return {
             subtotal,
-            shipping,
             tax,
             discount,
             giftCardTotal,
@@ -58,22 +55,13 @@ const SmartCartSummary = ({
             itemCount: cart.items?.length || 0,
             totalQuantity: cart.items?.reduce((sum, item) => sum + item.quantity, 0) || 0
         }
-    }, [cart, shippingEstimate])
+    }, [cart])
 
     // Format currency
     const formatCurrency = (amount: number) => formatPrice({
         amount,
         currency_code: cart.region?.currency_code || 'USD'
     })
-
-    // Estimate shipping based on location and items
-    useEffect(() => {
-        // Simulate shipping calculation
-        const baseShipping = 500 // $5.00
-        const itemWeight = pricingData.totalQuantity * 100 // Rough weight estimate
-        const estimated = pricingData.subtotal >= 10000 ? 0 : baseShipping + (itemWeight * 10)
-        setShippingEstimate(estimated)
-    }, [pricingData])
 
     // Dynamic upsell suggestions based on cart contents
     const upsellSuggestions = useMemo(() => {
@@ -160,15 +148,10 @@ const SmartCartSummary = ({
 
                 <div className="flex justify-between items-center">
                     <span className="text-nxl-ivory/80">
-                        Shipping
-                        {shippingEstimate === 0 && (
-                            <span className="ml-2 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
-                                FREE
-                            </span>
-                        )}
+                        {translate("cart", "shipping", "Shipping")}
                     </span>
-                    <span className="text-nxl-ivory">
-                        {shippingEstimate === 0 ? 'Free' : formatCurrency(shippingEstimate)}
+                    <span className="text-nxl-ivory/70 text-xs italic">
+                        {translate("cart", "shippingCalculatedAtCheckout", "Shipping will be calculated at checkout")}
                     </span>
                 </div>
 

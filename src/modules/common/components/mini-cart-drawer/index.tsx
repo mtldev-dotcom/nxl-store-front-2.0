@@ -197,7 +197,7 @@ const MiniCartDrawer = ({
 
                         {/* Shipping Notice */}
                         <div className="text-xs text-nxl-ivory/60 text-center">
-                          {translate("cart", "subtotalExclusive", "Shipping and taxes calculated at checkout")}
+                          {translate("cart", "shippingCalculatedAtCheckout", "Shipping will be calculated at checkout")}
                         </div>
 
                         {/* Action Buttons */}

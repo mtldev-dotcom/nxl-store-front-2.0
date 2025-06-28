@@ -73,6 +73,7 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
       </div>
 
       {/* Enhanced Free Shipping Progress */}
+      {/* COMMENTED OUT: Free delivery section 
       {!shippingProgress.qualified && (
         <div className="bg-gradient-to-r from-nxl-gold/8 to-nxl-gold/5 border border-nxl-gold/30 rounded-lg p-4 transition-all duration-300 hover:border-nxl-gold/40">
           <div className="flex items-center justify-between mb-2">
@@ -109,10 +110,13 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
           </div>
         </div>
       )}
+      */}
 
+      {/* COMMENTED OUT: Promo code section 
       <DiscountCode cart={cart} />
+      */}
 
-      {/* Shipping Estimation */}
+      {/* COMMENTED OUT: Shipping approximate cost section 
       <div className="bg-nxl-black/40 border border-nxl-gold/25 rounded-lg p-4 transition-all duration-300 hover:border-nxl-gold/40">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -141,6 +145,7 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
           </div>
         </div>
       </div>
+      */}
 
       <Divider />
 

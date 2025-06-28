@@ -29,7 +29,7 @@ import Thumbnail from "@modules/products/components/thumbnail"
 import MobileCartModal from "@modules/layout/components/mobile-cart-modal"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState, useCallback } from "react"
-import { getShippingEstimateFromCart, formatShippingEstimate, type ShippingEstimate } from "@lib/util/shipping"
+import { useTranslation } from "@lib/context/translation-context"
 
 interface CartDropdownProps {
   cart?: HttpTypes.StoreCart | null;
@@ -40,6 +40,9 @@ const CartDropdown = ({
   cart: cartState,
   dictionary
 }: CartDropdownProps) => {
+  // Access translation function for client-side translations
+  const { translate } = useTranslation()
+
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(undefined)
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
   const [mobileCartOpen, setMobileCartOpen] = useState(false)
@@ -48,7 +51,6 @@ const CartDropdown = ({
   const [isHovering, setIsHovering] = useState(false)
   const [itemCount, setItemCount] = useState(0)
   const [showItemAnimation, setShowItemAnimation] = useState(false)
-  const [shippingEstimate, setShippingEstimate] = useState<ShippingEstimate | null>(null)
 
   const hoverTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const closeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
@@ -163,20 +165,11 @@ const CartDropdown = ({
   const handleTouchStart = useCallback(() => setIsPressed(true), [])
   const handleTouchEnd = useCallback(() => setIsPressed(false), [])
 
-  // Calculate shipping estimate when cart changes
-  useEffect(() => {
-    const estimate = getShippingEstimateFromCart(cartState, dictionary)
-    setShippingEstimate(estimate)
-  }, [cartState?.id, cartState?.items?.length, cartState?.subtotal, cartState?.region_id, dictionary])
-
   // Format subtotal
   const formattedSubtotal = subtotal ? formatPriceWithSmallCurrency({
     amount: subtotal,
     currency_code: cartState?.currency_code || 'CAD',
   }) : null
-
-  // Format shipping estimate
-  const shippingDisplay = formatShippingEstimate(shippingEstimate, dictionary)
 
   return (
     <>
@@ -373,22 +366,15 @@ const CartDropdown = ({
                       </span>
                     </div>
 
-                    {/* Shipping Estimation */}
+                    {/* Shipping Message - shows translated message indicating shipping will be calculated at checkout */}
                     <div className="flex items-center justify-between mb-4 py-2 border-t border-nxl-gold/10">
                       <div>
                         <span className="text-sm font-medium text-nxl-ivory/90">
-                          {shippingDisplay.text}
+                          {translate("cart", "shipping", "Shipping")}
                         </span>
-                        {shippingDisplay.deliveryTime && (
-                          <p className="text-xs text-nxl-ivory/60">
-                            {shippingDisplay.deliveryTime}
-                          </p>
-                        )}
                       </div>
-                      <span className="text-sm font-semibold text-nxl-gold">
-                        {shippingDisplay.priceDisplay || (
-                          <span className="text-nxl-ivory/60 text-xs">TBD</span>
-                        )}
+                      <span className="text-nxl-ivory/70 text-xs italic">
+                        {translate("cart", "shippingCalculatedAtCheckout", "Shipping will be calculated at checkout")}
                       </span>
                     </div>
 
