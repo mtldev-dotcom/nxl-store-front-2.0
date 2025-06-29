@@ -10,644 +10,644 @@
 
 /* Custom scrollbar for luxury feel */
 ::-webkit-scrollbar {
-  width: 12px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-nxl-black);
-  border-radius: var(--border-radius-sm);
+    background: var(--color-nxl-black);
+    border-radius: var(--border-radius-sm);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-nxl-navy);
-  border: 2px solid var(--color-nxl-gold);
-  border-radius: var(--border-radius-lg);
-  transition: background var(--transition-base);
+    background: var(--color-nxl-navy);
+    border: 2px solid var(--color-nxl-gold);
+    border-radius: var(--border-radius-lg);
+    transition: background var(--transition-base);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-nxl-green);
+    background: var(--color-nxl-green);
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--color-nxl-black);
+    background: var(--color-nxl-black);
 }
 
 /* Global selection styling */
 ::selection {
-  background: var(--color-nxl-gold);
-  color: var(--color-nxl-black);
+    background: var(--color-nxl-gold);
+    color: var(--color-nxl-black);
 }
 
 ::-moz-selection {
-  background: var(--color-nxl-gold);
-  color: var(--color-nxl-black);
+    background: var(--color-nxl-gold);
+    color: var(--color-nxl-black);
 }
 
 @layer utilities {
-  /* Mobile-first optimizations */
+    /* Mobile-first optimizations */
 
-  /* Enhanced touch targets for mobile */
-  .mobile-touch-target {
-    min-height: 44px;
-    min-width: 44px;
-    @apply flex items-center justify-center;
-  }
-
-  /* Improved mobile text sizing with better scaling */
-  .mobile-text-xs {
-    @apply text-xs leading-4;
-  }
-
-  .mobile-text-sm {
-    @apply text-sm leading-5;
-  }
-
-  .mobile-text-base {
-    @apply text-base leading-6;
-  }
-
-  .mobile-text-lg {
-    @apply text-lg leading-7;
-  }
-
-  /* Mobile-specific spacing utilities */
-  .mobile-px {
-    @apply px-4 sm:px-6;
-  }
-
-  .mobile-py {
-    @apply py-3 sm:py-4;
-  }
-
-  .mobile-gap {
-    @apply gap-3 sm:gap-4;
-  }
-
-  /* Enhanced mobile focus states with larger hit areas */
-  .mobile-focus {
-    @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-muted focus:ring-offset-2 focus:ring-offset-nxl-black rounded-lg transition-all duration-200;
-  }
-
-  /* Safe area utilities for modern mobile devices */
-  .safe-area-top {
-    padding-top: env(safe-area-inset-top);
-  }
-
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .safe-area-left {
-    padding-left: env(safe-area-inset-left);
-  }
-
-  .safe-area-right {
-    padding-right: env(safe-area-inset-right);
-  }
-
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-  }
-
-  /* Elegant focus states with better mobile visibility */
-  input:focus~label,
-  input:not(:placeholder-shown)~label {
-    @apply -translate-y-2 text-xsmall-regular text-nxl-gold;
-  }
-
-  input:focus~label {
-    @apply left-0;
-  }
-
-  /* Custom autofill styling for inputs */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    border: 1px solid var(--color-nxl-gold);
-    -webkit-text-fill-color: var(--color-nxl-ivory);
-    -webkit-box-shadow: 0 0 0px 1000px var(--color-nxl-navy) inset;
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  /* Accessibility improvements */
-  @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* High contrast mode enhancements */
-  @media (prefers-contrast: high) {
-    .nxl-btn-primary {
-      @apply border-2 border-nxl-gold shadow-lg;
+    /* Enhanced touch targets for mobile */
+    .mobile-touch-target {
+        min-height: 44px;
+        min-width: 44px;
+        @apply flex items-center justify-center;
     }
 
-    .nxl-btn-secondary {
-      @apply border-2 border-nxl-gold bg-nxl-black-soft shadow-lg;
+    /* Improved mobile text sizing with better scaling */
+    .mobile-text-xs {
+        @apply text-xs leading-4;
     }
 
-    /* Ensure text remains visible in high contrast */
-    .text-nxl-ivory {
-      @apply text-white;
+    .mobile-text-sm {
+        @apply text-sm leading-5;
     }
 
-    .text-nxl-gold {
-      @apply text-yellow-400;
+    .mobile-text-base {
+        @apply text-base leading-6;
     }
-  }
 
-  /* Enhanced focus indicators for keyboard navigation and mobile accessibility */
-  .focus-visible:focus {
-    @apply outline-none ring-4 ring-nxl-gold ring-offset-4 ring-offset-nxl-black;
-  }
+    .mobile-text-lg {
+        @apply text-lg leading-7;
+    }
 
-  /* Skip link for accessibility */
-  .skip-link {
-    @apply absolute left-4 top-4 z-tooltip bg-nxl-gold text-nxl-black px-6 py-3 rounded-md transform -translate-y-20 focus:translate-y-0 transition-transform font-medium mobile-touch-target;
-  }
+    /* Mobile-specific spacing utilities */
+    .mobile-px {
+        @apply px-4 sm:px-6;
+    }
 
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
+    .mobile-py {
+        @apply py-3 sm:py-4;
+    }
 
-  /* Enhanced focus utilities for better mobile experience */
-  .focus-gold {
-    @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-light focus:ring-offset-2 focus:ring-offset-nxl-black focus:border-nxl-gold transition-all duration-200;
-  }
+    .mobile-gap {
+        @apply gap-3 sm:gap-4;
+    }
 
-  /* Enhanced image hover effects with mobile considerations */
-  .zoom-on-hover {
-    @apply transition-transform duration-700 hover:scale-105;
-  }
+    /* Enhanced mobile focus states with larger hit areas */
+    .mobile-focus {
+        @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-muted focus:ring-offset-2 focus:ring-offset-nxl-black rounded-lg transition-all duration-200;
+    }
 
-  /* Mobile-specific zoom (reduced for touch devices) */
-  @media (hover: none) {
+    /* Safe area utilities for modern mobile devices */
+    .safe-area-top {
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .safe-area-left {
+        padding-left: env(safe-area-inset-left);
+    }
+
+    .safe-area-right {
+        padding-right: env(safe-area-inset-right);
+    }
+
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    /* Elegant focus states with better mobile visibility */
+    input:focus~label,
+    input:not(:placeholder-shown)~label {
+        @apply -translate-y-2 text-xsmall-regular text-nxl-gold;
+    }
+
+    input:focus~label {
+        @apply left-0;
+    }
+
+    /* Custom autofill styling for inputs */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        border: 1px solid var(--color-nxl-gold);
+        -webkit-text-fill-color: var(--color-nxl-ivory);
+        -webkit-box-shadow: 0 0 0px 1000px var(--color-nxl-navy) inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* High contrast mode enhancements */
+    @media (prefers-contrast: high) {
+        .nxl-btn-primary {
+            @apply border-2 border-nxl-gold shadow-lg;
+        }
+
+        .nxl-btn-secondary {
+            @apply border-2 border-nxl-gold bg-nxl-black-soft shadow-lg;
+        }
+
+        /* Ensure text remains visible in high contrast */
+        .text-nxl-ivory {
+            @apply text-white;
+        }
+
+        .text-nxl-gold {
+            @apply text-yellow-400;
+        }
+    }
+
+    /* Enhanced focus indicators for keyboard navigation and mobile accessibility */
+    .focus-visible:focus {
+        @apply outline-none ring-4 ring-nxl-gold ring-offset-4 ring-offset-nxl-black;
+    }
+
+    /* Skip link for accessibility */
+    .skip-link {
+        @apply absolute left-4 top-4 z-tooltip bg-nxl-gold text-nxl-black px-6 py-3 rounded-md transform -translate-y-20 focus:translate-y-0 transition-transform font-medium mobile-touch-target;
+    }
+
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+    }
+
+    /* Enhanced focus utilities for better mobile experience */
+    .focus-gold {
+        @apply focus:outline-none focus:ring-4 focus:ring-nxl-gold-light focus:ring-offset-2 focus:ring-offset-nxl-black focus:border-nxl-gold transition-all duration-200;
+    }
+
+    /* Enhanced image hover effects with mobile considerations */
     .zoom-on-hover {
-      @apply active:scale-102 transition-transform duration-300;
+        @apply transition-transform duration-700 hover:scale-105;
     }
-  }
 
-  /* Enhanced line clamp utilities */
-  .line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-  }
-
-  .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
-  .line-clamp-3 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  /* Enhanced button shimmer animation with mobile optimization */
-  .shimmer {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .shimmer::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(to bottom right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        rgba(255, 255, 255, 0) 100%);
-    transform: rotate(30deg);
-    transition: transform 0.5s ease-out;
-    pointer-events: none;
-  }
-
-  .shimmer:hover::after {
-    transform: rotate(30deg) translate(100%, 100%);
-  }
-
-  /* Mobile-specific shimmer for touch devices */
-  @media (hover: none) {
-    .shimmer:active::after {
-      transform: rotate(30deg) translate(100%, 100%);
+    /* Mobile-specific zoom (reduced for touch devices) */
+    @media (hover: none) {
+        .zoom-on-hover {
+            @apply active:scale-102 transition-transform duration-300;
+        }
     }
-  }
 
-  /* Enhanced luxury shadow effects */
-  .shadow-luxury {
-    box-shadow: 0 25px 50px -12px rgba(212, 182, 96, 0.1),
-      0 10px 25px -5px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(212, 182, 96, 0.05);
-  }
+    /* Enhanced line clamp utilities */
+    .line-clamp-1 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
 
-  .shadow-luxury-lg {
-    box-shadow: 0 35px 60px -12px rgba(212, 182, 96, 0.15),
-      0 15px 35px -5px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(212, 182, 96, 0.1);
-  }
+    .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
 
-  /* Mobile-optimized shadows */
-  @media (max-width: 768px) {
+    .line-clamp-3 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+
+    /* Enhanced button shimmer animation with mobile optimization */
+    .shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .shimmer::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%);
+        transform: rotate(30deg);
+        transition: transform 0.5s ease-out;
+        pointer-events: none;
+    }
+
+    .shimmer:hover::after {
+        transform: rotate(30deg) translate(100%, 100%);
+    }
+
+    /* Mobile-specific shimmer for touch devices */
+    @media (hover: none) {
+        .shimmer:active::after {
+            transform: rotate(30deg) translate(100%, 100%);
+        }
+    }
+
+    /* Enhanced luxury shadow effects */
     .shadow-luxury {
-      box-shadow: 0 15px 30px -8px rgba(212, 182, 96, 0.08),
-        0 5px 15px -3px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(212, 182, 96, 0.03);
+        box-shadow: 0 25px 50px -12px rgba(212, 182, 96, 0.1),
+            0 10px 25px -5px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(212, 182, 96, 0.05);
     }
-  }
 
-  /* Enhanced mobile-specific interactions */
-  @media (hover: hover) {
-    .hover-enhanced:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
+    .shadow-luxury-lg {
+        box-shadow: 0 35px 60px -12px rgba(212, 182, 96, 0.15),
+            0 15px 35px -5px rgba(0, 0, 0, 0.5),
+            0 0 0 1px rgba(212, 182, 96, 0.1);
     }
-  }
 
-  /* Mobile tap feedback improvements */
-  @media (hover: none) {
-    .mobile-tap-feedback:active {
-      transform: scale(0.98);
-      background-color: rgba(212, 182, 96, 0.05);
+    /* Mobile-optimized shadows */
+    @media (max-width: 768px) {
+        .shadow-luxury {
+            box-shadow: 0 15px 30px -8px rgba(212, 182, 96, 0.08),
+                0 5px 15px -3px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(212, 182, 96, 0.03);
+        }
     }
-  }
 
-  /* Enhanced product card shadows for modern look */
-  .product-card-shadow {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  }
-
-  .product-card-shadow-hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Improved mobile touch feedback for product cards */
-  @media (hover: none) and (pointer: coarse) {
-    .product-card-mobile-tap:active {
-      transform: scale(0.98);
-      transition: transform 0.1s ease-out;
+    /* Enhanced mobile-specific interactions */
+    @media (hover: hover) {
+        .hover-enhanced:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
+        }
     }
-  }
 
-  /* Enhanced button interactions for product cards */
-  .product-card-button {
-    @apply transition-all duration-200 ease-out;
-  }
+    /* Mobile tap feedback improvements */
+    @media (hover: none) {
+        .mobile-tap-feedback:active {
+            transform: scale(0.98);
+            background-color: rgba(212, 182, 96, 0.05);
+        }
+    }
 
-  .product-card-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-  }
+    /* Enhanced product card shadows for modern look */
+    .product-card-shadow {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
 
-  .product-card-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  }
+    .product-card-shadow-hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Improved mobile touch feedback for product cards */
+    @media (hover: none) and (pointer: coarse) {
+        .product-card-mobile-tap:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease-out;
+        }
+    }
+
+    /* Enhanced button interactions for product cards */
+    .product-card-button {
+        @apply transition-all duration-200 ease-out;
+    }
+
+    .product-card-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-card-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
 }
 
 @layer components {
 
-  /* Enhanced content container with better mobile padding */
-  .content-container {
-    @apply max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Mobile-first container with safe area support */
-  .mobile-container {
-    @apply max-w-[1440px] w-full mx-auto mobile-px safe-area-left safe-area-right;
-  }
-
-  /* Enhanced luxury button styling with better mobile touch targets */
-  .nxl-btn-primary {
-    @apply mobile-touch-target px-6 py-4 bg-nxl-gold text-nxl-black border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-light active:bg-nxl-gold-dark transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .nxl-btn-secondary {
-    @apply mobile-touch-target px-6 py-4 bg-transparent text-nxl-gold border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-muted active:bg-nxl-gold-muted transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .nxl-btn-dark {
-    @apply mobile-touch-target px-6 py-4 bg-nxl-black text-nxl-ivory border border-nxl-black font-button uppercase tracking-wider hover:bg-nxl-navy active:bg-nxl-black-soft transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  /* Enhanced form input styling with better mobile support */
-  .nxl-input {
-    @apply bg-nxl-black border border-nxl-gold-muted text-nxl-ivory p-4 font-body focus-gold mobile-touch-target placeholder:text-nxl-ivory-muted placeholder:font-body rounded-lg transition-all duration-200;
-  }
-
-  /* Enhanced luxury card styling with better mobile interactions */
-  .nxl-card {
-    @apply bg-nxl-black-soft backdrop-blur-sm border border-nxl-gold-muted p-6 rounded-lg transition-all duration-300 hover:border-nxl-gold-light hover:shadow-luxury active:scale-98;
-  }
-
-  /* Enhanced mobile-first text styles with better scaling */
-  .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal sm:text-xs sm:leading-5;
-  }
-
-  .text-small-regular {
-    @apply text-xs leading-5 font-normal sm:text-sm sm:leading-6;
-  }
-
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold sm:text-sm sm:leading-6;
-  }
-
-  .text-base-regular {
-    @apply text-sm leading-6 font-normal sm:text-base sm:leading-7;
-  }
-
-  .text-base-semi {
-    @apply text-sm leading-6 font-semibold sm:text-base sm:leading-7;
-  }
-
-  .text-large-regular {
-    @apply text-base leading-6 font-normal sm:text-lg sm:leading-8;
-  }
-
-  .text-large-semi {
-    @apply text-base leading-6 font-semibold sm:text-lg sm:leading-8;
-  }
-
-  .text-xl-regular {
-    @apply text-xl leading-7 font-normal sm:text-2xl sm:leading-9;
-  }
-
-  .text-xl-semi {
-    @apply text-xl leading-7 font-semibold sm:text-2xl sm:leading-9;
-  }
-
-  .text-2xl-regular {
-    @apply text-2xl leading-8 font-normal sm:text-3xl sm:leading-10;
-  }
-
-  .text-2xl-semi {
-    @apply text-2xl leading-8 font-semibold sm:text-3xl sm:leading-10;
-  }
-
-  .text-3xl-regular {
-    @apply text-3xl leading-9 font-normal sm:text-4xl sm:leading-10;
-  }
-
-  .text-3xl-semi {
-    @apply text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10;
-  }
-
-  /* Enhanced NXL Typography with better mobile scaling */
-  .nxl-display {
-    @apply font-display uppercase tracking-wider text-nxl-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  .nxl-heading {
-    @apply font-serif text-nxl-ivory text-xl sm:text-2xl md:text-3xl lg:text-4xl;
-  }
-
-  .nxl-body {
-    @apply font-body text-nxl-ivory-muted text-sm sm:text-base md:text-lg leading-relaxed;
-  }
-
-  .nxl-button {
-    @apply font-button uppercase tracking-wider mobile-touch-target;
-  }
-
-  /* Enhanced product card animations with mobile optimization */
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+    /* Enhanced content container with better mobile padding */
+    .content-container {
+        @apply max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8;
     }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out;
-  }
-
-  /* Improved text contrast utilities for better mobile readability */
-  .text-contrast-high {
-    color: var(--color-nxl-ivory);
-    opacity: 1;
-  }
-
-  .text-contrast-medium {
-    color: var(--color-nxl-ivory);
-    opacity: 0.85;
-  }
-
-  .text-contrast-low {
-    color: var(--color-nxl-ivory);
-    opacity: 0.65;
-  }
-
-  /* Enhanced mobile-specific interactions */
-  @media (hover: hover) {
-    .hover-enhanced:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
-    }
-  }
-
-  /* Mobile tap feedback improvements */
-  @media (hover: none) {
-    .mobile-tap-feedback:active {
-      transform: scale(0.98);
-      background-color: rgba(212, 182, 96, 0.05);
-    }
-  }
-
-  /* Product card specific enhancements */
-  .product-card-enhanced {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .product-card-enhanced:hover {
-    @apply transform -translate-y-1 shadow-lg;
-  }
-
-  @media (max-width: 768px) {
-    .product-card-enhanced:active {
-      @apply transform scale-98;
-    }
-  }
-
-  /* Enhanced visibility utilities for debugging and better mobile experience */
-  .text-visible-high {
-    color: #FFFFFF !important;
-    opacity: 1 !important;
-  }
-
-  .text-visible-medium {
-    color: #F8F6F1 !important;
-    opacity: 0.9 !important;
-  }
-
-  .text-visible-accent {
-    color: #D4B660 !important;
-    opacity: 1 !important;
-  }
-
-  /* Ensure buttons are always visible on mobile */
-  @media (max-width: 640px) {
-    .mobile-always-visible {
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-  }
-
-  /* Enhanced image loading states */
-  .image-loading-enhanced {
-    background: linear-gradient(135deg,
-        var(--color-nxl-navy) 0%,
-        var(--color-nxl-black) 50%,
-        var(--color-nxl-navy) 100%);
-    background-size: 200% 200%;
-    animation: loading-shimmer 2s ease-in-out infinite;
-  }
-
-  @keyframes loading-shimmer {
-    0% {
-      background-position: 0% 50%;
+    /* Mobile-first container with safe area support */
+    .mobile-container {
+        @apply max-w-[1440px] w-full mx-auto mobile-px safe-area-left safe-area-right;
     }
 
-    50% {
-      background-position: 100% 50%;
+    /* Enhanced luxury button styling with better mobile touch targets */
+    .nxl-btn-primary {
+        @apply mobile-touch-target px-6 py-4 bg-nxl-gold text-nxl-black border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-light active:bg-nxl-gold-dark transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
     }
 
-    100% {
-      background-position: 0% 50%;
+    .nxl-btn-secondary {
+        @apply mobile-touch-target px-6 py-4 bg-transparent text-nxl-gold border border-nxl-gold font-button uppercase tracking-wider hover:bg-nxl-gold-muted active:bg-nxl-gold-muted transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
     }
-  }
 
-  /* Enhanced product card shadows for modern look */
-  .product-card-shadow {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  }
-
-  .product-card-shadow-hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Improved mobile touch feedback for product cards */
-  @media (hover: none) and (pointer: coarse) {
-    .product-card-mobile-tap:active {
-      transform: scale(0.98);
-      transition: transform 0.1s ease-out;
+    .nxl-btn-dark {
+        @apply mobile-touch-target px-6 py-4 bg-nxl-black text-nxl-ivory border border-nxl-black font-button uppercase tracking-wider hover:bg-nxl-navy active:bg-nxl-black-soft transition-all duration-300 shimmer text-base mobile-focus disabled:opacity-50 disabled:cursor-not-allowed;
     }
-  }
 
-  /* Better product card grid spacing */
-  .product-grid-enhanced {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
+    /* Enhanced form input styling with better mobile support */
+    .nxl-input {
+        @apply bg-nxl-black border border-nxl-gold-muted text-nxl-ivory p-4 font-body focus-gold mobile-touch-target placeholder:text-nxl-ivory-muted placeholder:font-body rounded-lg transition-all duration-200;
+    }
 
-  @media (min-width: 768px) {
+    /* Enhanced luxury card styling with better mobile interactions */
+    .nxl-card {
+        @apply bg-nxl-black-soft backdrop-blur-sm border border-nxl-gold-muted p-6 rounded-lg transition-all duration-300 hover:border-nxl-gold-light hover:shadow-luxury active:scale-98;
+    }
+
+    /* Enhanced mobile-first text styles with better scaling */
+    .text-xsmall-regular {
+        @apply text-[10px] leading-4 font-normal sm:text-xs sm:leading-5;
+    }
+
+    .text-small-regular {
+        @apply text-xs leading-5 font-normal sm:text-sm sm:leading-6;
+    }
+
+    .text-small-semi {
+        @apply text-xs leading-5 font-semibold sm:text-sm sm:leading-6;
+    }
+
+    .text-base-regular {
+        @apply text-sm leading-6 font-normal sm:text-base sm:leading-7;
+    }
+
+    .text-base-semi {
+        @apply text-sm leading-6 font-semibold sm:text-base sm:leading-7;
+    }
+
+    .text-large-regular {
+        @apply text-base leading-6 font-normal sm:text-lg sm:leading-8;
+    }
+
+    .text-large-semi {
+        @apply text-base leading-6 font-semibold sm:text-lg sm:leading-8;
+    }
+
+    .text-xl-regular {
+        @apply text-xl leading-7 font-normal sm:text-2xl sm:leading-9;
+    }
+
+    .text-xl-semi {
+        @apply text-xl leading-7 font-semibold sm:text-2xl sm:leading-9;
+    }
+
+    .text-2xl-regular {
+        @apply text-2xl leading-8 font-normal sm:text-3xl sm:leading-10;
+    }
+
+    .text-2xl-semi {
+        @apply text-2xl leading-8 font-semibold sm:text-3xl sm:leading-10;
+    }
+
+    .text-3xl-regular {
+        @apply text-3xl leading-9 font-normal sm:text-4xl sm:leading-10;
+    }
+
+    .text-3xl-semi {
+        @apply text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10;
+    }
+
+    /* Enhanced NXL Typography with better mobile scaling */
+    .nxl-display {
+        @apply font-display uppercase tracking-wider text-nxl-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+    }
+
+    .nxl-heading {
+        @apply font-serif text-nxl-ivory text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+    }
+
+    .nxl-body {
+        @apply font-body text-nxl-ivory-muted text-sm sm:text-base md:text-lg leading-relaxed;
+    }
+
+    .nxl-button {
+        @apply font-button uppercase tracking-wider mobile-touch-target;
+    }
+
+    /* Enhanced product card animations with mobile optimization */
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.6s ease-out;
+    }
+
+    /* Improved text contrast utilities for better mobile readability */
+    .text-contrast-high {
+        color: var(--color-nxl-ivory);
+        opacity: 1;
+    }
+
+    .text-contrast-medium {
+        color: var(--color-nxl-ivory);
+        opacity: 0.85;
+    }
+
+    .text-contrast-low {
+        color: var(--color-nxl-ivory);
+        opacity: 0.65;
+    }
+
+    /* Enhanced mobile-specific interactions */
+    @media (hover: hover) {
+        .hover-enhanced:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 182, 96, 0.25);
+        }
+    }
+
+    /* Mobile tap feedback improvements */
+    @media (hover: none) {
+        .mobile-tap-feedback:active {
+            transform: scale(0.98);
+            background-color: rgba(212, 182, 96, 0.05);
+        }
+    }
+
+    /* Product card specific enhancements */
+    .product-card-enhanced {
+        @apply transition-all duration-300 ease-out;
+    }
+
+    .product-card-enhanced:hover {
+        @apply transform -translate-y-1 shadow-lg;
+    }
+
+    @media (max-width: 768px) {
+        .product-card-enhanced:active {
+            @apply transform scale-98;
+        }
+    }
+
+    /* Enhanced visibility utilities for debugging and better mobile experience */
+    .text-visible-high {
+        color: #FFFFFF !important;
+        opacity: 1 !important;
+    }
+
+    .text-visible-medium {
+        color: #F8F6F1 !important;
+        opacity: 0.9 !important;
+    }
+
+    .text-visible-accent {
+        color: #D4B660 !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure buttons are always visible on mobile */
+    @media (max-width: 640px) {
+        .mobile-always-visible {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    }
+
+    /* Enhanced image loading states */
+    .image-loading-enhanced {
+        background: linear-gradient(135deg,
+                var(--color-nxl-navy) 0%,
+                var(--color-nxl-black) 50%,
+                var(--color-nxl-navy) 100%);
+        background-size: 200% 200%;
+        animation: loading-shimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes loading-shimmer {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Enhanced product card shadows for modern look */
+    .product-card-shadow {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    .product-card-shadow-hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Improved mobile touch feedback for product cards */
+    @media (hover: none) and (pointer: coarse) {
+        .product-card-mobile-tap:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease-out;
+        }
+    }
+
+    /* Better product card grid spacing */
     .product-grid-enhanced {
-      gap: 1.5rem;
-      grid-template-columns: repeat(3, 1fr);
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
     }
-  }
 
-  @media (min-width: 1024px) {
-    .product-grid-enhanced {
-      gap: 2rem;
-      grid-template-columns: repeat(4, 1fr);
+    @media (min-width: 768px) {
+        .product-grid-enhanced {
+            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
-  }
 
-  @media (min-width: 1280px) {
-    .product-grid-enhanced {
-      grid-template-columns: repeat(5, 1fr);
+    @media (min-width: 1024px) {
+        .product-grid-enhanced {
+            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
-  }
 
-  @media (min-width: 1536px) {
-    .product-grid-enhanced {
-      grid-template-columns: repeat(6, 1fr);
+    @media (min-width: 1280px) {
+        .product-grid-enhanced {
+            grid-template-columns: repeat(5, 1fr);
+        }
     }
-  }
 
-  /* Enhanced button interactions for product cards */
-  .product-card-button {
-    @apply transition-all duration-200 ease-out;
-  }
+    @media (min-width: 1536px) {
+        .product-grid-enhanced {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    }
 
-  .product-card-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-  }
+    /* Enhanced button interactions for product cards */
+    .product-card-button {
+        @apply transition-all duration-200 ease-out;
+    }
 
-  .product-card-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  }
+    .product-card-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    }
 
-  /* Force image visibility fixes */
-  img[data-nimg="fill"] {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    z-index: 1 !important;
-  }
+    .product-card-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
 
-  /* Ensure product image containers have proper stacking */
-  .product-image-container {
-    position: relative !important;
-    overflow: hidden !important;
-    background: #f5f5f5 !important;
-  }
+    /* Force image visibility fixes */
+    img[data-nimg="fill"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        z-index: 1 !important;
+    }
 
-  /* Debug styles for image visibility */
-  .image-debug {
-    background: red !important;
-    min-height: 200px !important;
-    border: 2px solid blue !important;
-  }
+    /* Ensure product image containers have proper stacking */
+    .product-image-container {
+        position: relative !important;
+        overflow: hidden !important;
+        background: #f5f5f5 !important;
+    }
+
+    /* Debug styles for image visibility */
+    .image-debug {
+        background: red !important;
+        min-height: 200px !important;
+        border: 2px solid blue !important;
+    }
 }
