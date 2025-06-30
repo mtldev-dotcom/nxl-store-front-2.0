@@ -24,22 +24,22 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
   // Get language display names from dictionary
   const getLanguageName = (localeCode: string): string => {
     // Access dictionary values safely
-    if (dictionary && 
-        typeof dictionary.navigation === 'object' && 
-        dictionary.navigation && 
-        typeof dictionary.navigation.languages === 'object' && 
-        dictionary.navigation.languages) {
-      
+    if (dictionary &&
+      typeof dictionary.navigation === 'object' &&
+      dictionary.navigation &&
+      typeof dictionary.navigation.languages === 'object' &&
+      dictionary.navigation.languages) {
+
       // Safely access the specific language properties
       const languages = dictionary.navigation.languages as any;
-      
+
       if (localeCode === "en" && languages.english) {
         return languages.english;
       } else if (localeCode === "fr" && languages.french) {
         return languages.french;
       }
     }
-    
+
     // Fallback if translation is missing
     switch (localeCode) {
       case "en":
@@ -57,10 +57,10 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
 
     // Replace current locale in pathname with new locale
     const pathSegments = pathname.split("/")
-    
+
     // The locale is always the third segment ([0] is empty, [1] is countryCode, [2] is locale)
     pathSegments[2] = newLocale
-    
+
     // Build new path and navigate
     const newPath = pathSegments.join("/")
     router.push(newPath)
@@ -94,9 +94,8 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className={`h-4 w-4 transition-transform duration-300 ${
-                  isLangOpen ? "rotate-180" : "rotate-0"
-                }`}
+                className={`h-4 w-4 transition-transform duration-300 ${isLangOpen ? "rotate-180" : "rotate-0"
+                  }`}
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
@@ -112,8 +111,8 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
                     role="option"
                     aria-selected={localeOption === locale}
                     className={`w-full px-4 py-2.5 text-left text-sm hover:bg-nxl-navy/70 hover:text-nxl-gold transition-colors duration-200 font-medium
-                      ${localeOption === locale 
-                        ? "bg-nxl-navy/40 text-nxl-gold" 
+                      ${localeOption === locale
+                        ? "bg-nxl-navy/40 text-nxl-gold"
                         : "text-nxl-ivory/95"
                       }
                     `}
@@ -129,14 +128,14 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <span className="font-serif text-base text-nxl-gold">
+        {/* <span className="font-serif text-base text-nxl-gold">
           {countryLabel}
         </span>
-        <div 
+        <div
           className="relative"
         >
           {regions && (
-            <div 
+            <div
               className="flex items-center gap-x-2 text-nxl-ivory hover:text-nxl-gold transition-colors cursor-pointer"
               onClick={() => toggleState.toggle()}
             >
@@ -153,7 +152,7 @@ const FooterSelectors = ({ regions, dictionary }: FooterSelectorsProps) => {
               />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -216,24 +216,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
 
                     {/* Country Select and Footer Section */}
                     <div className="flex flex-col gap-y-6 mt-auto pt-6 border-t border-nxl-gold/20">
-                      <div
-                        className="flex justify-between items-center"
-                        onMouseEnter={toggleState.open}
-                        onMouseLeave={toggleState.close}
-                      >
-                        {regions && (
-                          <CountrySelect
-                            toggleState={toggleState}
-                            regions={regions}
-                          />
-                        )}
-                        <ArrowRightMini
-                          className={clx(
-                            "transition-transform duration-200 text-nxl-ivory",
-                            toggleState.state ? "-rotate-90" : ""
-                          )}
-                        />
-                      </div>
+
                       <Text className="flex justify-between txt-compact-small text-nxl-ivory/80">
                         {getTranslation("footer.copyright", `© ${new Date().getFullYear()} Next X Level. All rights reserved.`)}
                       </Text>
